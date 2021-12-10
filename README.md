@@ -5,6 +5,7 @@
    Requirements
 </h2>
 
+
 <p align="center">    
     <a href="https://docs.pyrogram.org/intro/setup#api-keys"> Telegram API Key </a> |
     <a href="https://t.me/botfather"> Telegram Bot Token </a> |
