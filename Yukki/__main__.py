@@ -27,7 +27,7 @@ HELPABLE = {}
 
 async def initiate_bot():
     with console.status(
-        "[magenta] Booting up The SiestaXMusic...",
+        "[magenta] Booting up The Yukki Music Bot...",
     ) as status:
         console.print("┌ [red]Clearing MongoDB cache...")
         try:
@@ -78,7 +78,7 @@ async def initiate_bot():
         await asyncio.sleep(2.4)
         await startup_delete_last(_____)
     console.print(
-        "[bold green]Congrats!! SiestaXMusic has started successfully!\n"
+        "[bold green]Congrats!! Yukki Music Bot has started successfully!\n"
     )
     try:
         await app.send_message(

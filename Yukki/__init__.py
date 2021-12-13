@@ -66,13 +66,13 @@ async def initiate_bot():
     )
     console.print(header)
     with console.status(
-        "[magenta] Booting up SiestaXMusic...",
+        "[magenta] Booting up The Yukki Music Bot...",
     ) as status:
         console.print("┌ [red]Booting Up The Clients...\n")
         await app.start()
         await userbot.start()
         console.print("└ [green]Clients Booted Successfully!")
-        initial = await startup_send_new("Starting SiestaXMusic...")
+        initial = await startup_send_new("Starting Yukki Music Bot...")
         await asyncio.sleep(0.5)
         all_over = await startup_send_new("Checking Required Directories...")
         console.print(
