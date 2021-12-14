@@ -75,7 +75,7 @@ async def welcome(_, message: Message):
             return
 
 
-@app.on_message(filters.command(["help", "start"]) & filters.group)
+@app.on_message(filters.command(["help"]) & filters.group)
 @PermissionCheck
 async def useradd(_, message: Message):
     out = start_pannel()
@@ -87,6 +87,17 @@ async def useradd(_, message: Message):
         ),
     )
 
+@app.on_message(filters.command(["start"]) & filters.group)
+@PermissionCheck
+async def useradd(_, message: Message):
+    out = start_pannel()
+    await asyncio.gather(
+        message.delete(),
+        message.reply_text(
+            f"Thanks for having me in {message.chat.title}.\n{MUSIC_BOT_NAME} is alive.\n\nFor any assistance or help, checkout our support group and channel.",
+            reply_markup=InlineKeyboardMarkup(out[1]),
+        ),
+    )
 
 @app.on_message(filters.command("settings") & filters.group)
 @PermissionCheck
