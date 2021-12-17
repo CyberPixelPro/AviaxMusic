@@ -8,6 +8,7 @@ import time
 import uuid
 from datetime import datetime
 from sys import version as pyver
+import multiprocessing
 
 import psutil
 from pyrogram import Client
@@ -81,6 +82,7 @@ async def stats_markup(_, CallbackQuery):
         await CallbackQuery.answer("Getting System Stats...", show_alert=True)
         sc = platform.system()
         arch = platform.machine()
+        cpu_count = multiprocessing.cpu_count()
         ram = (
             str(round(psutil.virtual_memory().total / (1024.0 ** 3))) + " GB"
         )
@@ -93,6 +95,7 @@ async def stats_markup(_, CallbackQuery):
 **System Proc:** Online
 **Platform:** {sc}
 **Architecture:** {arch}
+**CPUs:** {cpu_count}v
 **Ram:** {ram}
 **Python Ver:** {pyver.split()[0]}
 **Pyrogram Ver:** {pyrover}"""
