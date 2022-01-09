@@ -87,7 +87,7 @@ def AssistantAdd(mystic):
                     pass
                 except Exception as e:
                     await message.reply_text(
-                        f"__Assistant Failed To Join__\n\n**Reason**: {e}"
+                        f"__Assistant Failed To Join__\n\n**Try manually adding the assistant account** @SiestaXMusicAssistant1 **to group**\n**If the problem still exist tell us in the support group :** @TechZBots_Support"
                     )
                     return
             else:
@@ -107,7 +107,7 @@ def AssistantAdd(mystic):
                     pass
                 except Exception as e:
                     await message.reply_text(
-                        f"__Assistant Failed To Join__\n\n**Reason**: {e}"
+                        f"__Assistant Failed To Join__\n\n**Try manually adding the assistant account** @SiestaXMusicAssistant1 **to group**\n**If the problem still exist tell us in the support group :** @TechZBots_Support"
                     )
                     return
         return await mystic(_, message)
