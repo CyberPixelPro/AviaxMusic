@@ -5,7 +5,8 @@ from Yukki import db
 pytgdb = db.pytg
 admindb = db.admin
 
-## Queue Chats
+
+## Queue Chats Audio
 
 
 async def get_active_chats() -> list:

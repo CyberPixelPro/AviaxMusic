@@ -12,8 +12,12 @@ def url_markup(videoid, duration, user_id, query, query_type):
                 callback_data=f"slider B|{query_type}|{query}|{user_id}",
             ),
             InlineKeyboardButton(
-                text="Play Now",
-                callback_data=f"Yukki {videoid}|{duration}|{user_id}",
+                text="🎵",
+                callback_data=f"MusicStream {videoid}|{duration}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="🎥",
+                callback_data=f"Choose {videoid}|{duration}|{user_id}",
             ),
             InlineKeyboardButton(
                 text="❯",
@@ -38,13 +42,19 @@ def url_markup2(videoid, duration, user_id):
     buttons = [
         [
             InlineKeyboardButton(
-                text="▶️ Play Now",
-                callback_data=f"Yukki {videoid}|{duration}|{user_id}",
+                text="🎵 Play Music",
+                callback_data=f"MusicStream {videoid}|{duration}|{user_id}",
             ),
+            InlineKeyboardButton(
+                text="🎥 Play Video",
+                callback_data=f"Choose {videoid}|{duration}|{user_id}",
+            ),
+        ],
+        [
             InlineKeyboardButton(
                 text="🗑 Close Search",
                 callback_data=f"forceclose {videoid}|{user_id}",
-            ),
+            )
         ],
     ]
     return buttons
@@ -117,25 +127,25 @@ def search_markup2(
         [
             InlineKeyboardButton(
                 text="6️⃣",
-                callback_data=f"yukki2 {ID6}|{duration6}|{user_id}",
+                callback_data=f"Yukki {ID6}|{duration6}|{user_id}",
             ),
             InlineKeyboardButton(
                 text="7️⃣",
-                callback_data=f"yukki2 {ID7}|{duration7}|{user_id}",
+                callback_data=f"Yukki {ID7}|{duration7}|{user_id}",
             ),
             InlineKeyboardButton(
                 text="8️⃣",
-                callback_data=f"yukki2 {ID8}|{duration8}|{user_id}",
+                callback_data=f"Yukki {ID8}|{duration8}|{user_id}",
             ),
         ],
         [
             InlineKeyboardButton(
                 text="9️⃣",
-                callback_data=f"yukki2 {ID9}|{duration9}|{user_id}",
+                callback_data=f"Yukki {ID9}|{duration9}|{user_id}",
             ),
             InlineKeyboardButton(
                 text="🔟",
-                callback_data=f"yukki2 {ID10}|{duration10}|{user_id}",
+                callback_data=f"Yukki {ID10}|{duration10}|{user_id}",
             ),
         ],
         [
@@ -165,6 +175,21 @@ def secondary_markup(videoid, user_id):
             InlineKeyboardButton(
                 text="🔗 More Menu", callback_data=f"other {videoid}|{user_id}"
             ),
+            InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close"),
+        ],
+    ]
+    return buttons
+
+
+def secondary_markup2(videoid, user_id):
+    buttons = [
+        [
+            InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
+            InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
+            InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
+            InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
+        ],
+        [
             InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close"),
         ],
     ]

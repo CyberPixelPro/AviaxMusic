@@ -4,16 +4,17 @@ import shutil
 import subprocess
 from sys import version as pyver
 
-from config import OWNER_ID
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from pyrogram.types import Message
 
-from Yukki import BOT_ID, MUSIC_BOT_NAME, OWNER_ID, SUDOERS, app
+from config import LOG_SESSION, OWNER_ID
+from Yukki import BOT_ID, BOT_USERNAME, MUSIC_BOT_NAME, OWNER_ID, SUDOERS, app
 from Yukki.Database import (add_gban_user, add_off, add_on, add_sudo,
                             get_active_chats, get_served_chats, get_sudoers,
                             is_gbanned_user, remove_active_chat,
-                            remove_gban_user, remove_served_chat, remove_sudo)
+                            remove_gban_user, remove_served_chat, remove_sudo,
+                            set_video_limit)
 
 __MODULE__ = "SudoUsers"
 __HELP__ = """
@@ -39,8 +40,8 @@ Only for Sudo Users.
 /maintenance [enable / disable]
 - When enabled Bot goes under maintenance mode. No one can play Music now!
 
-/update 
-- Fetch Updates from Server.
+/logger [enable / disable]
+- When enabled Bot logs the searched queries in logger group.
 
 /clean
 - Clean Temp Files and Logs.
@@ -159,39 +160,29 @@ async def sudoers_list(_, message: Message):
         await message.reply_text(text)
 
 
-# Restart Yukki
+### Video Limit
 
 
-@app.on_message(filters.command("restart") & filters.user(SUDOERS))
-async def theme_func(_, message):
-    A = "downloads"
-    B = "raw_files"
-    C = "cache"
-    shutil.rmtree(A)
-    shutil.rmtree(B)
-    shutil.rmtree(C)
-    await asyncio.sleep(2)
-    os.mkdir(A)
-    os.mkdir(B)
-    os.mkdir(C)
-    served_chats = []
+@app.on_message(
+    filters.command(["set_video_limit", f"set_video_limit@{BOT_USERNAME}"])
+    & filters.user(SUDOERS)
+)
+async def set_video_limit_kid(_, message: Message):
+    if len(message.command) != 2:
+        usage = "**Usage:**\n/set_video_limit [Number of chats allowed]"
+        return await message.reply_text(usage)
+    chat_id = message.chat.id
+    state = message.text.split(None, 1)[1].strip()
     try:
-        chats = await get_active_chats()
-        for chat in chats:
-            served_chats.append(int(chat["chat_id"]))
-    except Exception as e:
-        pass
-    for x in served_chats:
-        try:
-            await app.send_message(
-                x,
-                f"{MUSIC_BOT_NAME} has just restarted herself. Sorry for the issues.\n\nStart playing after 10-15 seconds again.",
-            )
-            await remove_active_chat(x)
-        except Exception:
-            pass
-    x = await message.reply_text(f"Restarting {MUSIC_BOT_NAME}")
-    os.system(f"kill -9 {os.getpid()} && python3 -m Yukki")
+        limit = int(state)
+    except:
+        return await message.reply_text(
+            "Please Use Numeric Numbers for Setting Limit."
+        )
+    await set_video_limit(141414, limit)
+    await message.reply_text(
+        f"Video Calls Maximum Limit Defined to {limit} Chats."
+    )
 
 
 ## Maintenance Yukki
@@ -199,7 +190,7 @@ async def theme_func(_, message):
 
 @app.on_message(filters.command("maintenance") & filters.user(SUDOERS))
 async def maintenance(_, message):
-    usage = "**Usage:**\n/Yukki [enable|disable]"
+    usage = "**Usage:**\n/maintenance [enable|disable]"
     if len(message.command) != 2:
         return await message.reply_text(usage)
     chat_id = message.chat.id
@@ -213,6 +204,33 @@ async def maintenance(_, message):
         user_id = 1
         await add_off(user_id)
         await message.reply_text("Maintenance Mode Disabled")
+    else:
+        await message.reply_text(usage)
+
+
+## Logger
+
+
+@app.on_message(filters.command("logger") & filters.user(SUDOERS))
+async def logger(_, message):
+    if LOG_SESSION == "None":
+        return await message.reply_text(
+            "No Logger Account Defined.\n\nPlease Set <code>LOG_SESSION</code> var and then try loggging."
+        )
+    usage = "**Usage:**\n/logger [enable|disable]"
+    if len(message.command) != 2:
+        return await message.reply_text(usage)
+    chat_id = message.chat.id
+    state = message.text.split(None, 1)[1].strip()
+    state = state.lower()
+    if state == "enable":
+        user_id = 5
+        await add_on(user_id)
+        await message.reply_text("Enabled Logging")
+    elif state == "disable":
+        user_id = 5
+        await add_off(user_id)
+        await message.reply_text("Logging Disabled")
     else:
         await message.reply_text(usage)
 
@@ -251,7 +269,7 @@ async def ban_globally(_, message):
             number_of_chats = 0
             for sex in served_chats:
                 try:
-                    await app.kick_chat_member(sex, user.id)
+                    await app.ban_chat_member(sex, user.id)
                     number_of_chats += 1
                     await asyncio.sleep(1)
                 except FloodWait as e:
@@ -302,7 +320,7 @@ __**New Global Ban on {MUSIC_BOT_NAME}**__
             number_of_chats = 0
             for sex in served_chats:
                 try:
-                    await app.kick_chat_member(sex, user_id)
+                    await app.ban_chat_member(sex, user_id)
                     number_of_chats += 1
                     await asyncio.sleep(1)
                 except FloodWait as e:
@@ -375,39 +393,6 @@ async def unban_globally(_, message):
         else:
             await remove_gban_user(user_id)
             await message.reply_text(f"Ungbanned!")
-
-
-chat_watcher_group = 5
-
-
-@app.on_message(group=chat_watcher_group)
-async def chat_watcher_func(_, message):
-    try:
-        userid = message.from_user.id
-    except Exception:
-        return
-    checking = f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
-    if await is_gbanned_user(userid):
-        try:
-            await message.chat.kick_member(userid)
-        except Exception:
-            return
-        await message.reply_text(
-            f"{checking} is globally banned by Sudo Users and has been kicked out of the chat.\n\n**Possible Reason:** Potential Spammer and Abuser."
-        )
-
-
-## UPDATE
-
-
-@app.on_message(filters.command("update") & filters.user(SUDOERS))
-async def update(_, message):
-    m = subprocess.check_output(["git", "pull"]).decode("UTF-8")
-    if str(m[0]) != "A":
-        x = await message.reply_text("Found Updates! Pushing Now.")
-        return os.system(f"kill -9 {os.getpid()} && python3 -m Yukki")
-    else:
-        await message.reply_text("Already Upto Date")
 
 
 # Broadcast Message
