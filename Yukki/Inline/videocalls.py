@@ -46,11 +46,21 @@ def stream_quality_markup(videoid, duration, user_id):
             InlineKeyboardButton(
                 text="📽 360P",
                 callback_data=f"VideoStream 360|{videoid}|{duration}|{user_id}",
-            ),            
+            ),
+            InlineKeyboardButton(
+                text="📽 720P",
+                callback_data=f"VideoStream 720|{videoid}|{duration}|{user_id}",
+            ),
             InlineKeyboardButton(
                 text="📽 480P",
                 callback_data=f"VideoStream 480|{videoid}|{duration}|{user_id}",
             ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="⬅️ Back",
+                callback_data=f"gback_list_chose_stream {videoid}|{duration}|{user_id}",
+            )
         ],
         [
             InlineKeyboardButton(
