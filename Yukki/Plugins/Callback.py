@@ -28,7 +28,6 @@ from Yukki.Inline import (audio_markup, audio_markup2, download_markup,
                           secondary_markup2)
 from Yukki.Utilities.changers import time_to_seconds
 from Yukki.Utilities.chat import specialfont_to_normal
-from Yukki.Utilities.paste import paste_to_nekobin
 from Yukki.Utilities.theme import check_theme
 from Yukki.Utilities.thumbnails import gen_thumb
 from Yukki.Utilities.timer import start_timer
