@@ -2,6 +2,7 @@ import asyncio
 import socket
 from asyncio import get_running_loop
 from functools import partial
+import requests
 
 from Yukki import aiohttpsession as session
 
@@ -39,3 +40,14 @@ async def isPreviewUp(preview: str) -> bool:
         else:
             return True if status == 200 else False
     return False
+
+async def paste_to_nekobin(msg):
+    data = msg
+    key = (
+        requests.post("https://nekobin.com/api/documents", json={"content": data})
+        .json()
+        .get("result")
+        .get("key")
+    )    
+    url = f"https://nekobin.com/{key}"
+    return url

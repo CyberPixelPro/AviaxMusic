@@ -27,7 +27,7 @@ from Yukki.Inline import (audio_markup, audio_markup2, download_markup,
                           secondary_markup2)
 from Yukki.Utilities.changers import time_to_seconds
 from Yukki.Utilities.chat import specialfont_to_normal
-from Yukki.Utilities.paste import isPreviewUp, paste_queue
+from Yukki.Utilities.paste import paste_to_nekobin
 from Yukki.Utilities.theme import check_theme
 from Yukki.Utilities.thumbnails import gen_thumb
 from Yukki.Utilities.timer import start_timer
@@ -454,20 +454,23 @@ async def play_playlist(_, CallbackQuery):
                 )
                 os.remove(thumb)
         await mystic.delete()
-        if for_p == 1:            
-            buttons = paste_queue_markup()
+        if for_p == 1:
+            m = await CallbackQuery.message.reply_text(
+                "Pasting Queued Playlist to Bin"
+            )
             preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
-            msg = msg[0:850]
-            msg = msg + "...\nPlaylist contains more songs but cant display it here. Btw all songs in your playlist will surely play."
+            url = await paste_to_nekobin(msg)            
+            buttons = paste_queue_markup(url)                        
             caption1 = f"**This is Queued Playlist of {third_name}.**\n\nPlayed by :- {CallbackQuery.from_user.mention}\n\n" + msg
+            caption1 = caption1[0:1020]
             await CallbackQuery.message.reply_photo(
                 photo=preview,
                 caption=caption1,
                 quote=False,
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode="markdown"
-            )            
-            
+            )
+            await m.delete()            
         else:
             await CallbackQuery.message.reply_text(
                 "Only 1 Music in Playlist.. No more music to add in queue."
@@ -559,7 +562,7 @@ async def check_playlist(_, CallbackQuery):
         j = 0
         await CallbackQuery.answer()
         await CallbackQuery.message.delete()
-        msg = ""
+        msg = f"Fetched Playlist:\n\n"
         for shikhar in _playlist:
             j += 1
             _note = await get_playlist(user_id, shikhar, genre)
@@ -567,22 +570,22 @@ async def check_playlist(_, CallbackQuery):
             duration = _note["duration"]
             msg += f"{j}- {title[:60]}\n"
             msg += f"    Duration- {duration} Min(s)\n\n"
-
-        buttons = fetch_playlist(
-            user_name, type, genre, CallbackQuery.from_user.id
-        )
+        m = await CallbackQuery.message.reply_text("Pasting Playlist to Bin")
         preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
-
-        msg = msg[0:850]
-        msg = msg + "...\nPlaylist contains more songs but cant display it here. Btw all songs in your playlist will surely play."
-        caption2 = f"**This is Playlist of {user_name}.**\n\n" + msg
+        url = await paste_to_nekobin(msg)                                
+        caption2 = f"This is Playlist of {user_name}.\n\n" + msg
+        caption2 = caption2[0:1020]
+        buttons = fetch_playlist(
+            user_name, type, genre, CallbackQuery.from_user.id, url
+        )
+        
         await CallbackQuery.message.reply_photo(
             photo=preview,
             caption=caption2,
             quote=False,
             reply_markup=InlineKeyboardMarkup(buttons),
-            parse_mode="markdown"
-        )            
+        )
+        await m.delete()        
 
 
 @app.on_callback_query(filters.regex("delete_playlist"))
