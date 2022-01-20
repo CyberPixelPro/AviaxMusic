@@ -574,17 +574,18 @@ async def check_playlist(_, CallbackQuery):
             duration = _note["duration"]
             msg += f"{j}- {title[:60]}\n"
             msg += f"    Duration- {duration} Min(s)\n\n"
-        m = await CallbackQuery.message.reply_text("Pasting Playlist to Bin")
-        link = await paste_queue(msg)
-        preview = link + "/preview.png"
-        url = link + "/index.txt"
+        m = await CallbackQuery.message.reply_text("Pasting Playlist to Bin")        
         buttons = fetch_playlist(
-            user_name, type, genre, CallbackQuery.from_user.id, url
+            user_name, type, genre, CallbackQuery.from_user.id
         )
+
+        preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
+        playlist_text = f"This is Playlist of {user_name}.\n\n" + msg 
+
         if await isPreviewUp(preview):
             await CallbackQuery.message.reply_photo(
                 photo=preview,
-                caption=f"This is Playlist of {user_name}.",
+                caption=playlist_text,
                 quote=False,
                 reply_markup=InlineKeyboardMarkup(buttons),
             )

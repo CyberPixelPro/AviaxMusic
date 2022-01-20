@@ -220,15 +220,14 @@ def paste_queue_markup(url):
     return buttons
 
 
-def fetch_playlist(user_name, type, genre, user_id, url):
+def fetch_playlist(user_name, type, genre, user_id):
     buttons = [
         [
             InlineKeyboardButton(
                 text=f"Play {user_name[:10]}'s {genre} Playlist",
                 callback_data=f"play_playlist {user_id}|{type}|{genre}",
             ),
-        ],
-        [InlineKeyboardButton(text="Checkout Playlist", url=f"{url}")],
+        ],        
         [InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close")],
     ]
     return buttons
