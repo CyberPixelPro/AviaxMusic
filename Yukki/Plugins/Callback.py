@@ -566,7 +566,7 @@ async def check_playlist(_, CallbackQuery):
         j = 0
         await CallbackQuery.answer()
         await CallbackQuery.message.delete()
-        msg = f"Fetched Playlist:\n\n"
+        msg = ""
         for shikhar in _playlist:
             j += 1
             _note = await get_playlist(user_id, shikhar, genre)
@@ -582,19 +582,13 @@ async def check_playlist(_, CallbackQuery):
         preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
         playlist_text = f"This is Playlist of {user_name}.\n\n" + msg 
 
-        if await isPreviewUp(preview):
-            await CallbackQuery.message.reply_photo(
-                photo=preview,
-                caption=playlist_text,
-                quote=False,
-                reply_markup=InlineKeyboardMarkup(buttons),
-            )
-            await m.delete()
-        else:
-            await CallbackQuery.message.reply_text(
-                text=msg, reply_markup=audio_markup2
-            )
-            await m.delete()
+        await CallbackQuery.message.reply_photo(
+            photo=preview,
+            caption=playlist_text,
+            quote=False,
+            reply_markup=InlineKeyboardMarkup(buttons),
+        )
+        await m.delete()        
 
 
 @app.on_callback_query(filters.regex("delete_playlist"))
