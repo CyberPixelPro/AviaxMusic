@@ -454,27 +454,11 @@ async def play_playlist(_, CallbackQuery):
                 )
                 os.remove(thumb)
         await mystic.delete()
-        if for_p == 1:
-            m = await CallbackQuery.message.reply_text(
-                "Pasting Queued Playlist to Bin"
-            )
-            link = await paste_queue(msg)
-            preview = link + "/preview.png"
-            url = link + "/index.txt"
+        if for_p == 1:            
             buttons = paste_queue_markup(url)
-            if await isPreviewUp(preview):
-                await CallbackQuery.message.reply_photo(
-                    photo=preview,
-                    caption=f"This is Queued Playlist of {third_name}.\n\nPlayed by :- {CallbackQuery.from_user.mention}",
-                    quote=False,
-                    reply_markup=InlineKeyboardMarkup(buttons),
-                )
-                await m.delete()
-            else:
-                await CallbackQuery.message.reply_text(
+            await CallbackQuery.message.reply_text(
                     text=msg, reply_markup=audio_markup2
-                )
-                await m.delete()
+                )            
         else:
             await CallbackQuery.message.reply_text(
                 "Only 1 Music in Playlist.. No more music to add in queue."
@@ -574,21 +558,9 @@ async def check_playlist(_, CallbackQuery):
             duration = _note["duration"]
             msg += f"{j}- {title[:60]}\n"
             msg += f"    Duration- {duration} Min(s)\n\n"
-        m = await CallbackQuery.message.reply_text("Pasting Playlist to Bin")        
-        buttons = fetch_playlist(
-            user_name, type, genre, CallbackQuery.from_user.id
-        )
-
-        preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
-        playlist_text = f"This is Playlist of {user_name}.\n\n" + msg 
-
-        await CallbackQuery.message.reply_photo(
-            photo=preview,
-            caption=playlist_text,
-            quote=False,
-            reply_markup=InlineKeyboardMarkup(buttons),
-        )
-        await m.delete()        
+        await CallbackQuery.message.reply_text(
+                    text=msg, reply_markup=audio_markup2
+                )       
 
 
 @app.on_callback_query(filters.regex("delete_playlist"))
