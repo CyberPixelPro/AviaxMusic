@@ -455,10 +455,17 @@ async def play_playlist(_, CallbackQuery):
                 os.remove(thumb)
         await mystic.delete()
         if for_p == 1:            
-            buttons = paste_queue_markup(url)
-            await CallbackQuery.message.reply_text(
-                    text=msg, reply_markup=audio_markup2
-                )            
+            buttons = paste_queue_markup()
+            preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
+            caption1 = f"**This is Queued Playlist of {third_name}.**\n\nPlayed by :- {CallbackQuery.from_user.mention}\n\n" + msg
+            await CallbackQuery.message.reply_photo(
+                photo=preview,
+                caption=caption1,
+                quote=False,
+                reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode="markdown"
+            )            
+            
         else:
             await CallbackQuery.message.reply_text(
                 "Only 1 Music in Playlist.. No more music to add in queue."
@@ -558,9 +565,19 @@ async def check_playlist(_, CallbackQuery):
             duration = _note["duration"]
             msg += f"{j}- {title[:60]}\n"
             msg += f"    Duration- {duration} Min(s)\n\n"
-        await CallbackQuery.message.reply_text(
-                    text=msg, reply_markup=audio_markup2
-                )       
+
+        buttons = fetch_playlist(
+            user_name, type, genre, CallbackQuery.from_user.id
+        )
+        preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
+        caption2 = f"**This is Playlist of {user_name}.**\n\n" + msg
+        await CallbackQuery.message.reply_photo(
+            photo=preview,
+            caption=caption2,
+            quote=False,
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode="markdown"
+        )            
 
 
 @app.on_callback_query(filters.regex("delete_playlist"))
