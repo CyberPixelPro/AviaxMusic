@@ -32,6 +32,7 @@ from Yukki.Utilities.theme import check_theme
 from Yukki.Utilities.thumbnails import gen_thumb
 from Yukki.Utilities.timer import start_timer
 from Yukki.Utilities.youtube import get_m3u8, get_yt_info_id
+from Yukki.Utilities.nekobin import paste_to_nekobin
 
 loop = asyncio.get_event_loop()
 
@@ -459,14 +460,8 @@ async def play_playlist(_, CallbackQuery):
                 "Pasting Queued Playlist to Bin"
             )
             preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
-            data = msg
-            key = (
-                requests.post("https://nekobin.com/api/documents", json={"content": data})
-                .json()
-                .get("result")
-                .get("key")
-            )    
-            url = f"https://nekobin.com/{key}"            
+               
+            url = paste_to_nekobin(msg)            
             buttons = paste_queue_markup(url)                        
             caption1 = f"**This is Queued Playlist of {third_name}.**\n\nPlayed by :- {CallbackQuery.from_user.mention}\n\n" + msg
             caption1 = caption1[0:1020]
@@ -579,14 +574,8 @@ async def check_playlist(_, CallbackQuery):
             msg += f"    Duration- {duration} Min(s)\n\n"
         m = await CallbackQuery.message.reply_text("Pasting Playlist to Bin")
         preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
-        data = msg
-        key = (
-            requests.post("https://nekobin.com/api/documents", json={"content": data})
-            .json()
-            .get("result")
-            .get("key")
-        )    
-        url = f"https://nekobin.com/{key}"                                
+        
+        url = paste_to_nekobin(msg)                                
         caption2 = f"This is Playlist of {user_name}.\n\n" + msg
         caption2 = caption2[0:1020]
         buttons = fetch_playlist(
