@@ -206,27 +206,29 @@ def third_playlist_markup(user_name, user_id, third_name, userid, videoid):
     return buttons
 
 
-def paste_queue_markup():
+def paste_queue_markup(url):
     buttons = [
         [
             InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
             InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
             InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
             InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
-        ],        
+        ],
+        [InlineKeyboardButton(text="Checkout Queued Playlist", url=f"{url}")],
         [InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close")],
     ]
     return buttons
 
 
-def fetch_playlist(user_name, type, genre, user_id):
+def fetch_playlist(user_name, type, genre, user_id, url):
     buttons = [
         [
             InlineKeyboardButton(
                 text=f"Play {user_name[:10]}'s {genre} Playlist",
                 callback_data=f"play_playlist {user_id}|{type}|{genre}",
             ),
-        ],        
+        ],
+        [InlineKeyboardButton(text="Checkout Playlist", url=f"{url}")],
         [InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close")],
     ]
     return buttons

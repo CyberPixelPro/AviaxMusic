@@ -459,7 +459,7 @@ async def play_playlist(_, CallbackQuery):
                 "Pasting Queued Playlist to Bin"
             )
             preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
-            url = await paste_to_nekobin(msg)            
+            url = paste_to_nekobin(msg)            
             buttons = paste_queue_markup(url)                        
             caption1 = f"**This is Queued Playlist of {third_name}.**\n\nPlayed by :- {CallbackQuery.from_user.mention}\n\n" + msg
             caption1 = caption1[0:1020]
@@ -572,7 +572,7 @@ async def check_playlist(_, CallbackQuery):
             msg += f"    Duration- {duration} Min(s)\n\n"
         m = await CallbackQuery.message.reply_text("Pasting Playlist to Bin")
         preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
-        url = await paste_to_nekobin(msg)                                
+        url = paste_to_nekobin(msg)                                
         caption2 = f"This is Playlist of {user_name}.\n\n" + msg
         caption2 = caption2[0:1020]
         buttons = fetch_playlist(
