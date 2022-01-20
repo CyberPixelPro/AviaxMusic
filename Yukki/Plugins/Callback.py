@@ -457,6 +457,8 @@ async def play_playlist(_, CallbackQuery):
         if for_p == 1:            
             buttons = paste_queue_markup()
             preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
+            msg = msg[0:900]
+            msg = msg + "...\nPlaylist contains more songs but cant display it here. Btw all songs in your playlist will surely play."
             caption1 = f"**This is Queued Playlist of {third_name}.**\n\nPlayed by :- {CallbackQuery.from_user.mention}\n\n" + msg
             await CallbackQuery.message.reply_photo(
                 photo=preview,
@@ -570,6 +572,9 @@ async def check_playlist(_, CallbackQuery):
             user_name, type, genre, CallbackQuery.from_user.id
         )
         preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
+
+        msg = msg[0:900]
+        msg = msg + "...\nPlaylist contains more songs but cant display it here. Btw all songs in your playlist will surely play."
         caption2 = f"**This is Playlist of {user_name}.**\n\n" + msg
         await CallbackQuery.message.reply_photo(
             photo=preview,
