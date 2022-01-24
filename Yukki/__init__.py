@@ -91,7 +91,7 @@ random_assistant = []
 
 async def initiate_bot():
     global SUDOERS, OWNER_ID, ASSIDS
-    global BOT_ID, BOT_NAME,
+    global BOT_ID, BOT_NAME
     global ASSID1, ASSNAME1, ASSMENTION1, ASSUSERNAME1
     global ASSID2, ASSNAME2, ASSMENTION2, ASSUSERNAME2
     global ASSID3, ASSNAME3, ASSMENTION3, ASSUSERNAME3
