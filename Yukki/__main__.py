@@ -229,7 +229,7 @@ async def initiate_bot():
     console.print(f"\n[red]Stopping Bot")
 
 
-home_text_pm = f"""Hello ,
+home_text_pm = f"""Hello firstname,
 My name is {BOT_NAME}.
 A Telegram Music+Video Streaming bot with some useful features.
 
@@ -354,7 +354,8 @@ async def start_command(_, message):
                 )
             return
     out = private_panel()
-    await message.reply_photo(photo=THUMBNAIL,caption=home_text_pm,
+    text1 = home_text_pm.replace("firstname",message.from_user.mention)
+    await message.reply_photo(photo=THUMBNAIL,caption=text1,
         reply_markup=InlineKeyboardMarkup(out[1]),
     )
     if await is_on_off(5):
@@ -432,10 +433,11 @@ All commands can be used with: /
         )
     elif home_match:
         out = private_panel()
+        text1 = home_text_pm.replace("firstname",query.from_user.mention)
         await app.send_photo(
             query.from_user.id,
             photo=THUMBNAIL,
-            caption=home_text_pm,
+            caption=text1,
             reply_markup=InlineKeyboardMarkup(out[1]),
         )
         await query.message.delete()
