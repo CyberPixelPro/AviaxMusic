@@ -16,7 +16,7 @@ from config import (ASSISTANT_PREFIX, DURATION_LIMIT_MIN, LOG_GROUP_ID,
 from config import MONGO_DB_URI as mango
 from config import (MUSIC_BOT_NAME, OWNER_ID, STRING1, STRING2, STRING3,
                     STRING4, STRING5, SUDO_USERS, UPSTREAM_BRANCH,
-                    UPSTREAM_REPO, get_queue)
+                    UPSTREAM_REPO, get_queue, botusername)
 from Yukki.Core.Clients.cli import (ASS_CLI_1, ASS_CLI_2, ASS_CLI_3, ASS_CLI_4,
                                     ASS_CLI_5, LOG_CLIENT, app)
 from Yukki.Utilities.changers import time_to_seconds
@@ -62,7 +62,7 @@ ASSISTANT_PREFIX = ASSISTANT_PREFIX
 ### Bot Info
 BOT_ID = 0
 BOT_NAME = ""
-BOT_USERNAME = ""
+BOT_USERNAME = botusername
 
 ### Assistant Info
 ASSIDS = []
@@ -91,7 +91,7 @@ random_assistant = []
 
 async def initiate_bot():
     global SUDOERS, OWNER_ID, ASSIDS
-    global BOT_ID, BOT_NAME, BOT_USERNAME
+    global BOT_ID, BOT_NAME,
     global ASSID1, ASSNAME1, ASSMENTION1, ASSUSERNAME1
     global ASSID2, ASSNAME2, ASSMENTION2, ASSUSERNAME2
     global ASSID3, ASSNAME3, ASSMENTION3, ASSUSERNAME3
@@ -151,7 +151,7 @@ async def initiate_bot():
             BOT_NAME = getme.first_name + " " + getme.last_name
         else:
             BOT_NAME = getme.first_name
-        BOT_USERNAME = getme.username
+        
         if STRING1 != "None":
             getme1 = await ASS_CLI_1.get_me()
             ASSID1 = getme1.id
