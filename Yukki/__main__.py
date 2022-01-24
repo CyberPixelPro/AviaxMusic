@@ -11,7 +11,7 @@ from rich.table import Table
 from youtubesearchpython import VideosSearch
 
 from config import (LOG_GROUP_ID, LOG_SESSION, STRING1, STRING2, STRING3,
-                    STRING4, STRING5)
+                    STRING4, STRING5, THUMBNAIL)
 from Yukki import (ASS_CLI_1, ASS_CLI_2, ASS_CLI_3, ASS_CLI_4, ASS_CLI_5,
                    ASSID1, ASSID2, ASSID3, ASSID4, ASSID5, ASSNAME1, ASSNAME2,
                    ASSNAME3, ASSNAME4, ASSNAME5, BOT_ID, BOT_NAME, LOG_CLIENT,
@@ -354,8 +354,7 @@ async def start_command(_, message):
                 )
             return
     out = private_panel()
-    await message.reply_text(
-        home_text_pm,
+    await message.reply_photo(photo=THUMBNAIL,caption=home_text_pm,
         reply_markup=InlineKeyboardMarkup(out[1]),
     )
     if await is_on_off(5):
@@ -433,9 +432,10 @@ All commands can be used with: /
         )
     elif home_match:
         out = private_panel()
-        await app.send_message(
+        await app.send_photo(
             query.from_user.id,
-            text=home_text_pm,
+            photo=THUMBNAIL,
+            caption=home_text_pm,
             reply_markup=InlineKeyboardMarkup(out[1]),
         )
         await query.message.delete()
