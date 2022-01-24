@@ -2,7 +2,6 @@ import asyncio
 import os
 import random
 from asyncio import QueueEmpty
-import requests
 
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup
@@ -28,11 +27,11 @@ from Yukki.Inline import (audio_markup, audio_markup2, download_markup,
                           secondary_markup2)
 from Yukki.Utilities.changers import time_to_seconds
 from Yukki.Utilities.chat import specialfont_to_normal
+from Yukki.Utilities.paste import isPreviewUp, paste_queue
 from Yukki.Utilities.theme import check_theme
 from Yukki.Utilities.thumbnails import gen_thumb
 from Yukki.Utilities.timer import start_timer
 from Yukki.Utilities.youtube import get_m3u8, get_yt_info_id
-from Yukki.Utilities.nekobin import paste_to_nekobin
 
 loop = asyncio.get_event_loop()
 
@@ -459,20 +458,23 @@ async def play_playlist(_, CallbackQuery):
             m = await CallbackQuery.message.reply_text(
                 "Pasting Queued Playlist to Bin"
             )
-            preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
-               
-            url = paste_to_nekobin(msg)            
-            buttons = paste_queue_markup(url)                        
-            caption1 = f"**This is Queued Playlist of {third_name}.**\n\nPlayed by :- {CallbackQuery.from_user.mention}\n\n" + msg
-            caption1 = caption1[0:1020]
-            await CallbackQuery.message.reply_photo(
-                photo=preview,
-                caption=caption1,
-                quote=False,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode="markdown"
-            )
-            await m.delete()            
+            link = await paste_queue(msg)
+            preview = link + "/preview.png"
+            url = link + "/index.txt"
+            buttons = paste_queue_markup(url)
+            if await isPreviewUp(preview):
+                await CallbackQuery.message.reply_photo(
+                    photo=preview,
+                    caption=f"This is Queued Playlist of {third_name}.\n\nPlayed by :- {CallbackQuery.from_user.mention}",
+                    quote=False,
+                    reply_markup=InlineKeyboardMarkup(buttons),
+                )
+                await m.delete()
+            else:
+                await CallbackQuery.message.reply_text(
+                    text=msg, reply_markup=audio_markup2
+                )
+                await m.delete()
         else:
             await CallbackQuery.message.reply_text(
                 "Only 1 Music in Playlist.. No more music to add in queue."
@@ -573,22 +575,25 @@ async def check_playlist(_, CallbackQuery):
             msg += f"{j}- {title[:60]}\n"
             msg += f"    Duration- {duration} Min(s)\n\n"
         m = await CallbackQuery.message.reply_text("Pasting Playlist to Bin")
-        preview = "https://telegra.ph/file/05f7f5996758967c3ac24.jpg"
-        
-        url = paste_to_nekobin(msg)                                
-        caption2 = f"This is Playlist of {user_name}.\n\n" + msg
-        caption2 = caption2[0:1020]
+        link = await paste_queue(msg)
+        preview = link + "/preview.png"
+        url = link + "/index.txt"
         buttons = fetch_playlist(
             user_name, type, genre, CallbackQuery.from_user.id, url
         )
-        
-        await CallbackQuery.message.reply_photo(
-            photo=preview,
-            caption=caption2,
-            quote=False,
-            reply_markup=InlineKeyboardMarkup(buttons),
-        )
-        await m.delete()        
+        if await isPreviewUp(preview):
+            await CallbackQuery.message.reply_photo(
+                photo=preview,
+                caption=f"This is Playlist of {user_name}.",
+                quote=False,
+                reply_markup=InlineKeyboardMarkup(buttons),
+            )
+            await m.delete()
+        else:
+            await CallbackQuery.message.reply_text(
+                text=msg, reply_markup=audio_markup2
+            )
+            await m.delete()
 
 
 @app.on_callback_query(filters.regex("delete_playlist"))

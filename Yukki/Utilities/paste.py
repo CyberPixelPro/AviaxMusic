@@ -2,7 +2,6 @@ import asyncio
 import socket
 from asyncio import get_running_loop
 from functools import partial
-import requests
 
 from Yukki import aiohttpsession as session
 
