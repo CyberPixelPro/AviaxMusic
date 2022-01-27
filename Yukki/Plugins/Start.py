@@ -1,3 +1,4 @@
+from Yukki.Plugins.helpmenu.start import start_menu_group
 import asyncio
 import random
 import time
@@ -9,7 +10,7 @@ from pyrogram import filters
 from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
                             InlineKeyboardMarkup, InputMediaPhoto, Message)
 
-from Yukki import ASSIDS, BOT_ID, MUSIC_BOT_NAME, OWNER_ID, SUDOERS, app
+from Yukki import ASSIDS, BOT_ID, BOT_USERNAME, MUSIC_BOT_NAME, OWNER_ID, SUDOERS, app
 from Yukki import boottime as bot_start_time
 from Yukki import db, random_assistant
 from Yukki.Core.PyTgCalls import Yukki
@@ -94,17 +95,10 @@ async def welcome(_, message: Message):
             return
 
 
-@app.on_message(filters.command(["help", "start"]) & filters.group)
+@app.on_message(filters.command(["start", f"start@{BOT_USERNAME}", "help", f"help@{BOT_USERNAME}"]) & filters.group)
 @PermissionCheck
 async def useradd(_, message: Message):
-    out = start_pannel()
-    await asyncio.gather(
-        message.delete(),
-        message.reply_text(
-            f"Thanks for having me in {message.chat.title}.\n{MUSIC_BOT_NAME} is alive.\n\nFor any assistance or help, checkout our support group and channel.",
-            reply_markup=InlineKeyboardMarkup(out[1]),
-        ),
-    )
+    await start_menu_group(message)
 
 
 @app.on_message(filters.command("settings") & filters.group)

@@ -1,3 +1,4 @@
+from Yukki.Plugins.helpmenu.start import start_menu_private
 import asyncio
 import importlib
 import os
@@ -238,8 +239,7 @@ All commands can be used with: / """
 
 @app.on_message(filters.command("help") & filters.private)
 async def help_command(_, message):
-    text, keyboard = await help_parser(message.from_user.mention)
-    await app.send_message(message.chat.id, text, reply_markup=keyboard)
+    await start_menu_private(message)
 
 
 @app.on_message(filters.command("start") & filters.private)
@@ -353,11 +353,8 @@ async def start_command(_, message):
                     f"{message.from_user.mention} has just started bot to check <code>VIDEO INFORMATION</code>\n\n**USER ID:** {sender_id}\n**USER NAME:** {sender_name}",
                 )
             return
-    out = private_panel()
-    text1 = home_text_pm.replace("firstname",message.from_user.mention)
-    await message.reply_photo(photo=THUMBNAIL,caption=text1,
-        reply_markup=InlineKeyboardMarkup(out[1]),
-    )
+    
+    await start_menu_private(message)
     if await is_on_off(5):
         sender_id = message.from_user.id
         sender_name = message.from_user.first_name

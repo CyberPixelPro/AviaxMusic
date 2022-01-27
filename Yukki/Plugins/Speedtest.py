@@ -1,3 +1,4 @@
+from config import SUDO_USERS
 import os
 
 import speedtest
@@ -17,7 +18,7 @@ __HELP__ = """
 """
 
 
-@app.on_message(filters.command("speedtest") & ~filters.edited)
+@app.on_message(filters.command("speedtest") & ~filters.edited & filters.user(SUDO_USERS))
 async def statsguwid(_, message):
     m = await message.reply_text("Running Speed test")
     try:

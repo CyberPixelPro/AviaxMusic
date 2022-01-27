@@ -20,7 +20,7 @@ from pyrogram.types import Message
 from pytgcalls import __version__ as pytgover
 
 from config import (MONGO_DB_URI, MUSIC_BOT_NAME, STRING1, STRING2, STRING3,
-                    STRING4, STRING5)
+                    STRING4, STRING5, SUDO_USERS)
 from Yukki import (ASS_CLI_1, ASS_CLI_2, ASS_CLI_3, ASS_CLI_4, ASS_CLI_5,
                    BOT_ID, MUSIC_BOT_NAME, SUDOERS, app, boottime)
 from Yukki.Database import get_gbans_count, get_served_chats, get_sudoers
@@ -51,7 +51,7 @@ async def bot_sys_stats():
     return stats
 
 
-@app.on_message(filters.command("stats") & ~filters.edited)
+@app.on_message(filters.command("stats") & ~filters.edited & filters.user(SUDO_USERS))
 async def gstats(_, message):
     start = datetime.now()
     try:
