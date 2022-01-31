@@ -219,9 +219,9 @@ async def vplay_stream(message,VideoData):
     callback_request = callback_data.split(None, 1)[1]
     videoid, duration, user_id = callback_request.split("|")    
     
-    VideoData = f"VideoStream 360|{videoid}|{duration}|{user_id}"
+    QualityData = f"VideoStream 360|{videoid}|{duration}|{user_id}"
 
-    callback_data = VideoData.strip()
+    callback_data = QualityData.strip()
     callback_request = callback_data.split(None, 1)[1]
     chat_id = message.chat.id
     chat_title = message.chat.title

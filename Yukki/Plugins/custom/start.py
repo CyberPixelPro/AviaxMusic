@@ -50,14 +50,15 @@ async def extra_menu(_, query):
 async def closer_menu(_, query):    
     await query.message.delete()
 
-@app.on_callback_query(filters.regex("start_menu_back") & filters.private)
-async def back_menu_private(_, query):    
-    mention = "[" + query.from_user.first_name + "](tg://user?id=" + str(query.from_user.id) + ")"
-    text = START_TEXT.replace("MENTION",mention)
-    await query.message.edit(text=text,reply_markup=START_BUTTON_PRIVATE,parse_mode="markdown")
+@app.on_callback_query(filters.regex("start_menu_back"))
+async def back_menu_group(_, query):
+    if query.message.chat.type == "group":
+        button = START_BUTTON_GROUP
+    elif query.message.chat.type == "supergroup":
+        button = START_BUTTON_GROUP
+    elif query.message.chat.type == "private":
+        button = START_BUTTON_PRIVATE
 
-@app.on_callback_query(filters.regex("start_menu_back") & filters.group)
-async def back_menu_group(_, query):    
     mention = "[" + query.from_user.first_name + "](tg://user?id=" + str(query.from_user.id) + ")"
     text = START_TEXT.replace("MENTION",mention)
-    await query.message.edit(text=text,reply_markup=START_BUTTON_GROUP,parse_mode="markdown")
+    await query.message.edit(text=text,reply_markup=button,parse_mode="markdown")

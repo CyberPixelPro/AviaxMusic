@@ -253,11 +253,6 @@ async def vplayaaa(_, message: Message):
             videoid,
         ) = get_yt_info_query(query)
         await mystic.delete()
-        buttons = url_markup(
-            videoid, duration_min, message.from_user.id, query, 0
-        )
-        return await message.reply_photo(
-            photo=thumb,
-            caption=f"📎Title: **{title}\n\n⏳Duration:** {duration_min} Mins\n\n__[Get Additional Information About Video](https://t.me/{BOT_USERNAME}?start=info_{videoid})__",
-            reply_markup=InlineKeyboardMarkup(buttons),
-        )
+        
+        VideoData = f"Choose {videoid}|{duration_min}|{message.from_user.id}"
+        return await vplay_stream(message,VideoData)
