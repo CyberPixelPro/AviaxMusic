@@ -20,12 +20,6 @@ async def commands_menu(_, query):
     text = COMMANDS_TEXT.replace("MENTION",mention)
     await query.message.edit(text=text,reply_markup=COMMANDS_BUTTON,parse_mode="markdown")
 
-@app.on_callback_query(filters.regex("back_btn"))
-async def back_menu(_, query):
-    mention = "[" + query.from_user.first_name + "](tg://user?id=" + str(query.from_user.id) + ")"
-    text = COMMANDS_TEXT.replace("MENTION",mention)
-    await query.message.edit(text=text,reply_markup=COMMANDS_BUTTON,parse_mode="markdown")
-
 @app.on_callback_query(filters.regex("admin_cmd"))
 async def admin_menu(_, query):    
     await query.message.edit(text=ADMIN_TEXT,reply_markup=BACK_BUTTON,parse_mode="markdown")
