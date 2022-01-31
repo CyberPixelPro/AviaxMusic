@@ -136,24 +136,27 @@ async def okaybhai(_, CallbackQuery):
 
 @app.on_callback_query(filters.regex("settingm"))
 async def settingm(_, CallbackQuery):
-    await CallbackQuery.answer("Bot Settings ...")
-    text, buttons = setting_markup()
-    c_title = CallbackQuery.message.chat.title
-    c_id = CallbackQuery.message.chat.id
-    chat_id = CallbackQuery.message.chat.id
-    _check = await get_start(c_id, "assistant")
-    if not _check:
-        assis = {
-            "volume": 100,
-        }
-        await save_start(c_id, "assistant", assis)
-        volume = 100
-    else:
-        volume = _check["volume"]
-    await CallbackQuery.edit_message_text(
-        text=f"{text}\n\n**Group:** {c_title}\n**Group ID:** {c_id}\n**Volume Level:** {volume}%",
-        reply_markup=InlineKeyboardMarkup(buttons),
-    )
+    try:
+        text, buttons = setting_markup()
+        c_title = CallbackQuery.message.chat.title
+        c_id = CallbackQuery.message.chat.id
+        chat_id = CallbackQuery.message.chat.id
+        await CallbackQuery.answer("Bot Settings ...")
+        _check = await get_start(c_id, "assistant")    
+        if not _check:
+            assis = {
+                "volume": 100,
+            }
+            await save_start(c_id, "assistant", assis)
+            volume = 100
+        else:
+            volume = _check["volume"]
+        await CallbackQuery.edit_message_text(
+            text=f"{text}\n\n**Group:** {c_title}\n**Group ID:** {c_id}\n**Volume Level:** {volume}%",
+            reply_markup=InlineKeyboardMarkup(buttons),
+        )
+    except Exception:
+        await CallbackQuery.answer("This Button Can Be Used Only In Groups.")
 
 
 @app.on_callback_query(filters.regex("EVE"))
