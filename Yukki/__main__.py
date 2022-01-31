@@ -91,9 +91,7 @@ async def initiate_bot():
             "<b>Congrats!! Music Bot has started successfully!</b>",
         )
     except Exception as e:
-        print(
-            "\nBot has failed to access the log Channel. Make sure that you have added your bot to your log channel and promoted as admin!"
-        )
+        print(str(e))
         console.print(f"\n[red]Stopping Bot")
         return
     a = await app.get_chat_member(LOG_GROUP_ID, BOT_ID)
