@@ -192,7 +192,7 @@ async def custom_start_stream(
         )
 
 
-async def vplay_stream(message,VideoData):
+async def vplay_stream(message,VideoData,mystic):
     limit = await get_video_limit(141414)
     if not limit:
         await message.delete()
@@ -255,6 +255,7 @@ async def vplay_stream(message,VideoData):
         duration_min,
         duration_sec,
         videoid,
+        mystic
     )
 
 async def custom_video_stream(
@@ -266,6 +267,7 @@ async def custom_video_stream(
     duration_min,
     duration_sec,
     videoid,
+    mystic
 ):
     global get_queue
     if message.chat.id not in db_mem:
@@ -344,3 +346,4 @@ async def custom_video_stream(
             message.from_user.id,
             0,
         )
+        await mystic.delete()

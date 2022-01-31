@@ -225,12 +225,11 @@ async def vplayaaa(_, message: Message):
             duration_sec,
             thumb,
             videoid,
-        ) = get_yt_info_query(query)
-        await mystic.delete()        
+        ) = get_yt_info_query(query)               
         
         VideoData = f"Choose {videoid}|{duration_min}|{message.from_user.id}"
-        return await vplay_stream(message,VideoData)
-    else:
+        return await vplay_stream(message,VideoData,mystic)
+    else:        
         if len(message.command) < 2:
             buttons = playlist_markup(
                 message.from_user.first_name, message.from_user.id, "abcd"
@@ -243,7 +242,7 @@ async def vplayaaa(_, message: Message):
                 reply_markup=InlineKeyboardMarkup(buttons),
             )
             return
-        mystic = await message.reply_text("🔍 **Searching**...")
+        mystic = await message.reply_text("🔄 Processing... Please Wait!")
         query = message.text.split(None, 1)[1]
         (
             title,
@@ -251,8 +250,6 @@ async def vplayaaa(_, message: Message):
             duration_sec,
             thumb,
             videoid,
-        ) = get_yt_info_query(query)
-        await mystic.delete()
-        
+        ) = get_yt_info_query(query)       
         VideoData = f"Choose {videoid}|{duration_min}|{message.from_user.id}"
-        return await vplay_stream(message,VideoData)
+        return await vplay_stream(message,VideoData,mystic)
