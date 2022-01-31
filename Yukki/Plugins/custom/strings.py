@@ -78,6 +78,14 @@ COMMANDS_BUTTON = InlineKeyboardMarkup(
             InlineKeyboardButton(
                 text="Extra Commands", callback_data="extra_cmd"
             ),                                   
+        ],
+        [
+            InlineKeyboardButton(
+                text="↪️ Back", callback_data="start_menu_back"
+            ),
+            InlineKeyboardButton(
+                text="🔄 Close", callback_data="close_btn"
+            ),            
         ],                
     ]
 )

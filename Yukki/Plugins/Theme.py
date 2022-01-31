@@ -58,7 +58,7 @@ async def settheme(_, message):
     await message.reply_text(f"Changed thumbnail theme to {theme}")
 
 
-@app.on_message(filters.command("theme"))
+@app.on_message(filters.command(["theme", f"theme@{BOT_USERNAME}"]))
 @PermissionCheck
 async def theme_func(_, message):
     await message.delete()

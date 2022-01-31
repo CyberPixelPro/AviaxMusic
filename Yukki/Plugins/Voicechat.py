@@ -9,7 +9,7 @@ from pyrogram.types import (InlineKeyboardMarkup, InputMediaPhoto, Message,
                             Voice)
 
 from config import get_queue
-from Yukki import SUDOERS, app, db_mem, random_assistant
+from Yukki import BOT_USERNAME, SUDOERS, app, db_mem, random_assistant
 from Yukki.Database import (get_active_chats, get_active_video_chats,
                             get_assistant, is_active_chat, save_assistant)
 from Yukki.Decorators.checker import checker, checkerCB
@@ -89,7 +89,7 @@ async def timer_checkup_markup(_, CallbackQuery):
         )
 
 
-@app.on_message(filters.command("queue"))
+@app.on_message(filters.command(["queue", f"queue@{BOT_USERNAME}"]))
 async def activevc(_, message: Message):
     global get_queue
     if await is_active_chat(message.chat.id):

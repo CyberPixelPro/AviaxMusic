@@ -36,7 +36,7 @@ __HELP__ = """
 """
 
 
-@app.on_message(filters.command("playplaylist") & filters.group)
+@app.on_message(filters.command(["playplaylist", f"playplaylist@{BOT_USERNAME}"]) & filters.group)
 @checker
 @PermissionCheck
 @AssistantAdd
@@ -107,7 +107,7 @@ async def play_playlist_cmd(_, message):
         return
 
 
-@app.on_message(filters.command("playlist") & filters.group)
+@app.on_message(filters.command(["playlist", f"playlist@{BOT_USERNAME}"]) & filters.group)
 @checker
 @PermissionCheck
 @AssistantAdd

@@ -1,7 +1,7 @@
 from config import THUMBNAIL
-from Yukki import (BOT_USERNAME, app)
+from Yukki import app
 from pyrogram import filters
-from Yukki.Plugins.helpmenu.strings import *
+from Yukki.Plugins.custom.strings import *
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 async def start_menu_private(message):
@@ -49,3 +49,15 @@ async def extra_menu(_, query):
 @app.on_callback_query(filters.regex("close_btn"))
 async def closer_menu(_, query):    
     await query.message.delete()
+
+@app.on_callback_query(filters.regex("start_menu_back") & filters.private)
+async def back_menu_private(_, query):    
+    mention = "[" + query.from_user.first_name + "](tg://user?id=" + str(query.from_user.id) + ")"
+    text = START_TEXT.replace("MENTION",mention)
+    await query.message.edit(text=text,reply_markup=START_BUTTON_PRIVATE,parse_mode="markdown")
+
+@app.on_callback_query(filters.regex("start_menu_back") & filters.group)
+async def back_menu_group(_, query):    
+    mention = "[" + query.from_user.first_name + "](tg://user?id=" + str(query.from_user.id) + ")"
+    text = START_TEXT.replace("MENTION",mention)
+    await query.message.edit(text=text,reply_markup=START_BUTTON_GROUP,parse_mode="markdown")

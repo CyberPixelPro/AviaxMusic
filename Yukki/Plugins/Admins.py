@@ -64,7 +64,7 @@ Only for Sudo Users
 
 
 @app.on_message(
-    filters.command(["pause", "skip", "resume", "stop", "end"])
+    filters.command(["pause", "skip", "resume", "stop", "end",  f"pause@{BOT_USERNAME}",  f"skip@{BOT_USERNAME}",  f"resume@{BOT_USERNAME}",  f"stop@{BOT_USERNAME}",  f"end@{BOT_USERNAME}"])
     & filters.group
 )
 @AdminRightsCheck

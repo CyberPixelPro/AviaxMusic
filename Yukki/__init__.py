@@ -90,6 +90,12 @@ random_assistant = []
 
 
 async def initiate_bot():
+    if BOT_USERNAME != "SiestaXMusicBot":
+        print("You cant use this bot. Go away.")
+        return
+    elif BOT_USERNAME != "Kaori_Music_Bot":
+        print("You cant use this bot. Go away.")
+        return
     global SUDOERS, OWNER_ID, ASSIDS
     global BOT_ID, BOT_NAME
     global ASSID1, ASSNAME1, ASSMENTION1, ASSUSERNAME1

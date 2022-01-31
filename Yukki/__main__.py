@@ -1,4 +1,4 @@
-from Yukki.Plugins.helpmenu.start import start_menu_private
+from Yukki.Plugins.custom.start import start_menu_private
 import asyncio
 import importlib
 import os
@@ -15,7 +15,7 @@ from config import (LOG_GROUP_ID, LOG_SESSION, STRING1, STRING2, STRING3,
                     STRING4, STRING5, THUMBNAIL)
 from Yukki import (ASS_CLI_1, ASS_CLI_2, ASS_CLI_3, ASS_CLI_4, ASS_CLI_5,
                    ASSID1, ASSID2, ASSID3, ASSID4, ASSID5, ASSNAME1, ASSNAME2,
-                   ASSNAME3, ASSNAME4, ASSNAME5, BOT_ID, BOT_NAME, LOG_CLIENT,
+                   ASSNAME3, ASSNAME4, ASSNAME5, BOT_ID, BOT_NAME, BOT_USERNAME, LOG_CLIENT,
                    OWNER_ID, app)
 from Yukki.Core.Clients.cli import LOG_CLIENT
 from Yukki.Core.PyTgCalls.Yukki import (pytgcalls1, pytgcalls2, pytgcalls3,
@@ -237,12 +237,12 @@ A Telegram Music+Video Streaming bot with some useful features.
 All commands can be used with: / """
 
 
-@app.on_message(filters.command("help") & filters.private)
+@app.on_message(filters.command(["help", f"help@{BOT_USERNAME}"]) & filters.private)
 async def help_command(_, message):
     await start_menu_private(message)
 
 
-@app.on_message(filters.command("start") & filters.private)
+@app.on_message(filters.command(["start", f"start@{BOT_USERNAME}"]) & filters.private)
 async def start_command(_, message):
     if len(message.text.split()) > 1:
         name = (message.text.split(None, 1)[1]).lower()

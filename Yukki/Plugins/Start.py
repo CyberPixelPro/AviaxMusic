@@ -1,4 +1,4 @@
-from Yukki.Plugins.helpmenu.start import start_menu_group
+from Yukki.Plugins.custom.start import start_menu_group
 import asyncio
 import random
 import time
@@ -101,7 +101,7 @@ async def useradd(_, message: Message):
     await start_menu_group(message)
 
 
-@app.on_message(filters.command("settings") & filters.group)
+@app.on_message(filters.command(["settings", f"settings@{BOT_USERNAME}"]) & filters.group)
 @PermissionCheck
 async def settings(_, message: Message):
     c_id = message.chat.id

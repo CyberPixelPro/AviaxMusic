@@ -28,10 +28,7 @@ SUPPORT_GROUP = "https://t.me/TechZBots_Support"
 
 THUMBNAIL = getenv("THUMB_LINK") 
 
-if str(getenv("BOT_USERNAME")).strip() == "":
-    botusername = "SiestaXMusicBot"
-else:
-    botusername = str(getenv("BOT_USERNAME"))
+botusername = str(getenv("BOT_USERNAME"))
 
 if str(getenv("STRING_SESSION1")).strip() == "":
     STRING1 = str(None)
