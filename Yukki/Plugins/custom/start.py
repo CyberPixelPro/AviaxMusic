@@ -65,5 +65,5 @@ async def extra_menu(_, query):
     
     
 @app.on_callback_query(filters.regex("open_commands"))
-async def extra_menu(_, query):    
+async def open_cmd_menu(_, query):    
     await query.message.edit(text="**Choose Basic Command to get Basic Bot Commands\nAnd Advanved Command to get Advanved Bot Commands.**",reply_markup=OPENMENU_BUTTON,parse_mode="markdown")    
