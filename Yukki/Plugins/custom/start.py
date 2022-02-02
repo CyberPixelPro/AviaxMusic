@@ -56,3 +56,8 @@ async def back_menu_group(_, query):
     mention = "[" + query.from_user.first_name + "](tg://user?id=" + str(query.from_user.id) + ")"
     text = START_TEXT.replace("MENTION",mention)
     await query.message.edit(text=text,reply_markup=button,parse_mode="markdown")
+    
+    
+@app.on_callback_query(filters.regex("basic_cmd"))
+async def extra_menu(_, query):    
+    await query.message.edit(text=BASIC_TEXT,reply_markup=BASIC_BACK_BUTTON,parse_mode="markdown")    

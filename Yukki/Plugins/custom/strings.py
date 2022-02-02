@@ -18,7 +18,12 @@ COMMANDS_TEXT = f"""
 START_BUTTON_GROUP = InlineKeyboardMarkup(
     [   [
             InlineKeyboardButton(
-                text="📚 Commands", callback_data="commands"
+                text="🔍 Basic Commands", callback_data="basic_cmd"
+            ),                                   
+        ],
+        [
+            InlineKeyboardButton(
+                text="📚 Advanced Commands", callback_data="commands"
             ),
             InlineKeyboardButton(
                 text="🔧 Settings", callback_data="settingm"
@@ -41,9 +46,11 @@ START_BUTTON_PRIVATE = InlineKeyboardMarkup(
                 text="➕ Add me to Group ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
             ),            
         ],
-        [
+        [   InlineKeyboardButton(
+                text="🔍 Basic Commands", callback_data="basic_cmd"
+            ),  
             InlineKeyboardButton(
-                text="📚 Commands", callback_data="commands"
+                text="📚 Advanced Commands", callback_data="commands"
             ),                       
         ],
         [
@@ -235,3 +242,32 @@ Here is the help for **Extra Commands:**
 /queue
 - Check Queue List of Music.
 """
+
+BASIC_TEXT = """
+💠 **Basic Commands:**
+
+/start - start the bot
+/help - get help message
+/play - play songs or videos in vc
+/mplay - play songs directly in vc
+/vplay - play videos directly in vc
+/lyrics - get lyrics of song
+/ping - ping the bot
+/playlist - play your playlist
+/song - download a song as music or video
+/settings - settings of the group
+/theme - set theme for your group
+/queue - get queued song
+"""
+
+BASIC_BACK_BUTTON = InlineKeyboardMarkup(
+    [   [
+            InlineKeyboardButton(
+                text="↪️ Back", callback_data="start_menu_back"
+            ),
+            InlineKeyboardButton(
+                text="🔄 Close", callback_data="close_btn"
+            ),            
+        ],                        
+    ]
+)
