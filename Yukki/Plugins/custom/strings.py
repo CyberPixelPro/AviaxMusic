@@ -16,14 +16,10 @@ COMMANDS_TEXT = f"""
 """
 
 START_BUTTON_GROUP = InlineKeyboardMarkup(
-    [   [
-            InlineKeyboardButton(
-                text="🔍 Basic Commands", callback_data="basic_cmd"
-            ),                                   
-        ],
+    [   
         [
             InlineKeyboardButton(
-                text="📚 Advanced Commands", callback_data="commands"
+                text="📚 Commands", callback_data="open_commands"
             ),
             InlineKeyboardButton(
                 text="🔧 Settings", callback_data="settingm"
@@ -46,11 +42,9 @@ START_BUTTON_PRIVATE = InlineKeyboardMarkup(
                 text="➕ Add me to Group ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
             ),            
         ],
-        [   InlineKeyboardButton(
-                text="🔍 Basic Commands", callback_data="basic_cmd"
-            ),  
+        [   
             InlineKeyboardButton(
-                text="📚 Advanced Commands", callback_data="commands"
+                text="📚 Commands", callback_data="open_commands"
             ),                       
         ],
         [
@@ -88,7 +82,7 @@ COMMANDS_BUTTON = InlineKeyboardMarkup(
         ],
         [
             InlineKeyboardButton(
-                text="↪️ Back", callback_data="start_menu_back"
+                text="↪️ Back", callback_data="open_commands"
             ),
             InlineKeyboardButton(
                 text="🔄 Close", callback_data="close_btn"
@@ -262,6 +256,28 @@ BASIC_TEXT = """
 
 BASIC_BACK_BUTTON = InlineKeyboardMarkup(
     [   [
+            InlineKeyboardButton(
+                text="↪️ Back", callback_data="open_commands"
+            ),
+            InlineKeyboardButton(
+                text="🔄 Close", callback_data="close_btn"
+            ),            
+        ],                        
+    ]
+)
+
+OPENMENU_BUTTON = InlineKeyboardMarkup(
+    [   [
+            InlineKeyboardButton(
+                text="🔍 Basic Commands", callback_data="basic_cmd"
+            ),                                   
+        ],
+        [
+            InlineKeyboardButton(
+                text="📚 Advanced Commands", callback_data="commands"
+            ),
+        ],
+        [
             InlineKeyboardButton(
                 text="↪️ Back", callback_data="start_menu_back"
             ),
