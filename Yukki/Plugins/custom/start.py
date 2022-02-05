@@ -14,7 +14,7 @@ async def start_menu_group(message):
     text = START_TEXT.replace("MENTION",mention)
     await message.reply_photo(photo=THUMBNAIL,caption=text,reply_markup=START_BUTTON_GROUP,parse_mode="markdown")
 
-@app.on_callback_query(filters.regex("commands"))
+@app.on_callback_query(filters.regex("advanced_cmd"))
 async def commands_menu(_, query):
     mention = "[" + query.from_user.first_name + "](tg://user?id=" + str(query.from_user.id) + ")"
     text = COMMANDS_TEXT.replace("MENTION",mention)
@@ -44,8 +44,8 @@ async def extra_menu(_, query):
 async def closer_menu(_, query):    
     await query.message.delete()
 
-@app.on_callback_query(filters.regex("start_menu_back"))
-async def back_menu_group(_, query):
+@app.on_callback_query(filters.regex("open_start_menu"))
+async def open_start_menu(_, query):
     if query.message.chat.type == "group":
         button = START_BUTTON_GROUP
     elif query.message.chat.type == "supergroup":
@@ -59,11 +59,11 @@ async def back_menu_group(_, query):
     
     
 @app.on_callback_query(filters.regex("basic_cmd"))
-async def extra_menu(_, query):    
+async def basic_cmd(_, query):    
     await query.message.edit(text=BASIC_TEXT,reply_markup=BASIC_BACK_BUTTON,parse_mode="markdown")    
     
     
     
-@app.on_callback_query(filters.regex("open_commands"))
-async def open_cmd_menu(_, query):    
-    await query.message.edit(text="**Choose Basic Command to get Basic Bot Commands\nAnd Advanved Command to get Advanved Bot Commands.**",reply_markup=OPENMENU_BUTTON,parse_mode="markdown")    
+@app.on_callback_query(filters.regex("command_menu"))
+async def command_menu(_, query):    
+    await query.message.edit(text="**Choose Basic Command to get Basic Bot Commands\nAnd Advanved Command to get Advanved Bot Commands.**",reply_markup=COMMAND_MENU_BUTTON,parse_mode="markdown")    

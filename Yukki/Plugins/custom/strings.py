@@ -19,7 +19,7 @@ START_BUTTON_GROUP = InlineKeyboardMarkup(
     [   
         [
             InlineKeyboardButton(
-                text="📚 Commands", callback_data="open_commands"
+                text="📚 Commands", callback_data="command_menu"
             ),
             InlineKeyboardButton(
                 text="🔧 Settings", callback_data="settingm"
@@ -44,7 +44,7 @@ START_BUTTON_PRIVATE = InlineKeyboardMarkup(
         ],
         [   
             InlineKeyboardButton(
-                text="📚 Commands", callback_data="open_commands"
+                text="📚 Commands", callback_data="command_menu"
             ),                       
         ],
         [
@@ -82,7 +82,7 @@ COMMANDS_BUTTON = InlineKeyboardMarkup(
         ],
         [
             InlineKeyboardButton(
-                text="↪️ Back", callback_data="open_commands"
+                text="↪️ Back", callback_data="command_menu"
             ),
             InlineKeyboardButton(
                 text="🔄 Close", callback_data="close_btn"
@@ -94,7 +94,7 @@ COMMANDS_BUTTON = InlineKeyboardMarkup(
 BACK_BUTTON = InlineKeyboardMarkup(
     [   [
             InlineKeyboardButton(
-                text="↪️ Back", callback_data="back_btn"
+                text="↪️ Back", callback_data="advanced_cmd"
             ),
             InlineKeyboardButton(
                 text="🔄 Close", callback_data="close_btn"
@@ -257,7 +257,7 @@ BASIC_TEXT = """
 BASIC_BACK_BUTTON = InlineKeyboardMarkup(
     [   [
             InlineKeyboardButton(
-                text="↪️ Back", callback_data="open_commands"
+                text="↪️ Back", callback_data="command_menu"
             ),
             InlineKeyboardButton(
                 text="🔄 Close", callback_data="close_btn"
@@ -266,7 +266,7 @@ BASIC_BACK_BUTTON = InlineKeyboardMarkup(
     ]
 )
 
-OPENMENU_BUTTON = InlineKeyboardMarkup(
+COMMAND_MENU_BUTTON = InlineKeyboardMarkup(
     [   [
             InlineKeyboardButton(
                 text="🔍 Basic Commands", callback_data="basic_cmd"
@@ -274,12 +274,12 @@ OPENMENU_BUTTON = InlineKeyboardMarkup(
         ],
         [
             InlineKeyboardButton(
-                text="📚 Advanced Commands", callback_data="commands"
+                text="📚 Advanced Commands", callback_data="advanced_cmd"
             ),
         ],
         [
             InlineKeyboardButton(
-                text="↪️ Back", callback_data="start_menu_back"
+                text="↪️ Back", callback_data="open_start_menu"
             ),
             InlineKeyboardButton(
                 text="🔄 Close", callback_data="close_btn"
