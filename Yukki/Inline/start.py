@@ -144,7 +144,7 @@ def setting_markup():
         ],
         [
             InlineKeyboardButton(text="✖️ Close", callback_data="close"),
-            InlineKeyboardButton(text="🔙 Go Back", callback_data="start_menu_back"),
+            InlineKeyboardButton(text="🔙 Go Back", callback_data="open_start_menu"),
         ],
     ]
     return f"🔧  **{MUSIC_BOT_NAME} Settings**", buttons
