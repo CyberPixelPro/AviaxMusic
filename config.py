@@ -59,3 +59,8 @@ if str(getenv("LOG_SESSION")).strip() == "":
     LOG_SESSION = str(None)
 else:
     LOG_SESSION = str(getenv("LOG_SESSION"))
+
+if str(getenv("LEAVE_CHANNELS")).strip() == "True":
+    LEAVE_CHANNELS = "True"
+else:
+    LEAVE_CHANNELS = "False"

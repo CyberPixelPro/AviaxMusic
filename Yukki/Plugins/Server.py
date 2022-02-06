@@ -6,7 +6,7 @@ import random
 import shutil
 from datetime import datetime
 from time import strftime, time
-
+import sys
 import heroku3
 import requests
 import urllib3
@@ -367,7 +367,7 @@ async def update_(client, message):
         )
         os.system("pip3 install -r requirements.txt")
         os.system(f"kill -9 {os.getpid()} && bash start")
-        exit()
+        sys.exit()
     return
 
 
