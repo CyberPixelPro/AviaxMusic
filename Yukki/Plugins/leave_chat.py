@@ -36,8 +36,8 @@ async def essential1(client, message: Message):
                             except:
                                 pass
                             await client.leave_chat(chat_id)               
-            except:
-                return
+            except Exception as e:
+                return print(e)
 
 @Client.on_message(filters.left_chat_member)
 async def essential2(client, message: Message):
@@ -46,11 +46,11 @@ async def essential2(client, message: Message):
     except:
         try:
             members_list = await client.get_chat_members(message.chat.id)
-        except:
-            return
+        except Exception as e:
+                return print(e)
     try:
         length = len(members_list)
         if length < 3:
             await client.leave_chat(message.chat.id)
-    except:
-        return
+    except Exception as e:
+                return print(e)
