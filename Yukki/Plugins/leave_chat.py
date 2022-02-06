@@ -15,7 +15,7 @@ from config import LEAVE_CHANNELS
 welcome_group = 2
 list1 = [LOG_GROUP_ID,-1001572029526,-1001642562293]
 
-@Client.on_message(filters.new_chat_members, group=welcome_group)
+@Client.on_message(filters.new_chat_members)
 async def essential1(client, message: Message):
     if LEAVE_CHANNELS == "True":
         chat_id = message.chat.id    
@@ -40,12 +40,12 @@ async def essential1(client, message: Message):
                 return
 
 @Client.on_message(filters.left_chat_member)
-async def essential1(client, message: Message):
+async def essential2(client, message: Message):
     try:
-        members_list = await app.get_chat_members(message.chat.id,limit=5)        
+        members_list = await client.get_chat_members(message.chat.id,limit=5)        
     except:
         try:
-            members_list = await app.get_chat_members(message.chat.id)
+            members_list = await client.get_chat_members(message.chat.id)
         except:
             return
     try:
