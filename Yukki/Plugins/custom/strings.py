@@ -132,6 +132,24 @@ BACK_BUTTON = InlineKeyboardMarkup(
     ]
 )
 
+SUDO_BACK_BUTTON = InlineKeyboardMarkup(
+    [   [
+            InlineKeyboardButton(
+                text="More Sudo Commands", url="https://telegra.ph/SiestaXMusic-Sudo-Commands-02-08"
+            ),                        
+        ],
+        [
+            InlineKeyboardButton(
+                text="↪️ Back", callback_data="advanced_cmd"
+            ),
+            InlineKeyboardButton(
+                text="🔄 Close", callback_data="close_btn"
+            ),            
+        ],                        
+    ]
+)
+
+
 ADMIN_TEXT = f"""
 Here is the help for **Admin Commands:**
 
@@ -219,25 +237,9 @@ Here is the help for **Sudo Commands:**
 /addsudo [Username or Reply to a user]
 /delsudo [Username or Reply to a user]
 
-**<u>HEROKU:</u>**
-/get_log - Log of last 100 lines from Heroku.
-/usage - Dyno Usage.
-
-**<u>CONFIG VARS:</u>**
-/get_var - Get a config var from Heroku or .env.
-/del_var - Delete any var on Heroku or .env.
-/set_var [Var Name] [Value] - Set a Var or Update a Var on heroku or .env. Seperate Var and its Value with a space.
-
 **<u>BOT COMMANDS:</u>**
 /restart - Restart Bot. 
 /update - Update Bot.
-/clean - Clean Temp Files .
-/maintenance [enable / disable] 
-/logger [enable / disable] - Bot logs the searched queries in logger group.
-
-**<u>STATS COMMANDS:</u>**
-/activevc - Check active voice chats on bot.
-/activevideo - Check active video calls on bot.
 /stats - Check Bots Stats
 
 **<u>BLACKLIST CHAT FUNCTION:</u>**
@@ -245,29 +247,13 @@ Here is the help for **Sudo Commands:**
 /whitelistchat [CHAT_ID] - Whitelist any blacklisted chat from using Music Bot
 
 **<u>BROADCAST FUNCTION:</u>**
-/broadcast [Message or Reply to a Message] - Broadcast any message to Bot's Served Chats.
-/broadcast_pin [Message or Reply to a Message] - Broadcast any message to Bot's Served Chats with message getting Pinned in chat [Disabled Notifications].
-/broadcast_pin_loud [Message or Reply to a Message] - Broadcast any message to Bot's Served Chats with message getting Pinned in chat [Enabled Notifications].
+/broadcast [Message or Reply to a Message] - Broadcast message.
+/broadcast_pin [Message or Reply to a Message] - Broadcast message with pin [Disabled Notifications].
+/broadcast_pin_loud [Message or Reply to a Message] - Broadcast message with pin [Enabled Notifications].
 
 **<u>GBAN FUNCTION:</u>**
 /gban [Username or Reply to a user] - Ban a user globally in Bot's Served Chats and prevents user from using bot commands.
 /ungban [Username or Reply to a user] - Remove a user from Bot's GBan List.
-
-**<u>JOIN/LEAVE FUNCTION:</u>**
-/joinassistant [Chat Username or Chat ID] - Join assistant to a group.
-/leaveassistant [Chat Username or Chat ID] - Assistant will leave the particular group.
-/leavebot [Chat Username or Chat ID] - Bot will leave the particular chat.
-
-**<u>VIDEOCALLS FUNCTION:</u>**
-/set_video_limit [Number of Chats] - Set a maximum Number of Chats allowed for Video Calls at a time.
-
-**<u>ASSISTAN FUNCTION:</u>**
-{ASSISTANT_PREFIX[0]}block [ Reply to a User Message] - Blocks the User from Assistant Account.
-{ASSISTANT_PREFIX[0]}unblock [ Reply to a User Message] - Unblocks the User from Assistant Account.
-{ASSISTANT_PREFIX[0]}approve [ Reply to a User Message] - Approves the User for DM.
-{ASSISTANT_PREFIX[0]}disapprove [ Reply to a User Message] - Disapproves the User for DM.
-{ASSISTANT_PREFIX[0]}pfp [ Reply to a Photo] - Changes Assistant account PFP.
-{ASSISTANT_PREFIX[0]}bio [Bio text] - Changes Bio of Assistant Account.
 """
 
 EXTRA_TEXT = """
