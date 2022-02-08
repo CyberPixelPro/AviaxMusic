@@ -219,7 +219,7 @@ async def vplay_stream(message,VideoData,mystic):
     callback_request = callback_data.split(None, 1)[1]
     videoid, duration, user_id = callback_request.split("|")    
     
-    QualityData = f"VideoStream 360|{videoid}|{duration}|{user_id}"
+    QualityData = f"VideoStream 480|{videoid}|{duration}|{user_id}"
 
     callback_data = QualityData.strip()
     callback_request = callback_data.split(None, 1)[1]
