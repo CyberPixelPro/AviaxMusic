@@ -1,3 +1,4 @@
+from config import ASSISTANT_PREFIX
 from Yukki import BOT_NAME, BOT_USERNAME
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -58,7 +59,35 @@ START_BUTTON_PRIVATE = InlineKeyboardMarkup(
     ]
 )
 
-COMMANDS_BUTTON = InlineKeyboardMarkup(
+COMMANDS_BUTTON_USER = InlineKeyboardMarkup(
+    [   [
+            InlineKeyboardButton(
+                text="Admin Commands", callback_data="admin_cmd"
+            ),
+            InlineKeyboardButton(
+                text="Bot Commands", callback_data="bot_cmd"
+            ),            
+        ],
+        [
+            InlineKeyboardButton(
+                text="Play Commands", callback_data="play_cmd"
+            ),            
+            InlineKeyboardButton(
+                text="Extra Commands", callback_data="extra_cmd"
+            ),                                   
+        ],
+        [
+            InlineKeyboardButton(
+                text="↪️ Back", callback_data="command_menu"
+            ),
+            InlineKeyboardButton(
+                text="🔄 Close", callback_data="close_btn"
+            ),            
+        ],                
+    ]
+)
+
+COMMANDS_BUTTON_SUDO = InlineKeyboardMarkup(
     [   [
             InlineKeyboardButton(
                 text="Admin Commands", callback_data="admin_cmd"
@@ -183,41 +212,62 @@ Here is the help for **Play Commands:**
 - Delete any saved music in your group's playlist [Requires Admin Rights.]
 """
 
-SUDO_TEXT = """
-Here is the help for **Play Commands:**
+SUDO_TEXT = f"""
+Here is the help for **Sudo Commands:**
 
-**Note:** Only for sudo users.
+**<u>ADD & REMOVE SUDO USERS :</u>**
+/addsudo [Username or Reply to a user]
+/delsudo [Username or Reply to a user]
 
+**<u>HEROKU:</u>**
+/get_log - Log of last 100 lines from Heroku.
+/usage - Dyno Usage.
 
-/leavebot (group id) -> Order bot to leave a chat
+**<u>CONFIG VARS:</u>**
+/get_var - Get a config var from Heroku or .env.
+/del_var - Delete any var on Heroku or .env.
+/set_var [Var Name] [Value] - Set a Var or Update a Var on heroku or .env. Seperate Var and its Value with a space.
 
-/sudolist -> Show the sudo member list
+**<u>BOT COMMANDS:</u>**
+/restart - Restart Bot. 
+/update - Update Bot.
+/clean - Clean Temp Files .
+/maintenance [enable / disable] 
+/logger [enable / disable] - Bot logs the searched queries in logger group.
 
-/addsudo (owner only) - Add user to the sudo list
+**<u>STATS COMMANDS:</u>**
+/activevc - Check active voice chats on bot.
+/activevideo - Check active video calls on bot.
+/stats - Check Bots Stats
 
-/delsudo (owner only) - Remove user from sudo list
+**<u>BLACKLIST CHAT FUNCTION:</u>**
+/blacklistchat [CHAT_ID] - Blacklist any chat from using Music Bot
+/whitelistchat [CHAT_ID] - Whitelist any blacklisted chat from using Music Bot
 
-/eval or /sh -> Dev Commands
+**<u>BROADCAST FUNCTION:</u>**
+/broadcast [Message or Reply to a Message] - Broadcast any message to Bot's Served Chats.
+/broadcast_pin [Message or Reply to a Message] - Broadcast any message to Bot's Served Chats with message getting Pinned in chat [Disabled Notifications].
+/broadcast_pin_loud [Message or Reply to a Message] - Broadcast any message to Bot's Served Chats with message getting Pinned in chat [Enabled Notifications].
 
-/stats -> Show the bot statistic
+**<u>GBAN FUNCTION:</u>**
+/gban [Username or Reply to a user] - Ban a user globally in Bot's Served Chats and prevents user from using bot commands.
+/ungban [Username or Reply to a user] - Remove a user from Bot's GBan List.
 
-/clean -> Clears temp(s) files.
+**<u>JOIN/LEAVE FUNCTION:</u>**
+/joinassistant [Chat Username or Chat ID] - Join assistant to a group.
+/leaveassistant [Chat Username or Chat ID] - Assistant will leave the particular group.
+/leavebot [Chat Username or Chat ID] - Bot will leave the particular chat.
 
-/restart -> Restart Bot.
+**<u>VIDEOCALLS FUNCTION:</u>**
+/set_video_limit [Number of Chats] - Set a maximum Number of Chats allowed for Video Calls at a time.
 
-/gban -> Globally banned a user from all served chat and from using bot
-
-/ungban -> Unblock User who is blocked from using.
-
-/speedtest -> Test download / upload speed of bot.
-
-/update -> Update Bot.
-
-/broadcast -> Broadcast a message in all the served chats
-
-/broadcast_pin -> Broadcast a message with pin in all the served chats
-
-/maintenance [enable & disable] -> Turn on / off maintenance mode
+**<u>ASSISTAN FUNCTION:</u>**
+{ASSISTANT_PREFIX[0]}block [ Reply to a User Message] - Blocks the User from Assistant Account.
+{ASSISTANT_PREFIX[0]}unblock [ Reply to a User Message] - Unblocks the User from Assistant Account.
+{ASSISTANT_PREFIX[0]}approve [ Reply to a User Message] - Approves the User for DM.
+{ASSISTANT_PREFIX[0]}disapprove [ Reply to a User Message] - Disapproves the User for DM.
+{ASSISTANT_PREFIX[0]}pfp [ Reply to a Photo] - Changes Assistant account PFP.
+{ASSISTANT_PREFIX[0]}bio [Bio text] - Changes Bio of Assistant Account.
 """
 
 EXTRA_TEXT = """

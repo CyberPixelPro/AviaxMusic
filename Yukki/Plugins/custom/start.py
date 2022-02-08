@@ -1,5 +1,5 @@
 from config import THUMBNAIL
-from Yukki import app
+from Yukki import SUDOERS, app
 from pyrogram import filters
 from Yukki.Plugins.custom.strings import *
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -18,7 +18,11 @@ async def start_menu_group(message):
 async def commands_menu(_, query):
     mention = "[" + query.from_user.first_name + "](tg://user?id=" + str(query.from_user.id) + ")"
     text = COMMANDS_TEXT.replace("MENTION",mention)
-    await query.message.edit(text=text,reply_markup=COMMANDS_BUTTON,parse_mode="markdown")
+    if (query.from_user.id in SUDOERS):
+        buttons = COMMANDS_BUTTON_SUDO
+    else:
+        buttons = COMMANDS_BUTTON_USER
+    await query.message.edit(text=text,reply_markup=buttons)
 
 @app.on_callback_query(filters.regex("admin_cmd"))
 async def admin_menu(_, query):    
