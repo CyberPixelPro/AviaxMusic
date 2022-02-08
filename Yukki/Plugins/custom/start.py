@@ -38,7 +38,7 @@ async def bot_menu(_, query):
 
 @app.on_callback_query(filters.regex("sudo_cmd"))
 async def sudo_menu(_, query):    
-    await query.message.edit(text=SUDO_TEXT,reply_markup=SUDO_BACK_BUTTON,parse_mode="markdown")
+    await query.message.edit(text=SUDO_TEXT,reply_markup=SUDO_BACK_BUTTON)
 
 @app.on_callback_query(filters.regex("extra_cmd"))
 async def extra_menu(_, query):    
