@@ -138,8 +138,7 @@ async def play_playlist(_, CallbackQuery):
     global get_queue
     loop = asyncio.get_event_loop()
     callback_data = CallbackQuery.data.strip()
-    chat_id = CallbackQuery.message.chat.id
-    chat_title = CallbackQuery.chat.title
+    chat_id = CallbackQuery.message.chat.id    
     user_id = CallbackQuery.from_user.id
     playlist_id = callback_data.replace("play_spotify_playlist","").strip()    
     
@@ -195,7 +194,7 @@ async def play_playlist(_, CallbackQuery):
                 if videoid not in db_mem:
                     db_mem[videoid] = {}
                 db_mem[videoid]["username"] = CallbackQuery.from_user.mention
-                db_mem[videoid]["chat_title"] = chat_title
+                db_mem[videoid]["chat_title"] = CallbackQuery.chat.title
                 db_mem[videoid]["user_id"] = user_id
                 got_queue = get_queue.get(CallbackQuery.message.chat.id)
                 title = title
