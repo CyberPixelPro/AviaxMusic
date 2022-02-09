@@ -194,7 +194,7 @@ async def play_playlist(_, CallbackQuery):
                 if videoid not in db_mem:
                     db_mem[videoid] = {}
                 db_mem[videoid]["username"] = CallbackQuery.from_user.mention
-                db_mem[videoid]["chat_title"] = CallbackQuery.chat.title
+                db_mem[videoid]["chat_title"] = CallbackQuery.message.chat.title
                 db_mem[videoid]["user_id"] = user_id
                 got_queue = get_queue.get(CallbackQuery.message.chat.id)                
                 user = CallbackQuery.from_user.first_name
@@ -218,7 +218,7 @@ async def play_playlist(_, CallbackQuery):
                         "Error Joining Voice Chat. Make sure Voice Chat is Enabled."
                     )
                 theme = await check_theme(chat_id)
-                chat_title = await specialfont_to_normal(CallbackQuery.chat.title)
+                chat_title = await specialfont_to_normal(CallbackQuery.message.chat.title)
                 thumb = await gen_thumb(
                     thumbnail,
                     title,
