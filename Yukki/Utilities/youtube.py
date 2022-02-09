@@ -21,7 +21,7 @@ def get_yt_info_id(videoid):
 
 def get_yt_info_query(query: str):
     results = VideosSearch(query, limit=1)
-    for result in results.result()["result"]:
+    for result in results.result().get("result"):
         title = result["title"]
         duration_min = result["duration"]
         thumbnail = result["thumbnails"][0]["url"].split("?")[0]
