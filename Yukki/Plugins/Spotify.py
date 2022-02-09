@@ -139,6 +139,7 @@ async def play_playlist(_, CallbackQuery):
     loop = asyncio.get_event_loop()
     callback_data = CallbackQuery.data.strip()
     chat_id = CallbackQuery.message.chat.id
+    chat_title = CallbackQuery.chat.title
     user_id = CallbackQuery.from_user.id
     playlist_id = callback_data.replace("play_spotify_playlist","").strip()    
     
