@@ -96,7 +96,7 @@ async def spotify_play(_, message: Message):
             mystic = await message.reply_text("🔄 **Processing URL... Please Wait!**")      
             
             if "track" in url:
-                track_id = url[31:53]
+                track_id = url[31:53].strip()
                 query = get_track_info(track_id)
                 if "errrorrr" in query:
                     return await message.reply_photo(
@@ -116,7 +116,7 @@ async def spotify_play(_, message: Message):
                 MusicData = f"MusicStream {videoid}|{duration_min}|{message.from_user.id}"
                 return await mplay_stream(message,MusicData)
             elif "playlist" in url:
-                playlist_id = url[34:56]
+                playlist_id = url[34:56].strip()
                 pinfo = get_playlist_info(playlist_id)
                 if "errrorrr" in pinfo:
                     return await message.reply_photo(
@@ -125,6 +125,7 @@ async def spotify_play(_, message: Message):
                             "**Usage:**\n /spotify [Spotify Track Or Playlist Link]\n\n**Example:** `/spotify https://open.spotify.com/playlist/4NHOU8jAyQ0RF0SkfpnrbM?si=dd56ccf3a8de436b`"
                         ),
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                await mystic.delete()
                 return await message.reply_photo(
                         photo="Utils/spotify.png",
                         caption=f"🔮 **Playlist Name:** {pinfo[0]}\n🧿 **Playlist By:** {pinfo[1]}",
@@ -138,7 +139,7 @@ async def play_playlist(_, CallbackQuery):
     callback_data = CallbackQuery.data.strip()
     chat_id = CallbackQuery.message.chat.id
     user_id = CallbackQuery.from_user.id
-    playlist_id = callback_data.replace("play_spotify_playlist","")    
+    playlist_id = callback_data.replace("play_spotify_playlist","").strip()    
     
     if chat_id not in db_mem:
         db_mem[chat_id] = {}
