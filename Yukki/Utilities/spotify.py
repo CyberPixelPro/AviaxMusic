@@ -15,13 +15,13 @@ def get_track_info(track_id):
         track_name = track_info["name"]
         return track_name
     except Exception as e:
-        return "errrorrr" + e
+        return "errrorrr" + str(e)
 
 def get_playlist_info(playlist_id):
     try:
         playlist_info = spt.playlist(playlist_id)
         name = playlist_info["name"]
-        owner = playlist_info["owner"]
+        owner = playlist_info["owner"]["display_name"]
         tracks = playlist_info["tracks"]["items"]        
         tracks_list = []
         for item in tracks:
@@ -29,7 +29,7 @@ def get_playlist_info(playlist_id):
             tracks_list.append(a)
         return [name,owner,tracks_list]
     except Exception as e:
-        return "errrorrr" + e
+        return "errrorrr" + str(e)
 
 def get_spotify_url(text):
     text = text.replace(f"/spotify@{BOT_USERNAME}","")
