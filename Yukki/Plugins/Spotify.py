@@ -1,5 +1,5 @@
 from Yukki.Database.queue import is_active_chat
-from Yukki.Utilities.spotify import get_playlist_info, get_spotify_info, get_spotify_url, get_track_info
+from Yukki.Utilities.spotify import get_playlist_info, get_spotify_url, get_track_info
 import asyncio
 from os import path
 
