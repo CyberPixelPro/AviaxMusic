@@ -7,3 +7,4 @@ downloads/
 raw_files/
 .gitignore
 __pycache__/
+.cache

@@ -7,3 +7,4 @@ raw_files/
 downloads/
 __pycache__/
 *.session-journal
+.cache
