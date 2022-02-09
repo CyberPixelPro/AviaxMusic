@@ -86,7 +86,7 @@ async def spotify_play(_, message: Message):
     url = get_spotify_url(message.text)
     if url == "":
         await message.reply_photo(
-                photo="Utils/spotify.jpg",
+                photo="Utils/spotify.png",
                 caption=(
                     "**Usage:**\n /spotify [Spotify Track Or Playlist Link]\n\n**Example:** `/spotify https://open.spotify.com/playlist/4NHOU8jAyQ0RF0SkfpnrbM?si=dd56ccf3a8de436b`"
                 ),
@@ -100,7 +100,7 @@ async def spotify_play(_, message: Message):
                 query = get_track_info(track_id)
                 if "errrorrr" in query:
                     return await message.reply_photo(
-                        photo="Utils/spotify.jpg",
+                        photo="Utils/spotify.png",
                         caption=(
                             "**Usage:**\n /spotify [Spotify Track Or Playlist Link]\n\n**Example:** `/spotify https://open.spotify.com/playlist/4NHOU8jAyQ0RF0SkfpnrbM?si=dd56ccf3a8de436b`"
                         ),
@@ -120,13 +120,13 @@ async def spotify_play(_, message: Message):
                 pinfo = get_playlist_info(playlist_id)
                 if "errrorrr" in pinfo:
                     return await message.reply_photo(
-                        photo="Utils/spotify.jpg",
+                        photo="Utils/spotify.png",
                         caption=(
                             "**Usage:**\n /spotify [Spotify Track Or Playlist Link]\n\n**Example:** `/spotify https://open.spotify.com/playlist/4NHOU8jAyQ0RF0SkfpnrbM?si=dd56ccf3a8de436b`"
                         ),
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
                 return await message.reply_photo(
-                        photo="Utils/spotify.jpg",
+                        photo="Utils/spotify.png",
                         caption=f"🔮 **Playlist Name:** {pinfo[0]}\n🧿 **Playlist By:** {pinfo[1]}",
                         reply_markup=InlineKeyboardMarkup(playlist_buttons(playlist_id)))
 
