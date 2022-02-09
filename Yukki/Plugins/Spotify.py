@@ -196,8 +196,7 @@ async def play_playlist(_, CallbackQuery):
                 db_mem[videoid]["username"] = CallbackQuery.from_user.mention
                 db_mem[videoid]["chat_title"] = CallbackQuery.chat.title
                 db_mem[videoid]["user_id"] = user_id
-                got_queue = get_queue.get(CallbackQuery.message.chat.id)
-                title = title
+                got_queue = get_queue.get(CallbackQuery.message.chat.id)                
                 user = CallbackQuery.from_user.first_name
                 duration = duration
                 to_append = [title, user, duration]
