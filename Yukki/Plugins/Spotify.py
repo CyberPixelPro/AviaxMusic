@@ -83,6 +83,7 @@ def playlist_buttons(id):
 @PermissionCheck
 @AssistantAdd
 async def spotify_play(_, message: Message):
+    await message.delete()
     url = get_spotify_url(message.text)
     if url == "":
         await message.reply_photo(
