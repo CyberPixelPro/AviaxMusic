@@ -21,4 +21,4 @@ yt-dlp==2021.11.10.1
 tgcrypto
 gitpython
 heroku3
-spotipy
+pyfy
