@@ -164,7 +164,7 @@ async def play_playlist(_, CallbackQuery):
     if "errrorrr" in Spoti_playlist:
         await CallbackQuery.message.delete()
         return await CallbackQuery.answer(
-            f"This User has no playlist on servers.", show_alert=True
+            f"Something went wrong try again...", show_alert=True
         )
     else:
         await CallbackQuery.message.delete()
@@ -176,7 +176,6 @@ async def play_playlist(_, CallbackQuery):
         for_t = 0
         for_p = 0
         for shikhar in Spoti_playlist:            
-            title = shikhar
             (
                     title,
                     duration_min,
