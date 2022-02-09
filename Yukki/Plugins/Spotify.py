@@ -218,7 +218,7 @@ async def play_playlist(_, CallbackQuery):
                         "Error Joining Voice Chat. Make sure Voice Chat is Enabled."
                     )
                 theme = await check_theme(chat_id)
-                chat_title = await specialfont_to_normal(chat_title)
+                chat_title = await specialfont_to_normal(CallbackQuery.chat.title)
                 thumb = await gen_thumb(
                     thumbnail,
                     title,
