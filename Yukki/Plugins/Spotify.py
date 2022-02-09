@@ -206,12 +206,7 @@ async def play_playlist(_, CallbackQuery):
                 loop = asyncio.get_event_loop()
                 send_video = videoid
                 for_t = 1
-                (
-                    title,
-                    duration_min,
-                    duration_sec,
-                    thumbnail,
-                ) = get_yt_info_id(videoid)
+                thumbnail = thumb
                 mystic = await mystic.edit(
                     f"**{MUSIC_BOT_NAME} Downloader**\n\n**Title:** {title[:50]}\n\n0% ▓▓▓▓▓▓▓▓▓▓▓▓ 100%"
                 )
