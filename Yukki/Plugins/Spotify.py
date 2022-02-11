@@ -214,14 +214,14 @@ async def play_playlist(_, CallbackQuery):
         for_t = 0
         for_p = 0
         if "pl" in cbdata:
-            cbdata = cbdata.replace("pl","").strip()
-            spotify_info = await getsp_playlist_info(cbdata,user_id)
+            query_id = cbdata.replace("pl","").strip()
+            spotify_info = await getsp_playlist_info(query_id,user_id)
         elif "ab" in cbdata:
-            cbdata = cbdata.replace("ab","").strip()
-            spotify_info = await getsp_album_info(cbdata,user_id)
+            query_id = cbdata.replace("ab","").strip()
+            spotify_info = await getsp_album_info(query_id,user_id)
         elif "ar" in cbdata:
-            cbdata = cbdata.replace("ar","").strip()
-            spotify_info = await getsp_artist_info(cbdata)
+            query_id = cbdata.replace("ar","").strip()
+            spotify_info = await getsp_artist_info(query_id)
         
         if "errrorrr" in spotify_info:
             await mystic.delete()
