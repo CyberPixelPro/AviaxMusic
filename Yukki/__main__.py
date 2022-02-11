@@ -288,13 +288,7 @@ async def start_command(_, message):
                     f"{message.from_user.mention} has just started bot to check <code>SUDOLIST</code>\n\n**USER ID:** {sender_id}\n**USER NAME:** {sender_name}",
                 )
         if name == "help":
-            text, keyboard = await help_parser(message.from_user.mention)
-            await message.delete()
-            return await app.send_text(
-                message.chat.id,
-                text,
-                reply_markup=keyboard,
-            )
+            return await start_menu_private(message)
         if name[0] == "i":
             m = await message.reply_text("🔎 Fetching Info!")
             query = (str(name)).replace("info_", "", 1)
@@ -351,17 +345,8 @@ async def start_command(_, message):
                     f"{message.from_user.mention} has just started bot to check <code>VIDEO INFORMATION</code>\n\n**USER ID:** {sender_id}\n**USER NAME:** {sender_name}",
                 )
             return
-    
-    await start_menu_private(message)
-    if await is_on_off(5):
-        sender_id = message.from_user.id
-        sender_name = message.from_user.first_name
-        umention = f"[{sender_name}](tg://user?id={int(sender_id)})"
-        return await LOG_CLIENT.send_message(
-            LOG_GROUP_ID,
-            f"{message.from_user.mention} has just started Bot.\n\n**USER ID:** {sender_id}\n**USER NAME:** {sender_name}",
-        )
-    return
+    else:
+        return await start_menu_private(message)
 
 
 async def help_parser(name, keyboard=None):

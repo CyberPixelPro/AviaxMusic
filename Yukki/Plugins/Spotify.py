@@ -1,5 +1,5 @@
 from Yukki.Database.queue import is_active_chat
-from Yukki.Utilities.spotify import get_playlist_info, get_spotify_url, get_track_info
+from Yukki.Utilities.spotify import get_spotify_url, getsp_album_info, getsp_artist_info, getsp_playlist_info, getsp_track_info
 import asyncio
 from os import path
 
@@ -62,11 +62,11 @@ from Yukki.Utilities.timer import start_timer
 from Yukki.Utilities.youtube import get_m3u8, get_yt_info_id
 from config import get_queue
 
-def playlist_buttons(id):
+def spotify_buttons(id,type):
     buttons = [   
             [
                 InlineKeyboardButton(
-                    text="🎵 Play Playlist", callback_data=f"play_spotify_playlist {id}"
+                    text="🎵 Play", callback_data=f"play_spotify_playlist {type} {id}"
                 ),
                 InlineKeyboardButton(
                     text="🗑 Close Search", callback_data="close_btn"
@@ -89,7 +89,7 @@ async def spotify_play(_, message: Message):
         await message.reply_photo(
                 photo="Utils/spotify.png",
                 caption=(
-                    "**Usage:**\n /spotify [Spotify Track Or Playlist Link]\n\n**Example:** `/spotify https://open.spotify.com/playlist/4NHOU8jAyQ0RF0SkfpnrbM?si=dd56ccf3a8de436b`"
+                    "**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
                 ),
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))
     else:
@@ -97,13 +97,13 @@ async def spotify_play(_, message: Message):
             mystic = await message.reply_text("🔄 **Processing URL... Please Wait!**")      
             
             if "track" in url:
-                query = get_track_info(url)
+                query = getsp_track_info(url)
                 if "errrorrr" in query:
                     await mystic.delete()
                     return await message.reply_photo(
                         photo="Utils/spotify.png",
                         caption=(
-                            "**Usage:**\n /spotify [Spotify Track Or Playlist Link]\n\n**Example:** `/spotify https://open.spotify.com/playlist/4NHOU8jAyQ0RF0SkfpnrbM?si=dd56ccf3a8de436b`"
+                            "**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
                         ),
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
                 (
@@ -118,20 +118,60 @@ async def spotify_play(_, message: Message):
                 return await mplay_stream(message,MusicData)
             elif "playlist" in url:                
                 playlist_id = url[34:56].strip()
-                pinfo = get_playlist_info(url)
+                pinfo = await getsp_playlist_info(url,message.from_user.id)
                 if "errrorrr" in pinfo:
                     await mystic.delete()
                     return await message.reply_photo(
                         photo="Utils/spotify.png",
                         caption=(
-                            "**Usage:**\n /spotify [Spotify Track Or Playlist Link]\n\n**Example:** `/spotify https://open.spotify.com/playlist/4NHOU8jAyQ0RF0SkfpnrbM?si=dd56ccf3a8de436b`"
+                            "**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
                         ),
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
                 await mystic.delete()
                 return await message.reply_photo(
                         photo="Utils/spotify.png",
                         caption=f"🔮 **Playlist Name:** {pinfo[0]}\n🧿 **Playlist By:** {pinfo[1]}",
-                        reply_markup=InlineKeyboardMarkup(playlist_buttons(playlist_id)))
+                        reply_markup=InlineKeyboardMarkup(spotify_buttons(playlist_id,"pl")))
+            elif "album" in url:
+                ainfo = await getsp_album_info(url,message.from_user.id)                
+                albumid = url[31:53].strip()
+                if "errrorrr" in ainfo:
+                    await mystic.delete()
+                    return await message.reply_photo(
+                        photo="Utils/spotify.png",
+                        caption=(
+                            "**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
+                        ),
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                await mystic.delete()
+                return await message.reply_photo(
+                        photo="Utils/spotify.png",
+                        caption=f"🔮 **Album Name:** {ainfo[0]}\n🧿 **Album By:** {ainfo[1]}",
+                        reply_markup=InlineKeyboardMarkup(spotify_buttons(albumid,"ab")))
+            elif "artist" in url:                
+                ainfo = await getsp_artist_info(url)                
+                albumid = url[32:54].strip()
+                if "errrorrr" in ainfo:
+                    await mystic.delete()
+                    return await message.reply_photo(
+                        photo="Utils/spotify.png",
+                        caption=(
+                            "**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
+                        ),
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                await mystic.delete()
+                return await message.reply_photo(
+                        photo="Utils/spotify.png",
+                        caption=f"🔮 **Artist Name:** {ainfo[0]}\n🧿 **Click the button below to play top 10 songs of {ainfo[0]}**",
+                        reply_markup=InlineKeyboardMarkup(spotify_buttons(albumid,"ar")))
+            else:
+                await mystic.delete()
+                return await message.reply_photo(
+                    photo="Utils/spotify.png",
+                    caption=(
+                        "**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
+                    ),
+                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
 
 
 @app.on_callback_query(filters.regex("play_spotify_playlist"))
@@ -140,7 +180,7 @@ async def play_playlist(_, CallbackQuery):
     loop = asyncio.get_event_loop()
     callback_data = CallbackQuery.data.strip()
     chat_id = CallbackQuery.message.chat.id
-    callback_request = callback_data.replace("play_spotify_playlist","").strip()
+    cbdata = callback_data.replace("play_spotify_playlist","").strip()
     user_id = CallbackQuery.from_user.id
     chat_title = CallbackQuery.message.chat.title
     user_id = int(user_id)
@@ -173,13 +213,22 @@ async def play_playlist(_, CallbackQuery):
         j = 0
         for_t = 0
         for_p = 0
-        spotify_info = get_playlist_info(callback_request)
+        if "pl" in cbdata:
+            cbdata = cbdata.replace("pl","").strip()
+            spotify_info = await getsp_playlist_info(cbdata)
+        elif "ab" in cbdata:
+            cbdata = cbdata.replace("ab","").strip()
+            spotify_info = await getsp_album_info(cbdata)
+        elif "ar" in cbdata:
+            cbdata = cbdata.replace("ar","").strip()
+            spotify_info = await getsp_artist_info(cbdata)
+        
         if "errrorrr" in spotify_info:
             await mystic.delete()
             return await CallbackQuery.message.reply_photo(
                 photo="Utils/spotify.png",
                 caption=(
-                    "**Usage:**\n /spotify [Spotify Track Or Playlist Link]\n\n**Example:** `/spotify https://open.spotify.com/playlist/4NHOU8jAyQ0RF0SkfpnrbM?si=dd56ccf3a8de436b`"
+                    "**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
                 ),
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
         tracks_list = spotify_info[2]
@@ -270,7 +319,7 @@ async def play_playlist(_, CallbackQuery):
             if await isPreviewUp(preview):
                 await CallbackQuery.message.reply_photo(
                     photo=preview,
-                    caption=f"**This is Queued Spoyify Playlist.**\n\nPlayed by :- {CallbackQuery.from_user.mention}",
+                    caption=f"**This is Queued Spotify Playlist.**\n\nPlayed by :- {CallbackQuery.from_user.mention}",
                     quote=False,
                     reply_markup=InlineKeyboardMarkup(buttons),
                 )

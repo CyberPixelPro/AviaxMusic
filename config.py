@@ -59,3 +59,8 @@ if str(getenv("LOG_SESSION")).strip() == "":
     LOG_SESSION = str(None)
 else:
     LOG_SESSION = str(getenv("LOG_SESSION"))
+
+if str(getenv("LIMIT")).strip().upper() == "FALSE":
+    PL_LIMIT = "FALSE"
+else:
+    PL_LIMIT = "TRUE"
