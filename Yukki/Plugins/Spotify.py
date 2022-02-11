@@ -66,7 +66,7 @@ def spotify_buttons(id,type):
     buttons = [   
             [
                 InlineKeyboardButton(
-                    text="🎵 Play", callback_data=f"play_spotify_playlist {type} {id}"
+                    text="🎵 Play", callback_data=f"psp {type} {id}"
                 ),
                 InlineKeyboardButton(
                     text="🗑 Close Search", callback_data="close_btn"
@@ -174,13 +174,13 @@ async def spotify_play(_, message: Message):
                     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
 
 
-@app.on_callback_query(filters.regex("play_spotify_playlist"))
+@app.on_callback_query(filters.regex("psp"))
 async def play_playlist(_, CallbackQuery):
     global get_queue
     loop = asyncio.get_event_loop()
     callback_data = CallbackQuery.data.strip()
     chat_id = CallbackQuery.message.chat.id
-    cbdata = callback_data.replace("play_spotify_playlist","").strip()
+    cbdata = callback_data.replace("psp","").strip()
     user_id = CallbackQuery.from_user.id
     chat_title = CallbackQuery.message.chat.title
     user_id = int(user_id)
