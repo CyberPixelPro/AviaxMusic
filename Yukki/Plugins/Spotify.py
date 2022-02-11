@@ -66,7 +66,7 @@ def spotify_buttons(id,type):
     buttons = [   
             [
                 InlineKeyboardButton(
-                    text="🎵 Play", callback_data=f"psp {type} {id}"
+                    text="🎵 Play", callback_data=f"psp{type} {id}"
                 ),
                 InlineKeyboardButton(
                     text="🗑 Close Search", callback_data="close_btn"
@@ -178,9 +178,8 @@ async def spotify_play(_, message: Message):
 async def play_playlist(_, CallbackQuery):
     global get_queue
     loop = asyncio.get_event_loop()
-    callback_data = CallbackQuery.data.strip()
+    cbdata = CallbackQuery.data.strip()
     chat_id = CallbackQuery.message.chat.id
-    cbdata = callback_data.replace("psp","").strip()
     user_id = CallbackQuery.from_user.id
     chat_title = CallbackQuery.message.chat.title
     user_id = int(user_id)
@@ -213,14 +212,14 @@ async def play_playlist(_, CallbackQuery):
         j = 0
         for_t = 0
         for_p = 0
-        if "pl" in cbdata:
-            query_id = cbdata.replace("pl","").strip()
+        if "psppl" in cbdata:
+            query_id = cbdata.replace("psppl","").strip()
             spotify_info = await getsp_playlist_info(query_id,user_id)
-        elif "ab" in cbdata:
-            query_id = cbdata.replace("ab","").strip()
+        elif "pspab" in cbdata:
+            query_id = cbdata.replace("pspab","").strip()
             spotify_info = await getsp_album_info(query_id,user_id)
-        elif "ar" in cbdata:
-            query_id = cbdata.replace("ar","").strip()
+        elif "pspar" in cbdata:
+            query_id = cbdata.replace("pspar","").strip()
             spotify_info = await getsp_artist_info(query_id)
         
         if "errrorrr" in spotify_info:
