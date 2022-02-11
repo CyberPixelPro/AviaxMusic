@@ -61,8 +61,8 @@ async def getsp_album_info(url,user):
         tracks = album_info["tracks"]["items"]        
         tracks_list = []
         for item in tracks:
-            track_name = item["track"]["name"]
-            artist = item["track"]["artists"][0]["name"]
+            track_name = item["name"]
+            artist = item["artists"][0]["name"]
             search = track_name + " " + artist
             tracks_list.append(search)
         if PL_LIMIT == "TRUE":
