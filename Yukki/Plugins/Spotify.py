@@ -162,7 +162,7 @@ async def spotify_play(_, message: Message):
                 await mystic.delete()
                 return await message.reply_photo(
                         photo="Utils/spotify.png",
-                        caption=f"🔮 **Artist Name:** {ainfo[0]}\n🧿 **Click the button below to play top 10 songs of {ainfo[0]}**",
+                        caption=f"🔮 **Artist Name:** {ainfo[0]}\n🧿 **Click the Button below to play top 10 songs of {ainfo[0]}**",
                         reply_markup=InlineKeyboardMarkup(spotify_buttons(albumid,"ar")))
             else:
                 await mystic.delete()
@@ -215,10 +215,10 @@ async def play_playlist(_, CallbackQuery):
         for_p = 0
         if "pl" in cbdata:
             cbdata = cbdata.replace("pl","").strip()
-            spotify_info = await getsp_playlist_info(cbdata)
+            spotify_info = await getsp_playlist_info(cbdata,user_id)
         elif "ab" in cbdata:
             cbdata = cbdata.replace("ab","").strip()
-            spotify_info = await getsp_album_info(cbdata)
+            spotify_info = await getsp_album_info(cbdata,user_id)
         elif "ar" in cbdata:
             cbdata = cbdata.replace("ar","").strip()
             spotify_info = await getsp_artist_info(cbdata)

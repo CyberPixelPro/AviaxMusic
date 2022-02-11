@@ -1,3 +1,4 @@
+from Yukki.Plugins.Spotify import spotify_play
 import asyncio
 from os import path
 
@@ -142,6 +143,8 @@ async def play(_, message: Message):
             mystic,
         )
     elif url:
+        if "spotify.com" in url:
+            return await spotify_play(_, message)
         mystic = await message.reply_text("🔄 Processing URL... Please Wait!")
         if not message.reply_to_message:
             query = message.text.split(None, 1)[1]
