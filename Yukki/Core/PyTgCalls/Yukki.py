@@ -9,7 +9,8 @@ from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
                             ReplyKeyboardMarkup, ReplyKeyboardRemove)
 from pytgcalls import PyTgCalls, StreamType
 from pytgcalls.types import Update
-from pytgcalls.types.input_stream import (AudioVideoPiped, AudioPiped)
+from pytgcalls.types.input_stream import (AudioVideoPiped, InputAudioStream,
+                                          InputStream)
 from pytgcalls.types.input_stream.quality import (HighQualityAudio,
                                                   HighQualityVideo,
                                                   LowQualityVideo,
@@ -31,7 +32,7 @@ from Yukki.Utilities.chat import specialfont_to_normal
 from Yukki.Utilities.theme import check_theme
 from Yukki.Utilities.thumbnails import gen_thumb
 from Yukki.Utilities.timer import start_timer
-from Yukki.Utilities.youtube import get_m3u8, get_audio, get_yt_info_id
+from Yukki.Utilities.youtube import get_m3u8, get_yt_info_id
 
 ### Clients
 pytgcalls1 = PyTgCalls(ASS_CLI_1)
@@ -43,16 +44,17 @@ pytgcalls5 = PyTgCalls(ASS_CLI_5)
 ### Multi Assistant start
 
 
-async def join_stream(chat_id: int, link: str):
+async def join_stream(chat_id: int, file_path: str):
     _assistant = await get_assistant(chat_id, "assistant")
     assistant = _assistant["saveassistant"]
     if int(assistant) == 1:
         try:
             await pytgcalls1.join_group_call(
                 chat_id,
-                AudioPiped(
-                    link,
-                    HighQualityAudio(),
+                InputStream(
+                    InputAudioStream(
+                        file_path,
+                    ),
                 ),
                 stream_type=StreamType().local_stream,
             )
@@ -63,9 +65,10 @@ async def join_stream(chat_id: int, link: str):
         try:
             await pytgcalls2.join_group_call(
                 chat_id,
-                AudioPiped(
-                    link,
-                    HighQualityAudio(),
+                InputStream(
+                    InputAudioStream(
+                        file_path,
+                    ),
                 ),
                 stream_type=StreamType().local_stream,
             )
@@ -76,9 +79,10 @@ async def join_stream(chat_id: int, link: str):
         try:
             await pytgcalls3.join_group_call(
                 chat_id,
-                AudioPiped(
-                    link,
-                    HighQualityAudio(),
+                InputStream(
+                    InputAudioStream(
+                        file_path,
+                    ),
                 ),
                 stream_type=StreamType().local_stream,
             )
@@ -89,9 +93,10 @@ async def join_stream(chat_id: int, link: str):
         try:
             await pytgcalls4.join_group_call(
                 chat_id,
-                AudioPiped(
-                    link,
-                    HighQualityAudio(),
+                InputStream(
+                    InputAudioStream(
+                        file_path,
+                    ),
                 ),
                 stream_type=StreamType().local_stream,
             )
@@ -102,9 +107,10 @@ async def join_stream(chat_id: int, link: str):
         try:
             await pytgcalls5.join_group_call(
                 chat_id,
-                AudioPiped(
-                    link,
-                    HighQualityAudio(),
+                InputStream(
+                    InputAudioStream(
+                        file_path,
+                    ),
                 ),
                 stream_type=StreamType().local_stream,
             )
@@ -348,47 +354,52 @@ async def stop_stream(chat_id: int):
 ### Multi Assistant Skip
 
 
-async def skip_stream(chat_id: int, link: str):
+async def skip_stream(chat_id: int, file_path: str):
     _assistant = await get_assistant(chat_id, "assistant")
     assistant = _assistant["saveassistant"]
     if int(assistant) == 1:
         await pytgcalls1.change_stream(
             chat_id,
-            AudioPiped(
-                link,
-                HighQualityAudio(),
+            InputStream(
+                InputAudioStream(
+                    file_path,
+                ),
             ),
         )
     elif int(assistant) == 2:
         await pytgcalls2.change_stream(
             chat_id,
-            AudioPiped(
-                link,
-                HighQualityAudio(),
+            InputStream(
+                InputAudioStream(
+                    file_path,
+                ),
             ),
         )
     elif int(assistant) == 3:
         await pytgcalls3.change_stream(
             chat_id,
-            AudioPiped(
-                link,
-                HighQualityAudio(),
+            InputStream(
+                InputAudioStream(
+                    file_path,
+                ),
             ),
         )
     elif int(assistant) == 4:
         await pytgcalls4.change_stream(
             chat_id,
-            AudioPiped(
-                link,
-                HighQualityAudio(),
+            InputStream(
+                InputAudioStream(
+                    file_path,
+                ),
             ),
         )
     elif int(assistant) == 5:
         await pytgcalls5.change_stream(
             chat_id,
-            AudioPiped(
-                link,
-                HighQualityAudio(),
+            InputStream(
+                InputAudioStream(
+                    file_path,
+                ),
             ),
         )
 
@@ -478,8 +489,10 @@ async def playout_end(pytgclients, chat_id):
                 videoid = afk
                 await pytgclients.change_stream(
                     chat_id,
-                    AudioPiped(
-                        afk,
+                    InputStream(
+                        InputAudioStream(
+                            afk,
+                        ),
                     ),
                 )
                 title = db_mem[videoid]["title"]
@@ -530,9 +543,7 @@ async def playout_end(pytgclients, chat_id):
                         await pytgclients.change_stream(
                             chat_id,
                             AudioVideoPiped(
-                                videoid, 
-                                HighQualityAudio(), 
-                                stream_quality,
+                                videoid, HighQualityAudio(), stream_quality
                             ),
                         )
                     except:
@@ -575,9 +586,7 @@ async def playout_end(pytgclients, chat_id):
                         await pytgclients.change_stream(
                             chat_id,
                             AudioVideoPiped(
-                                ytlink, 
-                                HighQualityAudio(), 
-                                stream_quality,
+                                ytlink, HighQualityAudio(), stream_quality
                             ),
                         )
                     except:
@@ -625,13 +634,20 @@ async def playout_end(pytgclients, chat_id):
                     duration_sec,
                     thumbnail,
                 ) = get_yt_info_id(afk)
+                mystic = await mystic.edit(
+                    f"**{MUSIC_BOT_NAME} Downloader**\n\n**Title:** {title[:50]}\n\n0% ▓▓▓▓▓▓▓▓▓▓▓▓ 100%"
+                )
                 loop = asyncio.get_event_loop()
-                ytlink = await get_audio(afk)                
+                downloaded_file = await loop.run_in_executor(
+                    None, download, afk, mystic, title
+                )
+                raw_path = await convert(downloaded_file)
                 await pytgclients.change_stream(
                     chat_id,
-                    AudioPiped(
-                        ytlink,
-                        HighQualityAudio(),
+                    InputStream(
+                        InputAudioStream(
+                            raw_path,
+                        ),
                     ),
                 )
                 theme = await check_theme(chat_id)
