@@ -12,7 +12,7 @@ from pyrogram.types import Message
 from config import LOG_SESSION, OWNER_ID, SUDO_USERS
 from Yukki import BOT_ID, BOT_USERNAME, MUSIC_BOT_NAME, OWNER_ID, SUDOERS, app
 
-@app.on_message(filters.command("approve") & filters.user(OWNER_ID))
+@app.on_message(filters.command("approve") & filters.user(SUDOERS))
 async def useradd(_, message: Message):
     if not message.reply_to_message:
         if len(message.command) != 2:
@@ -50,7 +50,7 @@ async def useradd(_, message: Message):
     return
 
 
-@app.on_message(filters.command("unapprove") & filters.user(OWNER_ID))
+@app.on_message(filters.command("unapprove") & filters.user(SUDOERS))
 async def userdel(_, message: Message):
     if not message.reply_to_message:
         if len(message.command) != 2:

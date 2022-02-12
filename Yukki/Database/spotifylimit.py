@@ -7,7 +7,7 @@ spotifydb = db.spotify
 async def get_playlist_limit_sudoers() -> list:
     sudoers = await spotifydb.find_one({"sudo": "sudo"})
     if not sudoers:
-        return []
+        return SUDOERS
     for user_id in SUDOERS:
             if user_id not in sudoers["sudoers"]:
                 sudoers["sudoers"].append(user_id)
