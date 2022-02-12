@@ -19,7 +19,8 @@ def getsp_track_info(url):
         search = track_name + " " + artist
         return search
     except Exception as e:
-        return "errrorrr" + str(e)
+        print(str(e))
+        return "errrorrr"
 
 async def getsp_playlist_info(url,user):
     try:
@@ -37,10 +38,11 @@ async def getsp_playlist_info(url,user):
             tracks_list.append(search)
         if PL_LIMIT == "TRUE":
             if user not in sudos:
-                tracks_list[0:20]
+                tracks_list = tracks_list[0:20]
         return [name,owner,tracks_list]
     except Exception as e:
-        return "errrorrr" + str(e)
+        print(str(e))
+        return "errrorrr"
 
 def get_spotify_url(text):
     text = text.replace(f"/spotify@{BOT_USERNAME}","")
@@ -67,10 +69,11 @@ async def getsp_album_info(url,user):
             tracks_list.append(search)
         if PL_LIMIT == "TRUE":
             if user not in sudos:
-                tracks_list[0:20]
+                tracks_list = tracks_list[0:20]
         return [name,owner,tracks_list]
     except Exception as e:
-        return "errrorrr" + str(e)
+        print(str(e))
+        return "errrorrr"
 
 async def getsp_artist_info(url):
     try:        
@@ -85,4 +88,5 @@ async def getsp_artist_info(url):
             tracks_list.append(search)
         return [name,"artist",tracks_list]
     except Exception as e:
-        return "errrorrr" + str(e)
+        print(str(e))
+        return "errrorrr"
