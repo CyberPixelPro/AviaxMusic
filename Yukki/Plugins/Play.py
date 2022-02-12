@@ -30,6 +30,7 @@ from Yukki.Utilities.url import get_url
 from Yukki.Utilities.videostream import start_stream_video
 from Yukki.Utilities.youtube import (get_yt_info_id, get_yt_info_query,
                                      get_yt_info_query_slider)
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 loop = asyncio.get_event_loop()
 
@@ -144,27 +145,31 @@ async def play(_, message: Message):
         )
     elif url:
         if "spotify.com" in url:
-            await spotify_play(_, message)
-        else:
-            mystic = await message.reply_text("🔄 Processing URL... Please Wait!")
-            if not message.reply_to_message:
-                query = message.text.split(None, 1)[1]
-            else:
-                query = message.reply_to_message.text
-            (
-                title,
-                duration_min,
-                duration_sec,
-                thumb,
-                videoid,
-            ) = get_yt_info_query(query)
-            await mystic.delete()
-            buttons = url_markup2(videoid, duration_min, message.from_user.id)
             return await message.reply_photo(
-                photo=thumb,
-                caption=f"📎Title: **{title}\n\n⏳Duration:** {duration_min} Mins\n\n__[Get Additional Information About Video](https://t.me/{BOT_USERNAME}?start=info_{videoid})__",
-                reply_markup=InlineKeyboardMarkup(buttons),
-            )
+                photo="Utils/spotify.png",
+                caption=(
+                    "**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
+                ),
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+        mystic = await message.reply_text("🔄 Processing URL... Please Wait!")
+        if not message.reply_to_message:
+            query = message.text.split(None, 1)[1]
+        else:
+            query = message.reply_to_message.text
+        (
+            title,
+            duration_min,
+            duration_sec,
+            thumb,
+            videoid,
+        ) = get_yt_info_query(query)
+        await mystic.delete()
+        buttons = url_markup2(videoid, duration_min, message.from_user.id)
+        return await message.reply_photo(
+            photo=thumb,
+            caption=f"📎Title: **{title}\n\n⏳Duration:** {duration_min} Mins\n\n__[Get Additional Information About Video](https://t.me/{BOT_USERNAME}?start=info_{videoid})__",
+            reply_markup=InlineKeyboardMarkup(buttons),
+        )
     else:
         if len(message.command) < 2:
             buttons = playlist_markup(
