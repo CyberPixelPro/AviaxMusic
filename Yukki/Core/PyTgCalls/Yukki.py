@@ -626,8 +626,7 @@ async def playout_end(pytgclients, chat_id):
                     thumbnail,
                 ) = get_yt_info_id(afk)
                 loop = asyncio.get_event_loop()
-                ytlink = await get_audio(videoid)
-                )
+                ytlink = await get_audio(afk)                
                 await pytgclients.change_stream(
                     chat_id,
                     AudioPiped(
