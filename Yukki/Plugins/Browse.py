@@ -13,11 +13,11 @@ async def browse_menu(_, query):
         buttons = getsp_categories()
         await query.answer()
         if data == "pg1":
-            return await query.message.edit("⭐️ Select the Category from which you want to listen songs !!!",reply_markup=InlineKeyboardMarkup(buttons[0]))
+            return await query.message.edit("**⭐️ Select the Category from which you want to listen songs !!!**",reply_markup=InlineKeyboardMarkup(buttons[0]))
         elif data == "pg2":
-            return await query.message.edit("⭐️ Select the Category from which you want to listen songs !!!",reply_markup=InlineKeyboardMarkup(buttons[1]))
+            return await query.message.edit("**⭐️ Select the Category from which you want to listen songs !!!**",reply_markup=InlineKeyboardMarkup(buttons[1]))
         elif data == "pg3":
-            return await query.message.edit("⭐️ Select the Category from which you want to listen songs !!!",reply_markup=InlineKeyboardMarkup(buttons[2]))
+            return await query.message.edit("**⭐️ Select the Category from which you want to listen songs !!!**",reply_markup=InlineKeyboardMarkup(buttons[2]))
 
         category_pl_buttons = getsp_categories_info(data)
         category_pl_buttons.append([
@@ -28,7 +28,7 @@ async def browse_menu(_, query):
                     text="🔄 Close", callback_data="close_btn"
                 ),            
             ],)
-        return await query.message.edit("⭐️ Now Select the playlist you want to listen from your choosed category !!!",reply_markup=InlineKeyboardMarkup(category_pl_buttons))
+        return await query.message.edit("**⭐️ Now Select the playlist you want to listen from your choosed category !!!**",reply_markup=InlineKeyboardMarkup(category_pl_buttons))
     except:
         pass
 
@@ -49,6 +49,6 @@ async def refresh_browse(_, query):
                     text="↪️ Back", callback_data="cat pg1"
                 ),            
             ],)
-        return await query.message.edit("⭐️ Select the Category from which you want to listen songs !!!",reply_markup=InlineKeyboardMarkup(category_pl_buttons))
+        return await query.message.edit("**⭐️ Now Select the playlist you want to listen from your choosed category !!!**",reply_markup=InlineKeyboardMarkup(category_pl_buttons))
     except:
         pass
