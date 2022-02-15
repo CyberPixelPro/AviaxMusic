@@ -94,7 +94,7 @@ async def assis_change(_, message: Message):
     _assistant = await get_assistant(message.chat.id, "assistant")
     if not _assistant:
         await message.reply_text(
-            f"**__Yukki Music Bot Assistant Alloted__**\n\nAssistant No. **{ran_ass}**"
+            f"**__SiestaXMusic Bot Assistant Alloted__**\n\nAssistant No. **{ran_ass}**"
         )
         assis = {
             "saveassistant": ran_ass,

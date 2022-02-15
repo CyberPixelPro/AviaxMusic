@@ -106,6 +106,16 @@
       "description": "Your bot's username.",
       "value": "",
       "required": true
+    },
+    "LIMIT": {
+      "description": "Use True to enable 20 songs limit for playlist songs from spotify. FALSE to disable.",
+      "value": "TRUE",
+      "required": false
+    },
+    "PM_PERMIT": {
+      "description": "Use True to enable PM Permit. FALSE to disable.",
+      "value": "TRUE",
+      "required": false
     }
   },
   "buildpacks": [

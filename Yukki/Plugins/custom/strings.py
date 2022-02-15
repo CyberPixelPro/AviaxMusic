@@ -190,7 +190,7 @@ Here is the help for **Bot Commands:**
 
 
 /start 
-- Start the Yukki Music Bot.
+- Start the Music Bot.
 
 /help 
 - Get Commands Helper Menu with detailed explanations of commands.
@@ -199,16 +199,15 @@ Here is the help for **Bot Commands:**
 - Get Settings dashboard of a group. You can manage Auth Users Mode. Commands Mode from here.
 
 /ping
-- Ping the Bot and check Ram, Cpu etc stats of Yukki."""
+- Ping the Bot and check Ram, Cpu etc stats of Music Bot."""
 
 PLAY_TEXT = """
 Here is the help for **Play Commands:**
 
-**Note:** Yukki Music Bot works on a single merged commands for Music and Video
 
 --**Youtube and Telegram Files:**--
 
-/play __[Music Name]__(Yukki will search on Youtube)
+/play __[Music Name]__(Bot will search on Youtube)
 /play __[Youtube Track link or Playlist]__
 /play __[Video, Live, M3U8 Links]__
 /play __[Reply to a Audio or Video File]__
@@ -264,10 +263,10 @@ Here is the help for **Extra Commands:**
 - Searches Lyrics for the particular Music on web.
 
 /sudolist 
-- Check Sudo Users of Yukki Music Bot
+- Check Sudo Users of Music Bot
 
 /song [Track Name] or [YT Link]
-- Download any track from youtube in mp3 or mp4 formats via Yukki.
+- Download any track from youtube in mp3 or mp4 formats via Bot.
 
 /queue
 - Check Queue List of Music.

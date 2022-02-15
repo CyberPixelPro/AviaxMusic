@@ -64,3 +64,8 @@ if str(getenv("LIMIT")).strip().upper() == "FALSE":
     PL_LIMIT = "FALSE"
 else:
     PL_LIMIT = "TRUE"
+
+if str(getenv("PM_PERMIT")).strip().upper() == "FALSE":
+    PM_PERMIT = "FALSE"
+else:
+    PM_PERMIT = "TRUE"

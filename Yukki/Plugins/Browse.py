@@ -25,7 +25,7 @@ async def browse_menu(_, query):
                     text="↪️ Refresh", callback_data=f"refbrowse {data}"
                 ),
                 InlineKeyboardButton(
-                    text="🔄 Close", callback_data="close_btn"
+                    text="↪️ Back", callback_data="cat pg1"
                 ),            
             ],)
         return await query.message.edit("**⭐️ Now Select the playlist you want to listen from your choosed category !!!**",reply_markup=InlineKeyboardMarkup(category_pl_buttons))
