@@ -280,6 +280,8 @@ BASIC_TEXT = """
 /play - play songs or videos in vc
 /mplay - play songs directly in vc
 /vplay - play videos directly in vc
+/spotify - play songs from spotify
+/resso - play songs from resso
 /lyrics - get lyrics of song
 /ping - ping the bot
 /playlist - play your playlist

@@ -1,3 +1,4 @@
+from Yukki.Plugins.Resso import resso_play
 from Yukki.Plugins.Spotify import spotify_play
 import asyncio
 from os import path
@@ -145,12 +146,9 @@ async def play(_, message: Message):
         )
     elif url:
         if "spotify.com" in url:
-            return await message.reply_photo(
-                photo="Utils/spotify.png",
-                caption=(
-                    "**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
-                ),
-                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔍 Browse", callback_data="cat pg1"),InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+            return await spotify_play(_, message)
+        elif "resso.com" in url:            
+            return await resso_play(_, message)
         mystic = await message.reply_text("🔄 Processing URL... Please Wait!")
         if not message.reply_to_message:
             query = message.text.split(None, 1)[1]

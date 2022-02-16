@@ -116,8 +116,11 @@ async def resso_play(_, message: Message):
                 await mystic.delete()
                 MusicData = f"MusicStream {videoid}|{duration_min}|{message.from_user.id}"
                 return await mplay_stream(message,MusicData)
-            elif "playlist" in url:                 
-                playlist_id = url[31:50].strip()
+            elif "playlist" in url:
+                if "playlist?id=" in url:                    
+                    playlist_id = url[34:53].strip() 
+                else:             
+                    playlist_id = url[31:50].strip()
                 pinfo = await get_resso_playlist(url,message.from_user.id)
                 if "errrorrr" in pinfo:
                     await mystic.delete()
