@@ -147,8 +147,10 @@ async def play(_, message: Message):
     elif url:
         if "spotify.com" in url:
             return await spotify_play(_, message)
-        elif "resso.com" in url:            
+        
+        if "resso.com" in url:            
             return await resso_play(_, message)
+        
         mystic = await message.reply_text("🔄 Processing URL... Please Wait!")
         if not message.reply_to_message:
             query = message.text.split(None, 1)[1]
