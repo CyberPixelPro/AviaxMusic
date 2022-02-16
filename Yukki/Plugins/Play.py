@@ -146,10 +146,10 @@ async def play(_, message: Message):
         )
     elif url:
         if "spotify.com" in url:
-            return await spotify_play(_, message)
+            return await message.reply_text("Use /spotify for spotify links")
         
         if "resso.com" in url:            
-            return await resso_play(_, message)
+            return await message.reply_text("Use /resso for resso links")
         
         mystic = await message.reply_text("🔄 Processing URL... Please Wait!")
         if not message.reply_to_message:
