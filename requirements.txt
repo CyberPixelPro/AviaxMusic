@@ -22,3 +22,5 @@ tgcrypto
 gitpython
 heroku3
 spotipy
+bs4
+html5lib
