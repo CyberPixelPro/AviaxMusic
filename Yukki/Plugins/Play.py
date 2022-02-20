@@ -1,5 +1,8 @@
-from Yukki.Plugins.Resso import resso_play
-from Yukki.Plugins.Spotify import spotify_play
+from Yukki.Utilities.spotify import get_spotify_url, getsp_album_info, getsp_artist_info, getsp_playlist_info, getsp_track_info
+from Yukki.Plugins.custom.func import mplay_stream
+from Yukki.Utilities.resso import get_resso_album, get_resso_artist, get_resso_playlist, get_resso_track
+from Yukki.Plugins.Resso import resso_buttons, resso_play
+from Yukki.Plugins.Spotify import spotify_buttons, spotify_play
 import asyncio
 from os import path
 
@@ -146,10 +149,193 @@ async def play(_, message: Message):
         )
     elif url:
         if "spotify.com" in url:
-            return await message.reply_text("Use /spotify for spotify links")
+            url = get_spotify_url(message.text)
+            if url == "":
+                await message.reply_photo(
+                        photo="Utils/spotify.png",
+                        caption=(
+                            "⭐️ **Give me a Link Or Use Browse Button Below**\n\n**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
+                        ),
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔍 Browse", callback_data="cat pg1"),InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))
+            else:
+                if url:
+                    mystic = await message.reply_text("🔄 **Processing URL... Please Wait!**")      
+                    
+                    if "track" in url:
+                        query = getsp_track_info(url)
+                        if "errrorrr" in query:
+                            await mystic.delete()
+                            return await message.reply_photo(
+                                photo="Utils/spotify.png",
+                                caption=(
+                                    "⭐️ **Give me a Link Or Use Browse Button Below**\n\n**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
+                                ),
+                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔍 Browse", callback_data="cat pg1"),InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                        (
+                            title,
+                            duration_min,
+                            duration_sec,
+                            thumb,
+                            videoid,
+                        ) = get_yt_info_query(query)
+                        await mystic.delete()
+                        MusicData = f"MusicStream {videoid}|{duration_min}|{message.from_user.id}"
+                        return await mplay_stream(message,MusicData)
+                    elif "playlist" in url:                
+                        playlist_id = url[34:56].strip()
+                        pinfo = await getsp_playlist_info(url,message.from_user.id)
+                        if "errrorrr" in pinfo:
+                            await mystic.delete()
+                            return await message.reply_photo(
+                                photo="Utils/spotify.png",
+                                caption=(
+                                    "⭐️ **Give me a Link Or Use Browse Button Below**\n\n**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
+                                ),
+                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔍 Browse", callback_data="cat pg1"),InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                        await mystic.delete()
+                        return await message.reply_photo(
+                                photo="Utils/spotify.png",
+                                caption=f"🔮 **Playlist Name:** {pinfo[0]}\n🧿 **Playlist By:** {pinfo[1]}",
+                                reply_markup=InlineKeyboardMarkup(spotify_buttons(playlist_id,"pl")))
+                    elif "album" in url:
+                        ainfo = await getsp_album_info(url,message.from_user.id)                
+                        albumid = url[31:53].strip()
+                        if "errrorrr" in ainfo:
+                            await mystic.delete()
+                            return await message.reply_photo(
+                                photo="Utils/spotify.png",
+                                caption=(
+                                    "⭐️ **Give me a Link Or Use Browse Button Below**\n\n**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
+                                ),
+                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔍 Browse", callback_data="cat pg1"),InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                        await mystic.delete()
+                        return await message.reply_photo(
+                                photo="Utils/spotify.png",
+                                caption=f"🔮 **Album Name:** {ainfo[0]}\n🧿 **Album By:** {ainfo[1]}",
+                                reply_markup=InlineKeyboardMarkup(spotify_buttons(albumid,"ab")))
+                    elif "artist" in url:                
+                        ainfo = await getsp_artist_info(url)                
+                        albumid = url[32:54].strip()
+                        if "errrorrr" in ainfo:
+                            await mystic.delete()
+                            return await message.reply_photo(
+                                photo="Utils/spotify.png",
+                                caption=(
+                                    "⭐️ **Give me a Link Or Use Browse Button Below**\n\n**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
+                                ),
+                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔍 Browse", callback_data="cat pg1"),InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                        await mystic.delete()
+                        return await message.reply_photo(
+                                photo="Utils/spotify.png",
+                                caption=f"🔮 **Artist Name:** {ainfo[0]}\n🧿 **Click the Button below to play top 10 songs of {ainfo[0]}**",
+                                reply_markup=InlineKeyboardMarkup(spotify_buttons(albumid,"ar")))
+                    else:
+                        await mystic.delete()
+                        return await message.reply_photo(
+                            photo="Utils/spotify.png",
+                            caption=(
+                                "⭐️ **Give me a Link Or Use Browse Button Below**\n\n**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
+                            ),
+                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔍 Browse", callback_data="cat pg1"),InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
         
         if "resso.com" in url:            
-            return await message.reply_text("Use /resso for resso links")
+            url = get_resso_album(message.text)
+            if url == "":
+                await message.reply_photo(
+                        photo="Utils/resso.jpg",
+                        caption=(
+                            "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                        ),
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))
+            else:
+                if url:
+                    mystic = await message.reply_text("🔄 **Processing URL... Please Wait!**")      
+                    
+                    if "track" in url:
+                        query = get_resso_track(url)
+                        if "errrorrr" in query:
+                            await mystic.delete()
+                            return await message.reply_photo(
+                                photo="Utils/resso.jpg",
+                                caption=(
+                                    "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                                ),
+                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                        (
+                            title,
+                            duration_min,
+                            duration_sec,
+                            thumb,
+                            videoid,
+                        ) = get_yt_info_query(query)
+                        await mystic.delete()
+                        MusicData = f"MusicStream {videoid}|{duration_min}|{message.from_user.id}"
+                        return await mplay_stream(message,MusicData)
+                    elif "playlist" in url:
+                        if "playlist?id=" in url:                    
+                            playlist_id = url[34:53].strip() 
+                        else:             
+                            playlist_id = url[31:50].strip()
+                        pinfo = await get_resso_playlist(url,message.from_user.id)
+                        if "errrorrr" in pinfo:
+                            await mystic.delete()
+                            return await message.reply_photo(
+                                photo="Utils/resso.jpg",
+                                caption=(
+                                    "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                                ),
+                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                        await mystic.delete()
+                        return await message.reply_photo(
+                                photo="Utils/resso.jpg",
+                                caption=f"🔮 **Playlist Name:** {pinfo[0]}\n🧿 **Playlist By:** {pinfo[1]}",
+                                reply_markup=InlineKeyboardMarkup(resso_buttons(playlist_id,"pl")))
+                    elif "album" in url:
+                        if "album?id=" in url:                    
+                            playlist_id = url[34:53].strip() 
+                        else:             
+                            playlist_id = url[31:50].strip()
+                        pinfo = await get_resso_album(url,message.from_user.id)
+                        if "errrorrr" in pinfo:
+                            await mystic.delete()
+                            return await message.reply_photo(
+                                photo="Utils/resso.jpg",
+                                caption=(
+                                    "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                                ),
+                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                        await mystic.delete()
+                        return await message.reply_photo(
+                                photo="Utils/resso.jpg",
+                                caption=f"🔮 **Album Name:** {pinfo[0]}\n🧿 **Album By:** {pinfo[1]}",
+                                reply_markup=InlineKeyboardMarkup(resso_buttons(playlist_id,"ab")))
+                    elif "artist" in url:
+                        if "artist?id=" in url:                    
+                            playlist_id = url[34:53].strip() 
+                        else:             
+                            playlist_id = url[31:50].strip()
+                        ainfo = await get_resso_artist(url,message.from_user.id)
+                        if "errrorrr" in ainfo:
+                            await mystic.delete()
+                            return await message.reply_photo(
+                                photo="Utils/resso.jpg",
+                                caption=(
+                                    "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                                ),
+                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
+                        await mystic.delete()
+                        return await message.reply_photo(
+                                photo="Utils/resso.jpg",
+                                caption=f"🔮 **Artist Name:** {ainfo[0]}\n🧿 **Click the Button below to play top 10 songs of {ainfo[0]}**",
+                                reply_markup=InlineKeyboardMarkup(resso_buttons(playlist_id,"ar")))
+                    else:
+                        await mystic.delete()
+                        return await message.reply_photo(
+                            photo="Utils/resso.jpg",
+                            caption=(
+                                "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                            ),
+                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
         
         mystic = await message.reply_text("🔄 Processing URL... Please Wait!")
         if not message.reply_to_message:
