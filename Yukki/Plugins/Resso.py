@@ -228,7 +228,7 @@ async def play_resso_playlist(_, CallbackQuery):
             elif "ressoar" in cbdata:
                 query_id = cbdata.replace("ressoar","").strip()
                 resso_url = "https://www.resso.com/artist/" + query_id
-                resso_info = await get_resso_artist(resso_url,user_id)
+                resso_info = await get_resso_artist(resso_url)
             
             
             

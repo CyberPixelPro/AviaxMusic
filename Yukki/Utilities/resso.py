@@ -56,7 +56,8 @@ async def get_resso_album(url,user):
         album_name = soup.find('h1').text
         owner = soup.find('a').text
         tracks_list = []
-        resso_list = soup.find_all('h3')
+        song_list = soup.find('div', {"class" : "songs-list"})
+        resso_list = song_list.find_all('h3')
         for song in resso_list:
             name = song.text
             artist = owner
