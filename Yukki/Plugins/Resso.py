@@ -89,7 +89,7 @@ async def resso_play(_, message: Message):
         await message.reply_photo(
                 photo="Utils/resso.jpg",
                 caption=(
-                    "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                    "**Usage:**\n /resso [Resso Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
                 ),
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))
     else:
@@ -103,7 +103,7 @@ async def resso_play(_, message: Message):
                     return await message.reply_photo(
                         photo="Utils/resso.jpg",
                         caption=(
-                            "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                            "**Usage:**\n /resso [Resso Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
                         ),
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
                 (
@@ -127,7 +127,7 @@ async def resso_play(_, message: Message):
                     return await message.reply_photo(
                         photo="Utils/resso.jpg",
                         caption=(
-                            "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                            "**Usage:**\n /resso [Resso Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
                         ),
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
                 await mystic.delete()
@@ -143,7 +143,7 @@ async def resso_play(_, message: Message):
                     return await message.reply_photo(
                         photo="Utils/resso.jpg",
                         caption=(
-                            "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                            "**Usage:**\n /resso [Resso Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
                         ),
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
                 await mystic.delete()
@@ -159,7 +159,7 @@ async def resso_play(_, message: Message):
                     return await message.reply_photo(
                         photo="Utils/resso.jpg",
                         caption=(
-                            "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                            "**Usage:**\n /resso [Resso Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
                         ),
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
                 await mystic.delete()
@@ -172,7 +172,7 @@ async def resso_play(_, message: Message):
                 return await message.reply_photo(
                     photo="Utils/resso.jpg",
                     caption=(
-                        "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                        "**Usage:**\n /resso [Resso Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
                     ),
                     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
 
@@ -237,7 +237,7 @@ async def play_resso_playlist(_, CallbackQuery):
                 return await CallbackQuery.message.reply_photo(
                     photo="Utils/resso.jpg",
                     caption=(
-                        "**Usage:**\n /resso [Resso  Track Or Playlist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
+                        "**Usage:**\n /resso [Resso Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists** [[What is this ?](https://t.me/TechZBots/71)]"
                     ),
                     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
             tracks_list = resso_info[2]
