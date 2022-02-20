@@ -136,10 +136,7 @@ async def resso_play(_, message: Message):
                         caption=f"🔮 **Playlist Name:** {pinfo[0]}\n🧿 **Playlist By:** {pinfo[1]}",
                         reply_markup=InlineKeyboardMarkup(resso_buttons(playlist_id,"pl")))
             elif "album" in url:                
-                if "album?id=" in url:                    
-                    playlist_id = url[32:50].strip() 
-                else:             
-                    playlist_id = url[29:47].strip()
+                playlist_id = url[28:47].strip()
                 pinfo = await get_resso_album(url,message.from_user.id)
                 if "errrorrr" in pinfo:
                     await mystic.delete()
@@ -155,10 +152,7 @@ async def resso_play(_, message: Message):
                         caption=f"🔮 **Album Name:** {pinfo[0]}\n🧿 **Album By:** {pinfo[1]}",
                         reply_markup=InlineKeyboardMarkup(resso_buttons(playlist_id,"ab")))
             elif "artist" in url:
-                if "artist?id=" in url:                    
-                    playlist_id = url[32:51].strip() 
-                else:             
-                    playlist_id = url[29:48].strip()
+                playlist_id = url[29:48].strip()
                 ainfo = await get_resso_artist(url)
                 if "errrorrr" in ainfo:
                     await mystic.delete()
