@@ -1,6 +1,7 @@
+import requests
 from Yukki.Utilities.spotify import get_spotify_url, getsp_album_info, getsp_artist_info, getsp_playlist_info, getsp_track_info
 from Yukki.Plugins.custom.func import mplay_stream
-from Yukki.Utilities.resso import get_resso_album, get_resso_artist, get_resso_playlist, get_resso_track
+from Yukki.Utilities.resso import get_resso_album, get_resso_artist, get_resso_playlist, get_resso_track, get_resso_url
 from Yukki.Plugins.Resso import resso_buttons, resso_play
 from Yukki.Plugins.Spotify import spotify_buttons, spotify_play
 import asyncio
@@ -149,7 +150,9 @@ async def play(_, message: Message):
         )
     elif url:
         if "spotify.com" in url:
-            url = get_spotify_url(message.text)
+            text = message.text.replace(f"/spotify@{BOT_USERNAME}","")
+            text = text.replace(f"/spotify","")
+            url = text.strip()            
             if url == "":
                 await message.reply_photo(
                         photo="Utils/spotify.png",
@@ -239,7 +242,14 @@ async def play(_, message: Message):
                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔍 Browse", callback_data="cat pg1"),InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
         
         if "resso.com" in url:            
-            url = get_resso_album(message.text)
+            text = message.text.replace(f"/resso@{BOT_USERNAME}","")
+            text = text.replace(f"/resso","")
+            url = text.strip()
+            url = str(requests.get(url).url)
+            if "resso.com" in url:
+                url = url
+            else:
+                return ""
             if url == "":
                 await message.reply_photo(
                         photo="Utils/resso.jpg",
@@ -290,11 +300,8 @@ async def play(_, message: Message):
                                 photo="Utils/resso.jpg",
                                 caption=f"🔮 **Playlist Name:** {pinfo[0]}\n🧿 **Playlist By:** {pinfo[1]}",
                                 reply_markup=InlineKeyboardMarkup(resso_buttons(playlist_id,"pl")))
-                    elif "album" in url:
-                        if "album?id=" in url:                    
-                            playlist_id = url[34:53].strip() 
-                        else:             
-                            playlist_id = url[31:50].strip()
+                    elif "album" in url:                
+                        playlist_id = url[28:47].strip()
                         pinfo = await get_resso_album(url,message.from_user.id)
                         if "errrorrr" in pinfo:
                             await mystic.delete()
@@ -310,11 +317,8 @@ async def play(_, message: Message):
                                 caption=f"🔮 **Album Name:** {pinfo[0]}\n🧿 **Album By:** {pinfo[1]}",
                                 reply_markup=InlineKeyboardMarkup(resso_buttons(playlist_id,"ab")))
                     elif "artist" in url:
-                        if "artist?id=" in url:                    
-                            playlist_id = url[34:53].strip() 
-                        else:             
-                            playlist_id = url[31:50].strip()
-                        ainfo = await get_resso_artist(url,message.from_user.id)
+                        playlist_id = url[29:48].strip()
+                        ainfo = await get_resso_artist(url)
                         if "errrorrr" in ainfo:
                             await mystic.delete()
                             return await message.reply_photo(
