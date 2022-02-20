@@ -70,10 +70,8 @@ async def get_resso_album(url,user):
         print(str(e))
         return "errrorrr"
 
-async def get_resso_artist(url,user):
-    try:
-        if PL_LIMIT == "TRUE":
-            sudos = await get_playlist_limit_sudoers()
+async def get_resso_artist(url):
+    try:        
         r = requests.get(url)
         soup = BeautifulSoup(r.content, 'html5lib')
         artist = soup.find('h1').text
@@ -85,9 +83,7 @@ async def get_resso_artist(url,user):
             artist = owner
             search = name + " " + artist
             tracks_list.append(search.strip())       
-        if PL_LIMIT == "TRUE":
-            if user not in sudos:
-                tracks_list = tracks_list[0:20]
+        tracks_list = tracks_list[0:10]
         return [artist,owner,tracks_list]
     except Exception as e:
         print(str(e))
