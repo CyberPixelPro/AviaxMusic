@@ -15,8 +15,7 @@ from git.exc import GitCommandError, InvalidGitRepositoryError
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from config import (HEROKU_API_KEY, HEROKU_APP_NAME, UPSTREAM_BRANCH,
-                    UPSTREAM_REPO)
+from config import (HEROKU_API_KEY, HEROKU_APP_NAME, UPSTREAM_BRANCH,)
 from Yukki import LOG_GROUP_ID, MUSIC_BOT_NAME, SUDOERS, app
 from Yukki.Database import get_active_chats, remove_active_chat, remove_active_video_chat
 from Yukki.Utilities.heroku import is_heroku, user_input
