@@ -82,7 +82,7 @@ async def admins(_, message: Message):
         await music_off(chat_id)
         await pause_stream(chat_id)
         await message.reply_text(
-            f"🎧 Voicechat Paused by {message.from_user.mention}!"
+            f"⏸ **Track paused.**\n\n• **To resume the stream, use the**\n» /resume command."
         )
     if message.command[0][1] == "e":
         if await is_music_playing(message.chat.id):
@@ -90,7 +90,7 @@ async def admins(_, message: Message):
         await music_on(chat_id)
         await resume_stream(chat_id)
         await message.reply_text(
-            f"🎧 Voicechat Resumed by {message.from_user.mention}!"
+            f"▶️ **Track resumed.**\n\n• **To pause the stream, use the**\n» /pause command."
         )
     if message.command[0][1] == "t" or message.command[0][1] == "n":
         if message.chat.id not in db_mem:
