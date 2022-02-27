@@ -15,7 +15,7 @@ from config import (ASSISTANT_PREFIX, DURATION_LIMIT_MIN, LOG_GROUP_ID,
                     LOG_SESSION)
 from config import MONGO_DB_URI as mango
 from config import (MUSIC_BOT_NAME, OWNER_ID, STRING1, STRING2, STRING3,
-                    STRING4, STRING5, SUDO_USERS, UPSTREAM_BRANCH,
+                    STRING4, STRING5, SUDO_USERS,
                      get_queue, botusername)
 from Yukki.Core.Clients.cli import (ASS_CLI_1, ASS_CLI_2, ASS_CLI_3, ASS_CLI_4,
                                     ASS_CLI_5, LOG_CLIENT, app)
@@ -27,7 +27,7 @@ console = Console()
 
 
 ### Heroku Shit
-UPSTREAM_BRANCH = UPSTREAM_BRANCH
+
 
 
 ### Modules
@@ -236,19 +236,19 @@ async def initiate_bot():
             else:
                 origin = repo.create_remote("origin", "https://github.com/TechShreyash/SiestaXMusic")
             origin.fetch()
-            repo.create_head(UPSTREAM_BRANCH, origin.refs[UPSTREAM_BRANCH])
-            repo.heads[UPSTREAM_BRANCH].set_tracking_branch(
-                origin.refs[UPSTREAM_BRANCH]
+            repo.create_head("main", origin.refs["main"])
+            repo.heads["main"].set_tracking_branch(
+                origin.refs["main"]
             )
-            repo.heads[UPSTREAM_BRANCH].checkout(True)
+            repo.heads["main"].checkout(True)
             try:
                 repo.create_remote("origin", "https://github.com/TechShreyash/SiestaXMusic")
             except BaseException:
                 pass
             nrs = repo.remote("origin")
-            nrs.fetch(UPSTREAM_BRANCH)
+            nrs.fetch("main")
             try:
-                nrs.pull(UPSTREAM_BRANCH)
+                nrs.pull("main")
             except GitCommandError:
                 repo.git.reset("--hard", "FETCH_HEAD")
             await install_requirements(
