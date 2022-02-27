@@ -71,7 +71,7 @@ async def admin_risghts(_, CallbackQuery):
             await music_off(chat_id)
             await pause_stream(chat_id)
             await CallbackQuery.message.reply_text(
-                f"🎧 Voicechat Paused by {CallbackQuery.from_user.mention}!",
+                f"⏸ **Track paused.**\n\n• **To resume the stream, use the**\n» /resume command.",
                 reply_markup=audio_markup2,
             )
             await CallbackQuery.message.delete()
@@ -84,7 +84,7 @@ async def admin_risghts(_, CallbackQuery):
             await music_on(chat_id)
             await resume_stream(chat_id)
             await CallbackQuery.message.reply_text(
-                f"🎧 Voicechat Resumed by {CallbackQuery.from_user.mention}!",
+                f"▶️ **Track resumed.**\n\n• **To pause the stream, use the**\n» /pause command.",
                 reply_markup=audio_markup2,
             )
             await CallbackQuery.message.delete()
