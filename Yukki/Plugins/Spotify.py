@@ -1,3 +1,4 @@
+import random
 from Yukki.Database.queue import is_active_chat
 from Yukki.Utilities.spotify import get_spotify_url, getsp_album_info, getsp_artist_info, getsp_playlist_info, getsp_track_info
 import asyncio
@@ -63,7 +64,12 @@ from Yukki.Utilities.youtube import get_m3u8, get_yt_info_id
 from config import get_queue
 
 def spotify_buttons(id,type):
-    buttons = [   
+    buttons = [
+            [
+                InlineKeyboardButton(
+                    text="🔀 Shuffle Play", callback_data=f"psps{type} {id}"
+                ),                                                   
+            ],   
             [
                 InlineKeyboardButton(
                     text="🎵 Play", callback_data=f"psp{type} {id}"
@@ -216,12 +222,31 @@ async def play_spotify_playlist(_, CallbackQuery):
             if "psppl" in cbdata:
                 query_id = cbdata.replace("psppl","").strip()
                 spotify_info = await getsp_playlist_info(query_id,user_id)
+                tracks_list = spotify_info[2]
             elif "pspab" in cbdata:
                 query_id = cbdata.replace("pspab","").strip()
                 spotify_info = await getsp_album_info(query_id,user_id)
+                tracks_list = spotify_info[2]
             elif "pspar" in cbdata:
                 query_id = cbdata.replace("pspar","").strip()
                 spotify_info = await getsp_artist_info(query_id)
+                tracks_list = spotify_info[2]
+
+            if "pspspl" in cbdata:
+                query_id = cbdata.replace("pspspl","").strip()
+                spotify_info = await getsp_playlist_info(query_id,user_id)
+                tracks_list = spotify_info[2]
+                random.shuffle(tracks_list)
+            elif "pspsab" in cbdata:
+                query_id = cbdata.replace("pspsab","").strip()
+                spotify_info = await getsp_album_info(query_id,user_id)
+                tracks_list = spotify_info[2]
+                random.shuffle(tracks_list)
+            elif "pspsar" in cbdata:
+                query_id = cbdata.replace("pspsar","").strip()
+                spotify_info = await getsp_artist_info(query_id)
+                tracks_list = spotify_info[2]
+                random.shuffle(tracks_list)
             
             if "errrorrr" in spotify_info:
                 await mystic.delete()
@@ -231,7 +256,7 @@ async def play_spotify_playlist(_, CallbackQuery):
                         "⭐️ **Give me a Link Or Use Browse Button Below**\n\n**Usage:**\n /spotify [Spotify Track Or Playlist Or Album Or Artist Link]\n\n➤ **Playing limit is 20 songs for playlists and albums** [[What is this ?](https://t.me/TechZBots/71)]"
                     ),
                     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🔍 Browse", callback_data="cat pg1"),InlineKeyboardButton(text="🔄 Close", callback_data="close_btn"),]]))             
-            tracks_list = spotify_info[2]
+            
             for shikhar in tracks_list:
                 (
                     title,
