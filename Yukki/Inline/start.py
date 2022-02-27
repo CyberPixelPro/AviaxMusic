@@ -24,7 +24,12 @@ def setting_markup2():
         ],
     ]
     return f"🔧  **{MUSIC_BOT_NAME} Settings**", buttons
+def private_panel():
+    return
 
+def start_pannel():
+    return
+    
 def setting_markup():
     buttons = [
         [
