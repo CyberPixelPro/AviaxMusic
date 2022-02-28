@@ -166,6 +166,8 @@ async def play(_, message: Message):
             duration_sec,
             thumb,
             videoid,
+            views, 
+            channel
         ) = get_yt_info_query(query)
         await mystic.delete()
         buttons = url_markup2(videoid, duration_min, message.from_user.id)
@@ -195,6 +197,8 @@ async def play(_, message: Message):
             duration_sec,
             thumb,
             videoid,
+            views, 
+            channel
         ) = get_yt_info_query(query)
         await mystic.delete()
         buttons = url_markup(
@@ -238,7 +242,14 @@ async def Music_Stream(_, CallbackQuery):
             "This is not for you! Search You Own Song.", show_alert=True
         )
     await CallbackQuery.message.delete()
-    title, duration_min, duration_sec, thumbnail = get_yt_info_id(videoid)
+    (
+        title,
+        duration_min,
+        duration_sec,
+        thumbnail,
+        views,
+        channel
+    ) = get_yt_info_id(videoid)
     if duration_sec > DURATION_LIMIT:
         return await CallbackQuery.message.reply_text(
             f"**Duration Limit Exceeded**\n\n**Allowed Duration: **{DURATION_LIMIT_MIN} minute(s)\n**Received Duration:** {duration_min} minute(s)"
@@ -253,7 +264,9 @@ async def Music_Stream(_, CallbackQuery):
     raw_path = await convert(downloaded_file)
     theme = await check_theme(chat_id)
     chat_title = await specialfont_to_normal(chat_title)
-    thumb = await gen_thumb(thumbnail, title, user_id, theme, chat_title)
+    thumb = await gen_thumb(
+                        thumbnail, title, CallbackQuery.from_user.id, "NOW PLAYING", views, duration_min, channel
+                    )
     if chat_id not in db_mem:
         db_mem[chat_id] = {}
     await start_stream(

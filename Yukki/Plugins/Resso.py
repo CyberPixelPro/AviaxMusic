@@ -112,6 +112,8 @@ async def resso_play(_, message: Message):
                     duration_sec,
                     thumb,
                     videoid,
+                    views, 
+                    channel
                 ) = get_yt_info_query(query)
                 await mystic.delete()
                 MusicData = f"MusicStream {videoid}|{duration_min}|{message.from_user.id}"
@@ -287,11 +289,7 @@ async def play_resso_playlist(_, CallbackQuery):
                     theme = await check_theme(chat_id)
                     chat_title = await specialfont_to_normal(chat_title)
                     thumb = await gen_thumb(
-                        thumbnail,
-                        title,
-                        CallbackQuery.from_user.id,
-                        theme,
-                        chat_title,
+                        thumbnail, title, CallbackQuery.from_user.id, "NOW PLAYING", views, duration_min, channel
                     )
                     buttons = primary_markup(
                         videoid,

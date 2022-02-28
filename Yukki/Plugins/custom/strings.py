@@ -287,7 +287,6 @@ BASIC_TEXT = """
 /playlist - play your playlist
 /song - download a song as music or video
 /settings - settings of the group
-/theme - set theme for your group
 /queue - get queued song
 """
 

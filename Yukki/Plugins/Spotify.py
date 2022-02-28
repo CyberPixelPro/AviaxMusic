@@ -118,6 +118,8 @@ async def spotify_play(_, message: Message):
                     duration_sec,
                     thumb,
                     videoid,
+                    views, 
+                    channel
                 ) = get_yt_info_query(query)
                 await mystic.delete()
                 MusicData = f"MusicStream {videoid}|{duration_min}|{message.from_user.id}"
@@ -264,7 +266,9 @@ async def play_spotify_playlist(_, CallbackQuery):
                     duration_sec,
                     thumb,
                     videoid,
-                ) = get_yt_info_query(shikhar)            
+                    views, 
+                    channel
+                ) = get_yt_info_query(shikhar)           
                 url = f"https://www.youtube.com/watch?v={videoid}"
                 duration = duration_min
                 if await is_active_chat(chat_id):
@@ -303,11 +307,7 @@ async def play_spotify_playlist(_, CallbackQuery):
                     theme = await check_theme(chat_id)
                     chat_title = await specialfont_to_normal(chat_title)
                     thumb = await gen_thumb(
-                        thumbnail,
-                        title,
-                        CallbackQuery.from_user.id,
-                        theme,
-                        chat_title,
+                        thumbnail, title, CallbackQuery.from_user.id, "NOW PLAYING", views, duration_min, channel
                     )
                     buttons = primary_markup(
                         videoid,

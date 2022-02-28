@@ -79,7 +79,14 @@ async def mplay_stream(message,MusicData):
             reply_markup=InlineKeyboardMarkup(buttons),
         )    
     await message.delete()
-    title, duration_min, duration_sec, thumbnail = get_yt_info_id(videoid)
+    (
+        title,
+        duration_min,
+        duration_sec,
+        thumbnail,
+        views,
+        channel
+    ) = get_yt_info_id(videoid)
     if duration_sec > DURATION_LIMIT:
         return await message.reply_text(
             f"**Duration Limit Exceeded**\n\n**Allowed Duration: **{DURATION_LIMIT_MIN} minute(s)\n**Received Duration:** {duration_min} minute(s)"
@@ -94,7 +101,9 @@ async def mplay_stream(message,MusicData):
     raw_path = await convert(downloaded_file)
     theme = await check_theme(chat_id)
     chat_title = await specialfont_to_normal(chat_title)
-    thumb = await gen_thumb(thumbnail, title, user_id, theme, chat_title)
+    thumb = await gen_thumb(
+                        thumbnail, title, message.from_user.id, "NOW PLAYING", views, duration_min, channel
+                    )
     if chat_id not in db_mem:
         db_mem[chat_id] = {}
     await custom_start_stream(
@@ -233,14 +242,23 @@ async def vplay_stream(message,VideoData,mystic):
             "**Live Stream Detected**\n\nWant to play live stream? This will stop the current playing musics(if any) and will start streaming live video.",
             reply_markup=InlineKeyboardMarkup(buttons),
         )    
-    title, duration_min, duration_sec, thumbnail = get_yt_info_id(videoid)
+    (
+        title,
+        duration_min,
+        duration_sec,
+        thumbnail,
+        views,
+        channel
+    ) = get_yt_info_id(videoid)
     if duration_sec > DURATION_LIMIT:
         return await message.reply_text(
             f"**Duration Limit Exceeded**\n\n**Allowed Duration: **{DURATION_LIMIT_MIN} minute(s)\n**Received Duration:** {duration_min} minute(s)"
         )    
     theme = await check_theme(chat_id)
     chat_title = await specialfont_to_normal(chat_title)
-    thumb = await gen_thumb(thumbnail, title, user_id, theme, chat_title)
+    thumb = await gen_thumb(
+                        thumbnail, title, message.from_user.id, "NOW PLAYING", views, duration_min, channel
+                    )
     nrs, ytlink = await get_m3u8(videoid)
     if nrs == 0:
         return await message.reply_text(

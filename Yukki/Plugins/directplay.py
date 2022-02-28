@@ -120,6 +120,8 @@ async def mplayaa(_, message: Message):
             duration_sec,
             thumb,
             videoid,
+            views, 
+            channel
         ) = get_yt_info_query(query)
         await mystic.delete()        
         MusicData = f"MusicStream {videoid}|{duration_min}|{message.from_user.id}"
@@ -145,6 +147,8 @@ async def mplayaa(_, message: Message):
             duration_sec,
             thumb,
             videoid,
+            views, 
+            channel
         ) = get_yt_info_query(query)
         await mystic.delete()
         MusicData = f"MusicStream {videoid}|{duration_min}|{message.from_user.id}"
@@ -225,6 +229,8 @@ async def vplayaaa(_, message: Message):
             duration_sec,
             thumb,
             videoid,
+            views, 
+            channel
         ) = get_yt_info_query(query)               
         
         VideoData = f"Choose {videoid}|{duration_min}|{message.from_user.id}"
@@ -250,6 +256,8 @@ async def vplayaaa(_, message: Message):
             duration_sec,
             thumb,
             videoid,
-        ) = get_yt_info_query(query)       
+            views, 
+            channel
+        ) = get_yt_info_query(query)      
         VideoData = f"Choose {videoid}|{duration_min}|{message.from_user.id}"
         return await vplay_stream(message,VideoData,mystic)

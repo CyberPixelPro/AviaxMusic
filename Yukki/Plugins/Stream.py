@@ -136,11 +136,20 @@ async def Live_Videos_Stream(_, CallbackQuery):
             "This is not for you! Search You Own Song.", show_alert=True
         )
     await CallbackQuery.message.delete()
-    title, duration_min, duration_sec, thumbnail = get_yt_info_id(videoid)
+    (
+        title,
+        duration_min,
+        duration_sec,
+        thumbnail,
+        views,
+        channel
+    ) = get_yt_info_id(videoid)
     await CallbackQuery.answer(f"Processing:- {title[:20]}", show_alert=True)
     theme = await check_theme(chat_id)
     chat_title = await specialfont_to_normal(chat_title)
-    thumb = await gen_thumb(thumbnail, title, user_id, theme, chat_title)
+    thumb = await gen_thumb(
+                        thumbnail, title, CallbackQuery.from_user.id, "NOW PLAYING", views, duration_min, channel
+                    )
     nrs, ytlink = await get_m3u8(videoid)
     if nrs == 0:
         return await CallbackQuery.message.reply_text(
@@ -178,7 +187,14 @@ async def Videos_Stream(_, CallbackQuery):
             reply_markup=InlineKeyboardMarkup(buttons),
         )
     await CallbackQuery.message.delete()
-    title, duration_min, duration_sec, thumbnail = get_yt_info_id(videoid)
+    (
+        title,
+        duration_min,
+        duration_sec,
+        thumbnail,
+        views,
+        channel
+    ) = get_yt_info_id(videoid)
     if duration_sec > DURATION_LIMIT:
         return await CallbackQuery.message.reply_text(
             f"**Duration Limit Exceeded**\n\n**Allowed Duration: **{DURATION_LIMIT_MIN} minute(s)\n**Received Duration:** {duration_min} minute(s)"
@@ -186,7 +202,9 @@ async def Videos_Stream(_, CallbackQuery):
     await CallbackQuery.answer(f"Processing:- {title[:20]}", show_alert=True)
     theme = await check_theme(chat_id)
     chat_title = await specialfont_to_normal(chat_title)
-    thumb = await gen_thumb(thumbnail, title, user_id, theme, chat_title)
+    thumb = await gen_thumb(
+                        thumbnail, title, CallbackQuery.from_user.id, "NOW PLAYING", views, duration_min, channel
+                    )
     nrs, ytlink = await get_m3u8(videoid)
     if nrs == 0:
         return await CallbackQuery.message.reply_text(

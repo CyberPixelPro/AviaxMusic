@@ -569,6 +569,8 @@ async def playout_end(pytgclients, chat_id):
                         duration_min,
                         duration_sec,
                         thumbnail,
+                        views,
+                        channel
                     ) = get_yt_info_id(videoid)
                     if int(quality) == 720:
                         stream_quality = HighQualityVideo()
@@ -599,7 +601,7 @@ async def playout_end(pytgclients, chat_id):
                     user_id = db_mem[afk]["user_id"]
                     chat_title = await specialfont_to_normal(c_title)
                     thumb = await gen_thumb(
-                        thumbnail, title, user_id, theme, chat_title
+                        thumbnail, title, user_id, "NOW PLAYING", views, duration_min, channel
                     )
                     buttons = primary_markup(
                         videoid, user_id, duration_min, duration_min
@@ -633,6 +635,8 @@ async def playout_end(pytgclients, chat_id):
                     duration_min,
                     duration_sec,
                     thumbnail,
+                    views,
+                    channel
                 ) = get_yt_info_id(afk)
                 mystic = await mystic.edit(
                     f"**{MUSIC_BOT_NAME} Downloader**\n\n**Title:** {title[:50]}\n\n0% ▓▓▓▓▓▓▓▓▓▓▓▓ 100%"
@@ -655,8 +659,8 @@ async def playout_end(pytgclients, chat_id):
                 user_id = db_mem[afk]["user_id"]
                 chat_title = await specialfont_to_normal(c_title)
                 thumb = await gen_thumb(
-                    thumbnail, title, user_id, theme, chat_title
-                )
+                        thumbnail, title, user_id, "NOW PLAYING", views, duration_min, channel
+                    )
                 buttons = primary_markup(
                     afk, user_id, duration_min, duration_min
                 )
