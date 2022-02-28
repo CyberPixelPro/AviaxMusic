@@ -62,10 +62,10 @@ async def gen_thumb(thumbnail, title, userid, status, views, duration, channel):
     image2.paste(circle, (0,0), mask = circle)
 
     # fonts
-    font1 = ImageFont.truetype(r'arial_bold.ttf', 30)
-    font2 = ImageFont.truetype(r'arial_black.ttf', 60)
-    font3 = ImageFont.truetype(r'arial_black.ttf', 40)
-    font4 = ImageFont.truetype(r'arial_bold.ttf', 35)
+    font1 = ImageFont.truetype(r'Utils/arial_bold.ttf', 30)
+    font2 = ImageFont.truetype(r'Utils/arial_black.ttf', 60)
+    font3 = ImageFont.truetype(r'Utils/arial_black.ttf', 40)
+    font4 = ImageFont.truetype(r'Utils/arial_bold.ttf', 35)
 
     image4 = ImageDraw.Draw(image2)
     image4.text((10, 10), BOT_NAME, fill="white", font = font1, align ="left") 
