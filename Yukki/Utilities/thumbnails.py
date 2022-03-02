@@ -45,10 +45,12 @@ async def gen_thumb(thumbnail, title, userid, status, views, duration, channel):
     circle = Image.open("Utils/circle.png")
     image1 = changeImageSize(1280, 720, image)
     image1 = image1.filter(ImageFilter.BoxBlur(10))
+    image11 = changeImageSize(1280, 720, image)
+    image1 = image11.filter(ImageFilter.BoxBlur(10))
     image2 = Image.blend(image1,black,0.6)
 
     # Cropping circle from thubnail
-    image3 = image.crop((280,0,1000,720))
+    image3 = image11.crop((280,0,1000,720))
     lum_img = Image.new('L', [720,720] , 0)
     draw = ImageDraw.Draw(lum_img)
     draw.pieslice([(0,0), (720,720)], 0, 360, fill = 255, outline = "white")
