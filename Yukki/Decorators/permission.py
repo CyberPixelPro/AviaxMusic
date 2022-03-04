@@ -33,7 +33,7 @@ def PermissionCheck(mystic):
                 "I don't have the required permission to perform this action."
                 + "\n**Permission:** __INVITE USERS VIA LINK__"
             )
-            if not a.can_restrict_members:
+        if not a.can_restrict_members:
             await message.reply_text(
                 "I don't have the required permission to perform this action."
                 + "\n**Permission:** __BAN PERMISSION__"
