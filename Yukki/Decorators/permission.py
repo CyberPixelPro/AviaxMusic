@@ -14,6 +14,7 @@ def PermissionCheck(mystic):
                 + "\n- **can_manage_voice_chats:** To manage voice chats"
                 + "\n- **can_delete_messages:** To delete Bot's Searched Waste"
                 + "\n- **can_invite_users**: For inviting assistant to chat."
+                + "\n- **can_ban_users**: To remove assistant after song."
             )
         if not a.can_manage_voice_chats:
             await message.reply_text(
@@ -31,6 +32,11 @@ def PermissionCheck(mystic):
             await message.reply_text(
                 "I don't have the required permission to perform this action."
                 + "\n**Permission:** __INVITE USERS VIA LINK__"
+            )
+            if not a.can_restrict_members:
+            await message.reply_text(
+                "I don't have the required permission to perform this action."
+                + "\n**Permission:** __BAN PERMISSION__"
             )
             return
         return await mystic(_, message)
