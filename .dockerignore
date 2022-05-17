@@ -1,9 +1,0 @@
-.env
-*.log
-.git/
-.idea/
-README.md
-downloads/
-raw_files/
-.gitignore
-__pycache__/
