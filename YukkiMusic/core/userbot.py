@@ -1,4 +1,4 @@
-import sy
+import sys
 
 from pyrogram import Client
 
