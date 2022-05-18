@@ -8,7 +8,7 @@ async def gen_thumb(videoid):
     if os.path.isfile(f"cache/techz{videoid}.png"): 
         return f"cache/techz{videoid}.png"
 
-    url = f"https://techzbotsapi.herokuapp.com/thumb?videoid={videoid}&botname={MUSIC_BOT_NAME}"
+    url = f"https://techzbots.tk/thumb?videoid={videoid}&botname={MUSIC_BOT_NAME}"
     
     try:
         async with aiohttp.ClientSession() as session:
