@@ -54,8 +54,8 @@ HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
 
 # For customized or modified Repository
-UPSTREAM_REPO = "https://github.com/TeamAviax/AstralFlames"
-UPSTREAM_BRANCH = "main"
+UPSTREAM_REPO = "https://github.com/TeamAviax/AviaxMusic"
+UPSTREAM_BRANCH = "master"
 
 # GIT TOKEN ( if your edited repo is private)
 GIT_TOKEN = getenv("GIT_TOKEN", None)
