@@ -31,7 +31,12 @@ START_BUTTON_GROUP = InlineKeyboardMarkup(
             InlineKeyboardButton(
                 text="💬 Support Group", url="https://t.me/AviaxSupport"
             ),                       
-        ],        
+        ],
+        [
+            InlineKeyboardButton(
+                text="🔗 Deploy your own bot", url="https://github.com/TeamAviax/AviaxMusic"
+            ),                                  
+        ]
     ]
 )
 
@@ -53,7 +58,12 @@ START_BUTTON_PRIVATE = InlineKeyboardMarkup(
             InlineKeyboardButton(
                 text="💬 Support Group", url="https://t.me/AviaxSupport"
             ),                       
-        ],        
+        ],
+        [
+            InlineKeyboardButton(
+                text="🔗 Deploy your own bot", url="https://github.com/TeamAviax/AviaxMusic"
+            ),                                  
+        ]
     ]
 )
 
