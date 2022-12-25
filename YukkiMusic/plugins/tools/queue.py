@@ -33,9 +33,9 @@ QUEUE_COMMAND = get_command("QUEUE_COMMAND")
 basic = {}
 
 
-def get_image(videoid):
-    if os.path.isfile(f"cache/{videoid}.png"):
-        return f"cache/{videoid}.png"
+def get_image(videoid, user_id):
+    if os.path.isfile(f"cache/{videoid}_{user_id}.jpg"):
+        return f"cache/{videoid}_{user_id}.jpg"
     else:
         return config.YOUTUBE_IMG_URL
 
@@ -76,13 +76,14 @@ async def ping_com(client, message: Message, _):
     file = got[0]["file"]
     videoid = got[0]["vidid"]
     user = got[0]["by"]
+    user_id = got[0]["user_id"]
     title = (got[0]["title"]).title()
     typo = (got[0]["streamtype"]).title()
     DUR = get_duration(got)
     if "live_" in file:
-        IMAGE = get_image(videoid)
+        IMAGE = get_image(videoid, user_id)
     elif "vid_" in file:
-        IMAGE = get_image(videoid)
+        IMAGE = get_image(videoid, user_id)
     elif "index_" in file:
         IMAGE = config.STREAM_IMG_URL
     else:
@@ -95,7 +96,7 @@ async def ping_com(client, message: Message, _):
         elif videoid == "soundcloud":
             IMAGE = config.SOUNCLOUD_IMG_URL
         else:
-            IMAGE = get_image(videoid)
+            IMAGE = get_image(videoid, user_id)
     send = (
         "**⌛️Duration:** Unknown Duration Stream\n\nClick on button below to get whole queued list."
         if DUR == "Unknown"
@@ -256,13 +257,14 @@ async def queue_back(client, CallbackQuery: CallbackQuery, _):
     file = got[0]["file"]
     videoid = got[0]["vidid"]
     user = got[0]["by"]
+    user_id = got[0]["user_id"]
     title = (got[0]["title"]).title()
     typo = (got[0]["streamtype"]).title()
     DUR = get_duration(got)
     if "live_" in file:
-        IMAGE = get_image(videoid)
+        IMAGE = get_image(videoid, user_id)
     elif "vid_" in file:
-        IMAGE = get_image(videoid)
+        IMAGE = get_image(videoid, user_id)
     elif "index_" in file:
         IMAGE = config.STREAM_IMG_URL
     else:
@@ -275,7 +277,7 @@ async def queue_back(client, CallbackQuery: CallbackQuery, _):
         elif videoid == "soundcloud":
             IMAGE = config.SOUNCLOUD_IMG_URL
         else:
-            IMAGE = get_image(videoid)
+            IMAGE = get_image(videoid, user_id)
     send = (
         "**⌛️Duration:** Unknown Duration Stream\n\nClick on button below to get whole queued list."
         if DUR == "Unknown"
