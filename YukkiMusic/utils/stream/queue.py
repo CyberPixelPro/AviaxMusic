@@ -39,6 +39,7 @@ async def put_queue(
         "chat_id": original_chat_id,
         "file": file,
         "vidid": vidid,
+        "user_id": user_id,
         "seconds": duration_in_seconds,
         "played": 0,
     }
