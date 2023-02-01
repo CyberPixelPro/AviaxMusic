@@ -67,7 +67,7 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
         ],
         [
             InlineKeyboardButton(
-                text="🏠 Support",
+                text="💜 Support",
                 url="https://t.me/chatting_gruap",
             ),
             InlineKeyboardButton(
@@ -122,7 +122,7 @@ def stream_markup(_, videoid, chat_id):
     buttons = [
         [
             InlineKeyboardButton(
-                text="🏠 Support",
+                text="💜 Support",
                 url="https://t.me/chatting_gruap",
             ),
             InlineKeyboardButton(
