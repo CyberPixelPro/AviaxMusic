@@ -41,9 +41,9 @@ def truncate(text):
     return [text1,text2]
 
 
-async def gen_thumb(videoid, user_id):
-    if os.path.isfile(f"cache/{videoid}_{user_id}.jpg"):
-        return f"cache/{videoid}_{user_id}.jpg"
+async def gen_thumb(videoid):
+    if os.path.isfile(f"cache/{videoid}.png"):
+        return f"cache/{videoid}.png"
     try:
         url = f"https://www.youtube.com/watch?v={videoid}"
         if 1==1:
@@ -73,28 +73,12 @@ async def gen_thumb(videoid, user_id):
                 async with session.get(f"http://img.youtube.com/vi/{videoid}/maxresdefault.jpg") as resp:
                     if resp.status == 200:
                         f = await aiofiles.open(
-                            f"cache/thumb{videoid}.jpg", mode="wb"
+                            f"cache/thumb{videoid}.png", mode="wb"
                         )
                         await f.write(await resp.read())
                         await f.close()
-            wxyz = await app.get_profile_photos(user_id)
-            try:
-                wxy = await app.download_media(wxyz[0]['file_id'], file_name=f'{user_id}.jpg')
-            except:
-                hehe = await app.get_profile_photos(app.id)
-                wxy = await app.download_media(hehe[0]['file_id'], file_name=f'{app.id}.jpg')
-            xy = Image.open(wxy)
-
-            a = Image.new('L', [640, 640], 0)
-            b = ImageDraw.Draw(a)
-            b.pieslice([(0, 0), (640,640)], 0, 360, fill = 255, outline = "white")
-            c = np.array(xy)
-            d = np.array(a)
-            e = np.dstack((c, d))
-            f = Image.fromarray(e)
-            x = f.resize((170, 170))
-
-            youtube = Image.open(f"cache/thumb{videoid}.jpg")
+            
+            youtube = Image.open(f"cache/thumb{videoid}.png")
             image1 = changeImageSize(1280, 720, youtube)
             image2 = image1.convert("RGBA")
             background = image2.filter(filter=ImageFilter.BoxBlur(30))
@@ -102,35 +86,34 @@ async def gen_thumb(videoid, user_id):
             background = enhancer.enhance(0.6)
             image2 = background
 
-            circle = Image.open("assets/circle.png")
-            
-            im = circle
-            im = im.convert('RGBA')
-            color = make_col()
+            cover = Image.open(f"cache/thumb{videoid}.png")
+            cover = cover.convert("RGBA")
+            w, h = cover.size
+            w = round((w*720)/h)
+            cover = cover.resize((w,720))
 
-            data = np.array(im)
-            red, green, blue, alpha = data.T
+            original = cover
+            vertices = [(50,0),(0,720),(w,720),(w,0)]
+            mask = Image.new("L", original.size, 0)
+            draw = ImageDraw.Draw(mask)
+            draw.polygon(vertices, fill=255, outline=None)
+            black =  Image.new("RGBA", original.size, 0)
+            result = Image.composite(original, black, mask)
+            cover = result
 
-            white_areas = (red == 255) & (blue == 255) & (green == 255)
-            data[..., :-1][white_areas.T] = color
+            image3 = image2.filter(filter=ImageFilter.GaussianBlur(10))
+            black = Image.new("RGB",(1280,720),"black").convert("RGBA")
+            image3 = Image.blend(image3,black,0.5)
 
-            im2 = Image.fromarray(data)
-            circle = im2
+            image3.paste(cover,(1280-590,0),cover)
+            image3 = image3.convert("RGB")
 
-            image3 = image1.crop((280,0,1000,720))
-            lum_img = Image.new('L', [720,720] , 0)
-            draw = ImageDraw.Draw(lum_img)
-            draw.pieslice([(0,0), (720,720)], 0, 360, fill = 255, outline = "white")
-            img_arr = np.array(image3)
-            lum_img_arr = np.array(lum_img)
-            final_img_arr = np.dstack((img_arr,lum_img_arr))
-            image3 = Image.fromarray(final_img_arr)
-            image3 = image3.resize((600,600))
+            image3 = ImageOps.expand(image3,20,(255, 255, 255))
+            image3 = image3.resize((1280,720))
 
-            image2.paste(image3, (50,70), mask=image3)
-            image2.paste(x, (470, 490), mask=x)
-            image2.paste(circle, (0,0), mask=circle)
-            
+            ldraw = ImageDraw.Draw(image3)
+            line = [((1280-w)+740,0),((1280-w)+680,720)]
+            ldraw.line(line, (255, 255, 255), 20)
 
             # fonts
             font1 = ImageFont.truetype('assets/font.ttf', 30)
@@ -138,32 +121,31 @@ async def gen_thumb(videoid, user_id):
             font3 = ImageFont.truetype('assets/font2.ttf', 40)
             font4 = ImageFont.truetype('assets/font2.ttf', 35)
 
-            image4 = ImageDraw.Draw(image2)
-            image4.text((10, 10), MUSIC_BOT_NAME, fill="white", font = font1, align ="left")
-            image4.text((670, 150), "NOW PLAYING", fill="white", font = font2, stroke_width=2, stroke_fill="white", align ="left") 
+            image4 = ImageDraw.Draw(image3)
+            image4.text((30, 20), "Aviax Music", fill="white", font = font1)
+            image4.text((80, 150), "NOW PLAYING", fill="white", font = font2, stroke_width=5, stroke_fill="black") 
 
             # title
             title1 = truncate(title)
-            image4.text((670, 300), text=title1[0], fill="white", stroke_width=1, stroke_fill="white",font = font3, align ="left") 
-            image4.text((670, 350), text=title1[1], fill="white", stroke_width=1, stroke_fill="white", font = font3, align ="left") 
+            image4.text((80, 300), text=title1[0], fill="white", stroke_width=5, stroke_fill="black",font = font3) 
+            image4.text((80, 350), text=title1[1], fill="white", stroke_width=5, stroke_fill="black", font = font3) 
 
             # description
             views = f"Views : {views}"
             duration = f"Duration : {duration} Mins"
             channel = f"Channel : {channel}"
 
-            image4.text((670, 450), text=views, fill="white", font = font4, align ="left") 
-            image4.text((670, 500), text=duration, fill="white", font = font4, align ="left") 
-            image4.text((670, 550), text=channel, fill="white", font = font4, align ="left")
+            image4.text((80, 450), text=views, fill="white", font = font4, align ="left") 
+            image4.text((80, 500), text=duration, fill="white", font = font4, align ="left") 
+            image4.text((80, 550), text=channel, fill="white", font = font4, align ="left")
 
-            image2 = ImageOps.expand(image2,border=20,fill=make_col())
-            image2 = image2.convert('RGB')
+            
             try:
                 os.remove(f"cache/thumb{videoid}.png")
             except:
                 pass
-            image2.save(f"cache/{videoid}_{user_id}.jpg")
-            file = f"cache/{videoid}_{user_id}.jpg"
+            image3.save(f"cache/{videoid}.png")
+            file = f"cache/{videoid}.png"
             return file
     except Exception as e:
         print(e)
