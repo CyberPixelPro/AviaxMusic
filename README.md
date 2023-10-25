@@ -131,4 +131,6 @@ This project is licensed under the MIT License. For more details, see the [LICEN
 ### 🙏 Acknowledgements
 
 Special thanks to all the contributors, supporters, and users of the Aviax Music Bot. Your feedback and support keep us going!
+- [Yukki Music](https://github.com/TeamYukki/YukkiMusicBot) and [AnonXMusic](https://github.com/AnonymousX1025/AnonXMusic) For their Source Codes.
+- [⏤͟͞𝘼𝘿𝙞𝙏𝙔𝘼 ༗](https://t.me/Aditya_xDz) For Music Thumbnail Idea.
 
