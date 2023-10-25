@@ -5,10 +5,10 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/stars/TeamAviax/AviaxMusic?style=flat-square&color=blue" alt="GitHub stars">
-  <img src="https://img.shields.io/github/forks/TeamAviax/AviaxMusic?style=flat-square&color=blue" alt="GitHub forks">
-  <img src="https://img.shields.io/github/issues/TeamAviax/AviaxMusic?style=flat-square&color=red" alt="GitHub issues">
-  <img src="https://img.shields.io/github/license/TeamAviax/AviaxMusic?style=flat-square&color=green" alt="GitHub license">
+  <img src="https://img.shields.io/github/stars/TeamAviax/AviaxMusic?style=for-the-badge&color=blue" alt="GitHub stars">
+  <img src="https://img.shields.io/github/forks/TeamAviax/AviaxMusic?style=for-the-badge&color=blue" alt="GitHub forks">
+  <img src="https://img.shields.io/github/issues/TeamAviax/AviaxMusic?style=for-the-badge&color=red" alt="GitHub issues">
+  <img src="https://img.shields.io/github/license/TeamAviax/AviaxMusic?style=for-the-badge&color=green" alt="GitHub license">
 </p>
 
 <h2 align="center">Delivering Superior Music Experience to Telegram</h2>
