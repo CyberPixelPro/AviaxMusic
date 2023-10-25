@@ -1,7 +1,7 @@
 <h1 align="center">🎵 Aviax Music Bot 🎵</h1>
 
 <p align="center">
-  <img src="https://telegra.ph/file/29808c1fd50add3b1bfc6.jpg" alt="Aviax Music Logo" width="1500" height="400">
+  <img src="https://telegra.ph/file/29808c1fd50add3b1bfc6.jpg" alt="Aviax Music Logo" width="1300" height="300">
 </p>
 
 <p align="center">
