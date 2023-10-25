@@ -57,7 +57,7 @@
    ```bash
    cp sample.env .env
    ```
-   `Edit .env with your vars`
+   -Edit .env with your vars
 8. **Editing Vars:**
    ```bash
    vi .env
