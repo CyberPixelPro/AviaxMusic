@@ -36,6 +36,7 @@ async def start_pm(client, message: Message, _):
             return await message.reply_photo(
                 photo=config.START_IMG_URL,
                 caption=_["help_1"].format(config.SUPPORT_GROUP),
+                protect_content=True,
                 reply_markup=keyboard,
             )
         if name[0:3] == "sud":
