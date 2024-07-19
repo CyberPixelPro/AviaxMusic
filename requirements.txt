@@ -14,7 +14,7 @@ pillow==9.5.0
 psutil
 py-tgcalls==0.9.7
 pykeyboard
-pyrogram==2.0.106
+https://github.com/pyrogrammod/pyrogrammod/archive/main.zip
 python-dotenv
 pyyaml
 requests
