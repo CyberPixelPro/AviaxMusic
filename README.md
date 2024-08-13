@@ -15,8 +15,6 @@
 
 ---
 
----
-
 ### 🛠 Fix for YouTube Blocking VPS IPs
 
 Due to YouTube blocking VPS IPs drastically, we have implemented a fix. Follow the steps below:
@@ -29,6 +27,7 @@ Due to YouTube blocking VPS IPs drastically, we have implemented a fix. Follow t
 
 This process will allow you to bypass the YouTube restrictions and ensure smooth operation of the bot.
 
+---
 
 ### 🌟 Features
 
