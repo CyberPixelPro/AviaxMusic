@@ -12,34 +12,24 @@ from youtubesearchpython.__future__ import VideosSearch
 from AviaxMusic.utils.database import is_on_off
 from AviaxMusic.utils.formatters import time_to_seconds
 
-from pathlib import Path
+
+
+import os
 import glob
-
-folder_path = f"{os.getcwd()}/cookies"
-txt_files = glob.glob(os.path.join(folder_path, '*.txt'))
-cookie_files = [file for file in txt_files]
-index = -1
-
-
-def cookies_logs(index):
-   filename = f"{os.getcwd()}/cookies/logs.csv"
-   with open(filename, 'r') as file:
-      lines = file.readlines()
-   last_lines = lines[-100:]
-   with open(filename, 'w') as file:
-      file.writelines(last_lines)
-   with open(filename, 'a') as file:
-      file.write(f'Choosen File : {cookie_files[index]}\n')
+import random
+import logging
 
 def cookie_txt_file():
-    global index
+    folder_path = f"{os.getcwd()}/cookies"
+    filename = f"{os.getcwd()}/cookies/logs.csv"
+    txt_files = glob.glob(os.path.join(folder_path, '*.txt'))
     if not txt_files:
         raise FileNotFoundError("No .txt files found in the specified folder.")
-    index += 1
-    if index >= len(cookie_files):
-        index = 0
-    cookies_logs(index)
-    return cookie_files[index]
+    cookie_txt_file = random.choice(txt_files)
+    with open(filename, 'a') as file:
+        file.write(f'Choosen File : {cookie_txt_file}\n')
+    return f"""cookies/{str(cookie_txt_file).split("/")[-1]}"""
+
 
 
 async def check_file_size(link):
