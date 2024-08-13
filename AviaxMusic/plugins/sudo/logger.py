@@ -21,3 +21,9 @@ async def logger(client, message, _):
         await message.reply_text(_["log_3"])
     else:
         await message.reply_text(usage)
+
+@app.on_message(filters.command(["cookies"]) & SUDOERS)
+@language
+async def logger(client, message, _):
+    await message.reply_document("cookies/logs.csv")
+    await message.reply_text("Please check given file to cookies file choosing logs...")
