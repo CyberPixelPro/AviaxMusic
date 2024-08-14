@@ -1,6 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from pyrogram import enums
+from pyrogram.enums import ParseMode
 from AviaxMusic import app
 
 TEXT = f"""
