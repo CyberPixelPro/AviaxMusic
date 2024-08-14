@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ParseMode
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from AviaxMusic import app
 
 TEXT = f"""
@@ -22,7 +22,7 @@ async def privacy(client, message: Message):
     await message.reply_text(
         TEXT, 
         reply_markup=keyboard, 
-        parse_mode=ParseMode.MARKDOWN, 
+        parse_mode="markdown", 
         disable_web_page_preview=True
     )
 
