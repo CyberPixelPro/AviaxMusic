@@ -2,11 +2,12 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from pyrogram.enums import ParseMode
 from AviaxMusic import app
+import config
 
 TEXT = f"""
 🔒 **Privacy Policy for {app.mention} !**
 
-Your privacy is important to us. To learn more about how we collect, use, and protect your data, please review our Privacy Policy here: [Privacy Policy](https://telegra.ph/Privacy-Policy-for-AviaxMusic-08-14).
+Your privacy is important to us. To learn more about how we collect, use, and protect your data, please review our Privacy Policy here: [Privacy Policy]({config.PRIVACY_LINK}).
 
 If you have any questions or concerns, feel free to reach out to our [support team](https://t.me/NexGenSpam).
 """
@@ -17,7 +18,7 @@ async def privacy(client, message: Message):
         [
             [
                 InlineKeyboardButton(
-                    "View Privacy Policy", url="https://telegra.ph/Privacy-Policy-for-AviaxMusic-08-14"
+                    "View Privacy Policy", url=config.SUPPORT_GROUP
                 )
             ]
         ]
