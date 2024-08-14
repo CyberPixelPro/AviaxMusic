@@ -22,7 +22,7 @@ async def privacy(client, message: Message):
     await message.reply_text(
         TEXT, 
         reply_markup=keyboard, 
-        parse_mode="Markdown", 
+        parse_mode=ParseMode.MARKDOWN, 
         disable_web_page_preview=True
     )
 
