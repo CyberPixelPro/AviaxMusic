@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram import enums
 from AviaxMusic import app
 
 TEXT = f"""
@@ -22,7 +23,7 @@ async def privacy(client, message: Message):
     await message.reply_text(
         TEXT, 
         reply_markup=keyboard, 
-        parse_mode="markdown", 
+        parse_mode=ParseMode.MARKDOWN, 
         disable_web_page_preview=True
     )
 
