@@ -11,7 +11,7 @@ import logging
 
 async def auto_leave():
     if config.AUTO_LEAVING_ASSISTANT:
-        while not await asyncio.sleep(45):
+        while not await asyncio.sleep(15):
             print("AUTO_LEAVING_ASSISTANT is enabled")
             from AviaxMusic.core.userbot import assistants
             ender = await is_autoleave()
