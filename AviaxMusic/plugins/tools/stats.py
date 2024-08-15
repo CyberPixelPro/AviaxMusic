@@ -13,13 +13,13 @@ from AviaxMusic import app
 from AviaxMusic.core.userbot import assistants
 from AviaxMusic.misc import SUDOERS, mongodb
 from AviaxMusic.plugins import ALL_MODULES
-from AviaxMusic.utils.database import get_served_chats, get_served_users, get_sudoers
+from AviaxMusic.utils.database import get_served_chats, get_served_users, get_sudoers,is_autoend,is_autoleave
 from AviaxMusic.utils.decorators.language import language, languageCB
 from AviaxMusic.utils.inline.stats import back_stats_buttons, stats_buttons
 from config import BANNED_USERS
 
 
-@app.on_message(filters.command(["stats", "gstats"]) & filters.group & ~BANNED_USERS)
+@app.on_message(filters.command(["mstats", "mvstats"]) & filters.group & ~BANNED_USERS)
 @language
 async def stats_global(client, message: Message, _):
     upl = stats_buttons(_, True if message.from_user.id in SUDOERS else False)
@@ -60,8 +60,9 @@ async def overall_stats(client, CallbackQuery, _):
         served_users,
         len(ALL_MODULES),
         len(SUDOERS),
-        config.AUTO_LEAVING_ASSISTANT,
+        await is_autoend(),
         config.DURATION_LIMIT_MIN,
+        await is_autoleave()  
     )
     med = InputMediaPhoto(media=config.STATS_IMG_URL, caption=text)
     try:
