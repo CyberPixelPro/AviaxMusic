@@ -1,22 +1,24 @@
 import asyncio
 from datetime import datetime
-
 from pyrogram.enums import ChatType
 from pytgcalls.exceptions import GroupCallNotFound
 import config
 from AviaxMusic import app
 from AviaxMusic.misc import db
 from AviaxMusic.core.call import Aviax, autoend, counter
-from AviaxMusic.utils.database import get_client, set_loop, is_active_chat, is_autoend,is_autoleave
+from AviaxMusic.utils.database import get_client, set_loop, is_active_chat, is_autoend, is_autoleave
 import logging
 
 async def auto_leave():
     if config.AUTO_LEAVING_ASSISTANT:
-        while not await asyncio.sleep(900):
+        while not await asyncio.sleep(45):
+            print("AUTO_LEAVING_ASSISTANT is enabled")
             from AviaxMusic.core.userbot import assistants
             ender = await is_autoleave()
+            print(f"Auto leave enabled: {ender}")
             if not ender:
                 continue
+            print("Auto leave process started")
             for num in assistants:
                 client = await get_client(num)
                 left = 0
@@ -36,18 +38,17 @@ async def auto_leave():
                                     continue
                                 if not await is_active_chat(i.chat.id):
                                     try:
+                                        print(f"Leaving chat: {i.chat.id}")
                                         await client.leave_chat(i.chat.id)
                                         left += 1
-                                    except:
+                                    except Exception as e:
+                                        print(f"Error leaving chat: {e}")
                                         continue
-                except:
+                except Exception as e:
+                    print(f"Error in dialogs loop: {e}")
                     pass
 
-
 asyncio.create_task(auto_leave())
-
-import asyncio
-import logging
 
 async def auto_end():
     global autoend, counter
