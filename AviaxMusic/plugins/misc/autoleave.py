@@ -10,7 +10,7 @@ from AviaxMusic.utils.database import get_client, set_loop, is_active_chat, is_a
 import logging
 
 async def auto_leave():
-    while not await asyncio.sleep(30):
+    while not await asyncio.sleep(900):
         from AviaxMusic.core.userbot import assistants
         ender = await is_autoleave()
         if not ender:
@@ -29,7 +29,7 @@ async def auto_leave():
                             i.chat.id != config.LOG_GROUP_ID
                             and i.chat.id != -1002016928980 and i.chat.id != -1002200386150 and i.chat.id != -1001397779415
                         ):
-                            if left == 2:
+                            if left == 20:
                                 continue
                             if not await is_active_chat(i.chat.id):
                                 try:
