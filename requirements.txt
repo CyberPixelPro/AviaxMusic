@@ -12,7 +12,7 @@ numpy
 opencv-python
 pillow==9.5.0
 psutil
-py-tgcalls==0.9.7
+py-tgcalls==2.0
 pykeyboard
 https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.23.zip
 python-dotenv
