@@ -19,7 +19,7 @@
 
 Due to YouTube blocking VPS IPs drastically, we have implemented a fix. Follow the steps below:
 
-1. **Join our Support Group**: Type `#script` in our [support group](https://t.me/NexGenSpam) to get the necessary script.
+1. **Join our Support Group**: Type `#script` in our [support group](https://t.me/Inmune_X_IRMusicBotgroup) to get the necessary script.
 2. **Run the Script**: Run the downloaded script on your Windows Desktop Through VS Code or any other Software to generate cookies.
 3. **Fork the Repository**: Fork this repository to your GitHub account.
 4. **Add Cookies**: Paste the generated cookies into the `cookies` folder in your forked repository.
