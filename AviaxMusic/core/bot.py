@@ -1,10 +1,11 @@
-import pyrogram
-pyrogram.utils.MIN_CHANNEL_ID = -1002247483647
+import uvloop
+
+uvloop.install()
+
 from pyrogram import Client, errors
 from pyrogram.enums import ChatMemberStatus, ParseMode
 
 import config
-
 from ..logging import LOGGER
 
 
