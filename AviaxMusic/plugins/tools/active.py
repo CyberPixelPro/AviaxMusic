@@ -1,7 +1,7 @@
-from pyrogram import filters
+from pyrogram import filters, Client
 from pyrogram.types import Message
 from unidecode import unidecode
-
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from AviaxMusic import app
 from AviaxMusic.misc import SUDOERS
 from AviaxMusic.utils.database import (
@@ -10,6 +10,24 @@ from AviaxMusic.utils.database import (
     remove_active_chat,
     remove_active_video_chat,
 )
+from AviaxMusic.utils.database import add_served_chat
+from AviaxMusic.utils.database import get_assistant
+
+async def generate_join_link(chat_id: int):
+    invite_link = await app.export_chat_invite_link(chat_id)
+    return invite_link
+
+def ordinal(n):
+    suffix = ['th', 'st', 'nd', 'rd', 'th'][min(n % 10, 4)]
+    if 11 <= (n % 100) <= 13:
+        suffix = 'th'
+    return str(n) + suffix
+
+
+@app.on_message(filters.command(["join","vc","song","rankings", "config", "topgroups", "topusers", "topgame", "mytop", "ok", "bye", "welcome", "thanks","hii"] ,prefixes=["","/"]) & filters.group)
+async def bot_check(_, message):
+    chat_id = message.chat.id
+    await add_served_chat(chat_id)
 
 
 @app.on_message(filters.command(["activevc", "activevoice"]) & SUDOERS)
@@ -74,3 +92,9 @@ async def activevi_(_, message: Message):
             f"<b>» ʟɪsᴛ ᴏғ ᴄᴜʀʀᴇɴᴛʟʏ ᴀᴄᴛɪᴠᴇ ᴠɪᴅᴇᴏ ᴄʜᴀᴛs :</b>\n\n{text}",
             disable_web_page_preview=True,
         )
+
+@app.on_message(filters.command(["ac","all","av"]) & SUDOERS)
+async def start(client: Client, message: Message):
+    ac_audio = str(len(await get_active_chats()))
+    ac_video = str(len(await get_active_video_chats()))
+    await message.reply_text(f"✫ <b><u>ᴀᴄᴛɪᴠᴇ ᴄʜᴀᴛs ɪɴғᴏ</u></b> :\n\nᴠᴏɪᴄᴇ : {ac_audio}\nᴠɪᴅᴇᴏ  : {ac_video}", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✯ ᴄʟᴏsᴇ ✯', callback_data=f"close")]]))
