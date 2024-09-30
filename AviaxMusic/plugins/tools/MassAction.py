@@ -17,8 +17,9 @@ async def banall(client: Client, message: Message):
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
-        await message.reply_text(f"Hey {message.from_user.mention}, 'banall' can only be executed by the group owner.")
+        await message.reply_text(f"Hey {message.from_user.mention}, 'banall' can only be executed by the group owner {owner_AMBOT}.")
         return
     confirm_msg = await message.reply(
         f"{message.from_user.mention}, are you sure you want to ban all group members?",
@@ -32,6 +33,7 @@ async def handle_callback(client: Client, callback_query: CallbackQuery):
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
         await callback_query.answer("Only the group owner can confirm this action.", show_alert=True)
         return
@@ -63,8 +65,9 @@ async def unbanall(client: Client, message: Message):
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
-        await message.reply_text(f"Hey {message.from_user.mention}, 'unbanall' can only be executed by the group owner.")
+        await message.reply_text(f"Hey {message.from_user.mention}, 'unbanall' can only be executed by the group owner {owner_AMBOT}.")
         return
     confirm_msg = await message.reply(
         f"{message.from_user.mention}, are you sure you want to unban all group members?",
@@ -79,6 +82,7 @@ async def handle_unbanall_callback(client: Client, callback_query: CallbackQuery
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
         await callback_query.answer("Only the group owner can confirm this action.", show_alert=True)
         return
@@ -110,8 +114,9 @@ async def unmuteall(client: Client, message: Message):
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
-        await message.reply_text(f"Hey {message.from_user.mention}, 'unmuteall' can only be executed by the group owner.")
+        await message.reply_text(f"Hey {message.from_user.mention}, 'unmuteall' can only be executed by the group owner {owner_AMBOT}.")
         return
     
     confirm_msg = await message.reply(
@@ -127,6 +132,7 @@ async def handle_unmuteall_callback(client: Client, callback_query: CallbackQuer
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
         await callback_query.answer("Only the group owner can confirm this action.", show_alert=True)
         return
@@ -158,8 +164,9 @@ async def muteall(client: Client, message: Message):
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
-        await message.reply_text(f"Hey {message.from_user.mention}, 'muteall' can only be executed by the group owner.")
+        await message.reply_text(f"Hey {message.from_user.mention}, 'muteall' can only be executed by the group owner {owner_AMBOT}.")
         return
     confirm_msg = await message.reply(
         f"{message.from_user.mention}, are you sure you want to mute all group members?",
@@ -173,6 +180,7 @@ async def handle_muteall_callback(client: Client, callback_query: CallbackQuery)
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
         await callback_query.answer("Only the group owner can confirm this action.", show_alert=True)
         return
@@ -203,8 +211,9 @@ async def kickall(client: Client, message: Message):
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
-        await message.reply_text(f"Hey {message.from_user.mention}, 'kickall' can only be executed by the group owner.")
+        await message.reply_text(f"Hey {message.from_user.mention}, 'kickall' can only be executed by the group owner {owner_AMBOT}.")
         return
     confirm_msg = await message.reply(
         f"{message.from_user.mention}, are you sure you want to kick all group members?",
@@ -219,6 +228,7 @@ async def handle_kickall_callback(client: Client, callback_query: CallbackQuery)
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
         await callback_query.answer("Only the group owner can confirm this action.", show_alert=True)
         return
@@ -250,9 +260,9 @@ async def unpinall(client: Client, message: Message):
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
-    
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
-        await message.reply_text(f"Hey {message.from_user.mention}, 'unpinall' can only be executed by the group owner.")
+        await message.reply_text(f"Hey {message.from_user.mention}, 'unpinall' can only be executed by the group owner {owner_AMBOT}.")
         return
     confirm_msg = await message.reply(
         f"{message.from_user.mention}, are you sure you want to unpin all messages?",
@@ -267,6 +277,7 @@ async def handle_unpinall_callback(client: Client, callback_query: CallbackQuery
     async for admin in client.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if admin.status == enums.ChatMemberStatus.OWNER:
             owner_id = admin.user.id
+            owner_AMBOT = admin.user.mention
     if user_id != owner_id and user_id not in SUDOERS:
         await callback_query.answer("Only the group owner can confirm this action.", show_alert=True)
         return
