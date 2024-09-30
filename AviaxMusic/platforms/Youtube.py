@@ -20,24 +20,13 @@ import glob
 import os
 import random
 
+
 def cookie_txt_file():
-    github_url = "https://raw.githubusercontent.com/AbhiModszYT/AnieXEricaMusic/main/AnieXEricaMusic/cookies/cookies.txt"
-    response = requests.get(github_url)
-    if response.status_code == 200:
-        file_path = "cookies/cookies.txt"
-        with open(file_path, 'w') as file:
-            file.write(response.text)
-        txt_files = glob.glob(os.path.join("cookies", '*.txt'))
-        if not txt_files:
-            raise FileNotFoundError("No .txt files found in the specified folder.")
-        cookie_txt_file = random.choice(txt_files)
-        with open("chosen_file_log.txt", 'a') as log_file:
-            log_file.write(f'Chosen File: {cookie_txt_file}\n')
-        return f"cookies/{os.path.basename(cookie_txt_file)}"
-    else:
-        raise Exception("Failed to download the cookies.txt file.")
+    cookie_dir = "AviaxMusic/cookies"
+    cookies_files = [f for f in os.listdir(cookie_dir) if f.endswith(".txt")]
 
-
+    cookie_file = os.path.join(cookie_dir, random.choice(cookies_files))
+    return cookie_file
 
 
 async def check_file_size(link):
