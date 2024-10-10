@@ -10,7 +10,7 @@ from AviaxMusic.utils.database import get_client, set_loop, is_active_chat, is_a
 import logging
 
 async def auto_leave():
-    while not await asyncio.sleep(900):
+    while not await asyncio.sleep(86400):
         from AviaxMusic.core.userbot import assistants
         ender = await is_autoleave()
         if not ender:
@@ -46,7 +46,7 @@ asyncio.create_task(auto_leave())
 async def auto_end():
     global autoend, counter
     while True:
-        await asyncio.sleep(60)
+        await asyncio.sleep(900)
         try:
             ender = await is_autoend()
             if not ender:
