@@ -22,7 +22,7 @@ async def leave_all(client, message):
         async for dialog in userbot.get_dialogs():
             if dialog.chat.id == AMBOTOP:
                 continue
-            if in await is_active_chat(dialog.chat.id):
+            if await is_active_chat(dialog.chat.id):
                 continue
             try:
                 await userbot.leave_chat(dialog.chat.id)
