@@ -1,14 +1,12 @@
 import asyncio
-
 from pyrogram import filters
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.errors import InviteRequestSent
-
-from AviaxMusic import app
+from AviaxMusic import app, userbot
 from AviaxMusic.misc import SUDOERS
 from AviaxMusic.utils.database import get_assistant
-
-
+from AviaxMusic.core.userbot import assistants
+from config import LOG_GROUP_ID as AMBOTOP
 
 
 @app.on_message(filters.command(["leaveall", f"leaveall@{app.username}"]) & SUDOERS)
@@ -22,7 +20,7 @@ async def leave_all(client, message):
     try:
         userbot = await get_assistant(message.chat.id)
         async for dialog in userbot.get_dialogs():
-            if dialog.chat.id == -1001733534088:
+            if dialog.chat.id == AMBOTOP:
                 continue
             try:
                 await userbot.leave_chat(dialog.chat.id)
