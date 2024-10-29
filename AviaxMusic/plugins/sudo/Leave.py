@@ -6,7 +6,7 @@ from AviaxMusic import app, userbot
 from AviaxMusic.misc import SUDOERS
 from AviaxMusic.utils.database import get_assistant, is_active_chat
 from AviaxMusic.core.userbot import assistants
-from config import LOG_GROUP_ID as AMBOTOP
+from config import LOG_GROUP_ID as Jai
 
 
 @app.on_message(filters.command(["leaveall", f"leaveall@{app.username}"]) & SUDOERS)
