@@ -15,7 +15,7 @@ pillow==9.5.0
 psutil
 py-tgcalls==0.9.7
 pykeyboard
-https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.23.zip
+kurigram==2.1.35
 python-dotenv
 pyyaml
 requests
