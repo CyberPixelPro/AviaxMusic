@@ -7,7 +7,7 @@ ffmpeg-python
 gitpython
 hachoir
 heroku3
-httpx[http2]==0.25.2
+httpx[http2]
 motor
 numpy
 opencv-python
@@ -15,7 +15,7 @@ pillow==9.5.0
 psutil
 py-tgcalls==0.9.7
 pykeyboard
-kurigram==2.1.35
+kurigram==2.1.37
 python-dotenv
 pyyaml
 requests
@@ -25,5 +25,4 @@ tgcrypto
 unidecode
 uvloop
 yt-dlp
-youtube-search
-youtube-search-python
+https://github.com/KSKOP69/youtube-search-python/archive/ksk.zip
