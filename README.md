@@ -29,6 +29,29 @@ This process will allow you to bypass the YouTube restrictions and ensure smooth
 
 ---
 
+## 🎵 Using the API for Audio Streaming
+If you do not want to deal with YouTube restrictions, you can rely on our API for audio streaming. The API allows you to fetch audio directly without needing cookies, making the process simpler and more reliable.
+
+### How to Get an API Key
+To use the API, you need an API key. Follow these steps to obtain one:
+
+1. **DM on Telegram**: Contact the bot admin on Telegram at [Rahul](https://t.me/RahulTC) to request an API key.
+2. **Free Trial**: New users can request a **5-day free trial** with a 1,000 song request limit to test the API. Simply mention "I want a free trial" in your DM, and I will provide a trial API key.
+3. **Choose a Plan**: After the trial (or if you want a higher limit), select a plan based on your song request limit needs (all prices are in INR, on a **monthly basis**):
+   - **5,000 Song Requests**: ₹49/month
+   - **10,000 Song Requests**: ₹99/month
+   - **15,000 Song Requests**: ₹149/month
+   - **20,000 Song Requests**: ₹199/month
+4. **Payment**: After selecting a plan, You will be provided payment details. Once the payment is confirmed, you will receive your API key via Telegram DM.
+5. **Integrate the API Key**: Add the API key to your bot's configuration (refer to the setup instructions for details on where to add the key).
+
+### Important Notes About API Usage
+- **Daily Reset**: The song request limit resets daily at midnight (IST). For example, if you have a 5,000 song request limit, you can request up to 5,000 songs each day.
+- **Audio Only**: The API provides audio streaming only. If you need video play support, you must add cookies as described in the section above.
+- **Support**: If you face any issues with the API or need help with integration, join our [support group](https://t.me/NexGenSpam) and ask for assistance.
+
+---
+
 ### 🌟 Features
 
 - 🎵 **Multiple Sources:** Play music from various platforms.
