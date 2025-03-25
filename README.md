@@ -38,10 +38,10 @@ To use the API, you need an API key. Follow these steps to obtain one:
 1. **DM on Telegram**: Contact the bot admin on Telegram at [Rahul](https://t.me/RahulTC) to request an API key.
 2. **Free Trial**: New users can request a **5-day free trial** with a 1,000 song request limit to test the API. Simply mention "I want a free trial" in your DM, and I will provide a trial API key.
 3. **Choose a Plan**: After the trial (or if you want a higher limit), select a plan based on your song request limit needs (all prices are in INR, on a **monthly basis**):
-   - **5,000 Song Requests**: ₹49/month
-   - **10,000 Song Requests**: ₹99/month
-   - **15,000 Song Requests**: ₹149/month
-   - **20,000 Song Requests**: ₹199/month
+   - **5,000 Song Requests Daily**: ₹49/month
+   - **10,000 Song Requests Daily**: ₹99/month
+   - **15,000 Song Requests Daily**: ₹149/month
+   - **20,000 Song Requests Daily**: ₹199/month
 4. **Payment**: After selecting a plan, You will be provided payment details. Once the payment is confirmed, you will receive your API key via Telegram DM.
 5. **Integrate the API Key**: Add the API key to your bot's configuration (refer to the setup instructions for details on where to add the key).
 
