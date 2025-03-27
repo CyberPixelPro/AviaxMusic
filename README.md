@@ -36,7 +36,7 @@ If you do not want to deal with YouTube restrictions, you can rely on our API fo
 To use the API, you need an API key. Follow these steps to obtain one:
 
 1. **DM on Telegram**: Contact the bot admin on Telegram at [Rahul](https://t.me/RahulTC) to request an API key.
-2. **Free Trial**: New users can request a **5-day free trial** with a 1,000 song request limit to test the API. Simply mention "I want a free trial" in your DM, and I will provide a trial API key.
+2. **Free Plan**: New users can request **Free Plan** with a 1,000 song request limit to the API. Simply mention "I want a free Plan" in my DM, and I will provide a API key (Need to renew it monthly).
 3. **Choose a Plan**: After the trial (or if you want a higher limit), select a plan based on your song request limit needs (all prices are in INR, on a **monthly basis**):
    - **5,000 Song Requests Daily**: ₹49/month
    - **10,000 Song Requests Daily**: ₹99/month
