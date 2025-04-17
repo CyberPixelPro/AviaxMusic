@@ -6,28 +6,36 @@ import traceback
 from inspect import getfullargspec
 from io import StringIO
 from time import time
-
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-
 from AviaxMusic import app
 from config import OWNER_ID
 
-
+# Function to execute code asynchronously
 async def aexec(code, client, message):
-    exec(
-        "async def __aexec(client, message): "
-        + "".join(f"\n {a}" for a in code.split("\n"))
-    )
-    return await locals()["__aexec"](client, message)
+    try:
+        # Sanitize and wrap the code in an async function
+        code = code.strip()  # Remove leading/trailing spaces to avoid issues with quotes
+        exec(
+            "async def __aexec(client, message): "
+            + "".join(f"\n {a}" for a in code.split("\n"))
+        )
+        # Execute the sanitized code
+        return await locals()["__aexec"](client, message)
+    except SyntaxError as e:
+        # Catch syntax errors and send a user-friendly message
+        await message.reply(f"Syntax Error: {str(e)}")
+    except Exception as e:
+        # Catch all other errors and send only the error message without full traceback
+        await message.reply(f"Error: {str(e)}")
 
-
+# Function to edit or reply with the appropriate method based on the message context
 async def edit_or_reply(msg: Message, **kwargs):
     func = msg.edit_text if msg.from_user.is_self else msg.reply
     spec = getfullargspec(func.__wrapped__).args
     await func(**{k: v for k, v in kwargs.items() if k in spec})
 
-
+# Command handler for the '/eval' command
 @app.on_edited_message(
     filters.command("eval")
     & filters.user(OWNER_ID)
@@ -80,7 +88,7 @@ async def executor(client: app, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        text="⏳",
+                        text="⏳ ",
                         callback_data=f"runtime {t2-t1} Seconds",
                     )
                 ]
@@ -100,7 +108,7 @@ async def executor(client: app, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        text="⏳",
+                        text="⏳ ",
                         callback_data=f"runtime {round(t2-t1, 3)} Seconds",
                     ),
                     InlineKeyboardButton(
@@ -112,13 +120,7 @@ async def executor(client: app, message: Message):
         )
         await edit_or_reply(message, text=final_output, reply_markup=keyboard)
 
-
-@app.on_callback_query(filters.regex(r"runtime"))
-async def runtime_func_cq(_, cq):
-    runtime = cq.data.split(None, 1)[1]
-    await cq.answer(runtime, show_alert=True)
-
-
+# Command handler for the '/forceclose' command (force close long-running tasks)
 @app.on_callback_query(filters.regex("forceclose"))
 async def forceclose_command(_, CallbackQuery):
     callback_data = CallbackQuery.data.strip()
@@ -137,7 +139,7 @@ async def forceclose_command(_, CallbackQuery):
     except:
         return
 
-
+# Command handler for the '/sh' command (shell command execution)
 @app.on_edited_message(
     filters.command("sh")
     & filters.user(OWNER_ID)
