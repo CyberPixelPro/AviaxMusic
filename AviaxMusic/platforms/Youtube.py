@@ -29,22 +29,22 @@ def cookie_txt_file():
 
 async def download_song(link: str):
     video_id = link.split('v=')[-1].split('&')[0]
-
     download_folder = "downloads"
+
     for ext in ["mp3", "m4a", "webm"]:
         file_path = f"{download_folder}/{video_id}.{ext}"
         if os.path.exists(file_path):
-            #print(f"File already exists: {file_path}")
             return file_path
-        
+
     song_url = f"{API_URL}/song/{video_id}?api={API_KEY}"
+
     async with aiohttp.ClientSession() as session:
         for attempt in range(10):
             try:
                 async with session.get(song_url) as response:
                     if response.status != 200:
                         raise Exception(f"API request failed with status code {response.status}")
-                
+
                     data = await response.json()
                     status = data.get("status", "").lower()
 
@@ -52,7 +52,21 @@ async def download_song(link: str):
                         download_url = data.get("link")
                         if not download_url:
                             raise Exception("API response did not provide a download URL.")
-                        break
+
+                        file_format = data.get("format", "mp3").lower()
+                        file_name = f"{video_id}.{file_format}"
+                        os.makedirs(download_folder, exist_ok=True)
+                        file_path = os.path.join(download_folder, file_name)
+
+                        async with session.get(download_url) as file_response:
+                            with open(file_path, 'wb') as f:
+                                while True:
+                                    chunk = await file_response.content.read(8192)
+                                    if not chunk:
+                                        break
+                                    f.write(chunk)
+                        return file_path
+
                     elif status == "downloading":
                         await asyncio.sleep(4)
                     else:
@@ -61,34 +75,9 @@ async def download_song(link: str):
             except Exception as e:
                 print(f"[FAIL] {e}")
                 return None
-        else:
-            print("⏱️ Max retries reached. Still downloading...")
-            return None
-    
 
-        try:
-            file_format = data.get("format", "mp3")
-            file_extension = file_format.lower()
-            file_name = f"{video_id}.{file_extension}"
-            download_folder = "downloads"
-            os.makedirs(download_folder, exist_ok=True)
-            file_path = os.path.join(download_folder, file_name)
-
-            async with session.get(download_url) as file_response:
-                with open(file_path, 'wb') as f:
-                    while True:
-                        chunk = await file_response.content.read(8192)
-                        if not chunk:
-                            break
-                        f.write(chunk)
-                return file_path
-        except aiohttp.ClientError as e:
-            print(f"Network or client error occurred while downloading: {e}")
-            return None
-        except Exception as e:
-            print(f"Error occurred while downloading song: {e}")
-            return None
-    return None
+        print("⏱️ Max retries reached. Still downloading...")
+        return None
 
 async def check_file_size(link):
     async def get_format_info(link):
