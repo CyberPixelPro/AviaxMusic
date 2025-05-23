@@ -39,31 +39,32 @@ async def download_song(link: str):
         
     song_url = f"{API_URL}/song/{video_id}?api={API_KEY}"
     async with aiohttp.ClientSession() as session:
-    for attempt in range(10):
-        try:
-            async with session.get(song_url) as response:
-                if response.status != 200:
-                    raise Exception(f"API request failed with status code {response.status}")
+        for attempt in range(10):
+            try:
+                async with session.get(song_url) as response:
+                    if response.status != 200:
+                        raise Exception(f"API request failed with status code {response.status}")
                 
-                data = await response.json()
-                status = data.get("status", "").lower()
+                    data = await response.json()
+                    status = data.get("status", "").lower()
 
-                if status == "done":
-                    download_url = data.get("link")
-                    if not download_url:
-                        raise Exception("API response did not provide a download URL.")
-                    break
-                elif status == "downloading":
-                    await asyncio.sleep(4)
-                else:
-                    error_msg = data.get("error") or data.get("message") or f"Unexpected status '{status}'"
-                    raise Exception(f"API error: {error_msg}")
-        except Exception as e:
-            print(f"[FAIL] {e}")
+                    if status == "done":
+                        download_url = data.get("link")
+                        if not download_url:
+                            raise Exception("API response did not provide a download URL.")
+                        break
+                    elif status == "downloading":
+                        await asyncio.sleep(4)
+                    else:
+                        error_msg = data.get("error") or data.get("message") or f"Unexpected status '{status}'"
+                        raise Exception(f"API error: {error_msg}")
+            except Exception as e:
+                print(f"[FAIL] {e}")
+                return None
+        else:
+            print("⏱️ Max retries reached. Still downloading...")
             return None
-    else:
-        print("⏱️ Max retries reached. Still downloading...")
-        return None
+    
 
         try:
             file_format = data.get("format", "mp3")
