@@ -153,5 +153,5 @@ HELP_15 = """
 HELP_16 = """
 <b><u>Privacy Command :</b></u>
 
-/Privacy : Display the privacy statement for Sarcastic Bot 
+/privacy : Display the privacy statement of {0}
 """
