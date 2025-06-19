@@ -14,7 +14,6 @@ pillow==9.5.0
 psutil
 py-tgcalls==0.9.7
 pytgcrypto
-pykeyboard
 kurigram
 python-dotenv
 pyyaml
