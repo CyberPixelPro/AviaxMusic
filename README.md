@@ -79,7 +79,7 @@ Manage keys from our official dashboard (no Telegram DMs needed):
 
 Add your API key to `.env`:
 
-```env
+
 API_KEY=your-api-key-here
 
 ---
