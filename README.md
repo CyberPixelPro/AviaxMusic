@@ -17,65 +17,70 @@
 
 ### 🛠 Fix for YouTube Blocking VPS IPs
 
-Due to YouTube blocking VPS IPs drastically, we have implemented a fix. Follow the steps below:
+YouTube blocks many VPS IPs. We now provide **two ways** to keep playback smooth:
 
-1. **Join our Support Group**: Type `#script` in our [support group](https://t.me/NexGenSpam) to get the necessary script.
-2. **Run the Script**: Run the downloaded script on your Windows Desktop Through VS Code or any other Software to generate cookies.
-3. **Fork the Repository**: Fork this repository to your GitHub account.
-4. **Add Cookies**: Paste the generated cookies into the `cookies` folder in your forked repository.
-5. **Deploy the Bot**: Continue with the setup instructions as outlined above.
+1. **API (Recommended):**  
+   Stream **audio & video** via our API with built-in vPlay support. No cookie hassle.
 
-This process will allow you to bypass the YouTube restrictions and ensure smooth operation of the bot.
+2. **Custom Cookies (Fallback / No-API mode):**  
+   Generate cookies on your local machine and place them in the `cookies/` folder to bypass YouTube restrictions.
 
 ---
 
-## 🎵 Using the API for Audio Streaming
+## 🎵 Using the API for Audio & Video (vPlay)
 
-If you do not want to deal with YouTube restrictions, you can rely on our API for audio streaming. The API allows you to fetch audio directly without needing cookies, making the process simpler and more reliable.
+The API now supports **both audio and video**.  
+Use API for reliability; switch to **custom cookies** if you prefer not to rely on the API.
 
 ---
 
-### 🔑 How to Get an API Key
+### 🔑 Get an API Key
 
-You can now generate and manage your API keys through our official dashboard — no more Telegram DMs required!
+Manage keys from our official dashboard (no Telegram DMs needed):
 
-[![API Dashboard](https://img.shields.io/badge/Visit-Dashboard-black?style=for-the-badge&logo=vercel)](https://panel.thequickearn.xyz)
-[![API Community](https://img.shields.io/badge/Join-API%20Community-green?style=for-the-badge&logo=telegram)](https://t.me/+DXGe6UE90y01NDVl)
-[![Contact Rahul](https://img.shields.io/badge/DM-@RahulTC-blueviolet?style=for-the-badge&logo=telegram)](https://t.me/ItzRahul)
+[![API Dashboard](https://img.shields.io/badge/Visit-Dashboard-black?style=for-the-badge&logo=vercel)](https://panel.thequickearn.xyz)  
+[![API Community](https://img.shields.io/badge/Join-API%20Community-green?style=for-the-badge&logo=telegram)](https://t.me/+DXGe6UE90y01NDVl)  
+[![Contact Rahul](https://img.shields.io/badge/DM-@RahulTC-blueviolet?style=for-the-badge&logo=telegram)](https://t.me/ItzRahul)  
 
-#### 🛠️ Steps to Get Started:
+---
 
-1. **Sign Up**: Visit the dashboard and create an account with your email.
-2. **Free Plan**: All new users receive a **Free Plan** with:
-   - 🔁 1,000 daily requests
-   - 🗓️ Valid for 30 days
-3. **Upgrade Plans**: Choose a higher daily limit plan below (INR ₹ / month):
+#### 🛠️ Steps to Get Started
 
-| Plan Name          | Daily Requests | Monthly Price  |
-|--------------------|----------------|----------------|
-| Free Plan          | 1,000          | ₹0             |
-| Basic Plan         | 5,000          | ₹50            |
-| Standard Plan      | 10,000         | ₹50            |
-| Pro Plan           | 15,000         | ₹75            |
-| Entriprise Plan    | 20,000         | ₹100           |
-| Mega Plan          | 50,000         | ₹250           |
+1. **Sign up** at [panel.thequickearn.xyz](https://panel.thequickearn.xyz) and create an account.  
+2. **Generate Key**: After logging in, click **“Generate Key”** on the dashboard to activate the **Free Plan**.  
+3. **Upgrade anytime** via the dashboard for higher limits.  
 
-4. **Billing & Renewal**:
-   - Manage everything through the dashboard
-   - Extend key validity or upgrade instantly
-5. **Integration**:
-   - Copy your API key and add it to your `.env` or config file:
-     ```env
-     API_KEY=your-api-key-here
-     ```
+---
+
+### 📦 Plans & Pricing (₹/month)
+
+| Plan          | Daily API Requests | Daily Video Requests | Price   |
+|---------------|--------------------|----------------------|---------|
+| **Free**      | 200                | 4                    | ₹0      |
+| **Starter**   | 5,000              | 100                  | ₹97     |
+| **Standard**  | 10,000             | 200                  | ₹209    |
+| **Pro**       | 25,000             | 500                  | ₹419    |
+| **Business**  | 50,000             | 1,000                | ₹839    |
+| **Enterprise**| 100,000            | 2,000                | ₹1259   |
+| **Ultra**     | 150,000            | 3,000                | ₹1819   |
 
 ---
 
 ### 📌 Important Notes About API Usage
 
-- 🔄 **Daily Reset**: Request limits reset at midnight (IST) every day.
-- 🎵 **Audio-Only API**: Video support requires cookies (see YouTube section above).
-- 💬 **Community Support**: For API-specific help, join the [API Community Group](https://t.me/+DXGe6UE90y01NDVl)
+- 🔄 **Daily Reset**: All limits reset at midnight (IST).  
+- 🎧🎬 **Audio + Video**: Fully supported via API (vPlay).  
+- 🍪 **Fallback**: Add local **custom cookies** if you prefer not to use the API (works for both audio & video).  
+- 💬 **Support**: Join the [API Community Group](https://t.me/+DXGe6UE90y01NDVl).  
+
+---
+
+### ⚙️ Integration
+
+Add your API key to `.env`:
+
+```env
+API_KEY=your-api-key-here
 
 ---
 
