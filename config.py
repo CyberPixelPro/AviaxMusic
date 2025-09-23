@@ -7,22 +7,22 @@ from pyrogram import filters
 load_dotenv()
 
 # Get this value from my.telegram.org/apps
-API_ID = int(getenv("API_ID"))
-API_HASH = getenv("API_HASH")
+API_ID = int(getenv("24827537"))
+API_HASH = getenv("a2130b7f3f8dcfa91645e6f7447dc8f5")
 
 # Get your token from @BotFather on Telegram.
 BOT_TOKEN = getenv("BOT_TOKEN")
 
 # Get your mongo url from cloud.mongodb.com
-MONGO_DB_URI = getenv("MONGO_DB_URI", None)
+MONGO_DB_URI = getenv("mongodb+srv://ordmanthan:Mantsha@143@kayumusic.qi0ucva.mongodb.net/?retryWrites=true&w=majority&appName=kayumusic", None)
 
 DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 60))
 
 # Chat id of a group for logging bot's activities
-LOG_GROUP_ID = int(getenv("LOG_GROUP_ID", None))
+LOG_GROUP_ID = int(getenv("2726684656", None))
 
 # Get this value from @MissRose_Bot on Telegram by /id
-OWNER_ID = int(getenv("OWNER_ID", None))
+OWNER_ID = int(getenv("1926064495", None))
 
 ## Fill these variables if you're deploying on heroku.
 # Your heroku app name
@@ -32,7 +32,7 @@ HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
 API_URL = getenv("API_URL", 'https://api.thequickearn.xyz') #youtube song url
 VIDEO_API_URL = getenv("VIDEO_API_URL", 'https://api.video.thequickearn.xyz')
-API_KEY = getenv("API_KEY", None) # youtube song api key, generate free key or buy paid plan from panel.thequickearn.xyz
+API_KEY = getenv("30DxNexGenBots132733", None) # youtube song api key, generate free key or buy paid plan from panel.thequickearn.xyz
 
 UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
@@ -43,8 +43,8 @@ GIT_TOKEN = getenv(
     "GIT_TOKEN", None
 )  # Fill this variable if your upstream repository is private
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/NexGenBots")
-SUPPORT_GROUP = getenv("SUPPORT_GROUP", "https://t.me/NexGenSpam")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/radhakrishna1081")
+SUPPORT_GROUP = getenv("SUPPORT_GROUP", "https://t.me/+BBYsKkH_CvA1YzE1")
 
 # Set this to True if you want the assistant to automatically leave chats after an interval
 AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", False))
@@ -69,11 +69,11 @@ TG_VIDEO_FILESIZE_LIMIT = int(getenv("TG_VIDEO_FILESIZE_LIMIT", 2145386496))
 
 
 # Get your pyrogram v2 session from Replit
-STRING1 = getenv("STRING_SESSION", None)
-STRING2 = getenv("STRING_SESSION2", None)
-STRING3 = getenv("STRING_SESSION3", None)
-STRING4 = getenv("STRING_SESSION4", None)
-STRING5 = getenv("STRING_SESSION5", None)
+STRING1 = getenv("BQF1s6cAp4RsxPTrZxi8qEVjJkAgnEqD_ha-6jdrNeKPYoP1ndMcnL_784MSkKB66Lv0FE5aNhjm8D4GjxV7nNpJdSnXUgN8A-BuOs4oP_tIo8bsoMeBBphy1kZzB-7548MNf5HudA88Mg7omzMtvavRHkg8DUKnZKqW7BON8Tc8FSro-RzwIorAbYqVu4qZbKJ44-nFlcB8T3q6VqiwyHYlBvBZAw5tsVvOE_Gz87seXke5ezRDAVZ5eXNmfYXzo9wgehwT-28pXtMs_wgz0Mpz5_eKMZKrlU-HqAP43HsR-d2kllj3t6KhGaaQekXa_6nYBn2wm4WTSc-5lw8xy8qJdTE7SgAAAAG8oG9zAA", None)
+STRING2 = getenv("BQF1s6cAp4RsxPTrZxi8qEVjJkAgnEqD_ha-6jdrNeKPYoP1ndMcnL_784MSkKB66Lv0FE5aNhjm8D4GjxV7nNpJdSnXUgN8A-BuOs4oP_tIo8bsoMeBBphy1kZzB-7548MNf5HudA88Mg7omzMtvavRHkg8DUKnZKqW7BON8Tc8FSro-RzwIorAbYqVu4qZbKJ44-nFlcB8T3q6VqiwyHYlBvBZAw5tsVvOE_Gz87seXke5ezRDAVZ5eXNmfYXzo9wgehwT-28pXtMs_wgz0Mpz5_eKMZKrlU-HqAP43HsR-d2kllj3t6KhGaaQekXa_6nYBn2wm4WTSc-5lw8xy8qJdTE7SgAAAAG8oG9zAA", None)
+STRING3 = getenv("BQF1s6cAp4RsxPTrZxi8qEVjJkAgnEqD_ha-6jdrNeKPYoP1ndMcnL_784MSkKB66Lv0FE5aNhjm8D4GjxV7nNpJdSnXUgN8A-BuOs4oP_tIo8bsoMeBBphy1kZzB-7548MNf5HudA88Mg7omzMtvavRHkg8DUKnZKqW7BON8Tc8FSro-RzwIorAbYqVu4qZbKJ44-nFlcB8T3q6VqiwyHYlBvBZAw5tsVvOE_Gz87seXke5ezRDAVZ5eXNmfYXzo9wgehwT-28pXtMs_wgz0Mpz5_eKMZKrlU-HqAP43HsR-d2kllj3t6KhGaaQekXa_6nYBn2wm4WTSc-5lw8xy8qJdTE7SgAAAAG8oG9zAA", None)
+STRING4 = getenv("BQF1s6cAp4RsxPTrZxi8qEVjJkAgnEqD_ha-6jdrNeKPYoP1ndMcnL_784MSkKB66Lv0FE5aNhjm8D4GjxV7nNpJdSnXUgN8A-BuOs4oP_tIo8bsoMeBBphy1kZzB-7548MNf5HudA88Mg7omzMtvavRHkg8DUKnZKqW7BON8Tc8FSro-RzwIorAbYqVu4qZbKJ44-nFlcB8T3q6VqiwyHYlBvBZAw5tsVvOE_Gz87seXke5ezRDAVZ5eXNmfYXzo9wgehwT-28pXtMs_wgz0Mpz5_eKMZKrlU-HqAP43HsR-d2kllj3t6KhGaaQekXa_6nYBn2wm4WTSc-5lw8xy8qJdTE7SgAAAAG8oG9zAA", None)
+STRING5 = getenv("BQF1s6cAp4RsxPTrZxi8qEVjJkAgnEqD_ha-6jdrNeKPYoP1ndMcnL_784MSkKB66Lv0FE5aNhjm8D4GjxV7nNpJdSnXUgN8A-BuOs4oP_tIo8bsoMeBBphy1kZzB-7548MNf5HudA88Mg7omzMtvavRHkg8DUKnZKqW7BON8Tc8FSro-RzwIorAbYqVu4qZbKJ44-nFlcB8T3q6VqiwyHYlBvBZAw5tsVvOE_Gz87seXke5ezRDAVZ5eXNmfYXzo9wgehwT-28pXtMs_wgz0Mpz5_eKMZKrlU-HqAP43HsR-d2kllj3t6KhGaaQekXa_6nYBn2wm4WTSc-5lw8xy8qJdTE7SgAAAAG8oG9zAA", None)
 
 
 BANNED_USERS = filters.user()
@@ -121,3 +121,4 @@ if SUPPORT_GROUP:
         raise SystemExit(
             "[ERROR] - Your SUPPORT_GROUP url is wrong. Please ensure that it starts with https://"
         )
+
