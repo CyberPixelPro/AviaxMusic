@@ -1,8 +1,7 @@
 import sys
-import asyncio
 if sys.platform != "win32":
     import uvloop
-    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())  # <- add this
+    uvloop.install()
 
 from pyrogram import Client, errors
 from pyrogram.enums import ChatMemberStatus, ParseMode
@@ -57,5 +56,6 @@ class Aviax(Client):
 
     async def stop(self):
         await super().stop()
+
 
 
