@@ -1,4 +1,5 @@
 import sys
+import asyncio
 if sys.platform != "win32":
     import uvloop
     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())  # <- add this
@@ -56,4 +57,5 @@ class Aviax(Client):
 
     async def stop(self):
         await super().stop()
+
 
