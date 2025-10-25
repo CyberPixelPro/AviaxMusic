@@ -1,15 +1,21 @@
 import sys
+import asyncio
+
 if sys.platform != "win32":
     import uvloop
-    uvloop.install()
+    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+
+# Check a loop for uvloop
+try:
+    asyncio.get_running_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
 
 from pyrogram import Client, errors
 from pyrogram.enums import ChatMemberStatus, ParseMode
 
 import config
 from ..logging import LOGGER
-
-
 class Aviax(Client):
     def __init__(self):
         LOGGER(__name__).info("Starting Bot...")
@@ -56,3 +62,4 @@ class Aviax(Client):
 
     async def stop(self):
         await super().stop()
+
