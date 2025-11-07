@@ -21,7 +21,8 @@ requests
 speedtest-cli
 spotipy
 unidecode
-uvloop; sys_platform != "win32"
+uvloop==0.21.0; sys_platform != "win32"
 yt-dlp
 youtube-search
 youtube-search-python
+
