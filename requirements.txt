@@ -6,7 +6,7 @@ ffmpeg-python
 gitpython
 hachoir
 heroku3
-httpx[http2]==0.25.2
+httpx
 motor
 numpy
 opencv-python
@@ -25,4 +25,5 @@ uvloop==0.21.0; sys_platform != "win32"
 yt-dlp
 youtube-search
 youtube-search-python
+py-yt-search
 
