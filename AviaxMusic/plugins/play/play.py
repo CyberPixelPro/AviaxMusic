@@ -159,22 +159,8 @@ async def play_commnd(
     elif url:
         if await YouTube.exists(url):
             if "playlist" in url:
-                try:
-                    details = await YouTube.playlist(
-                        url,
-                        config.PLAYLIST_FETCH_LIMIT,
-                        message.from_user.id,
-                    )
-                except:
-                    return await mystic.edit_text(_["play_3"])
-                streamtype = "playlist"
-                plist_type = "yt"
-                if "&" in url:
-                    plist_id = (url.split("=")[1]).split("&")[0]
-                else:
-                    plist_id = url.split("=")[1]
-                img = config.PLAYLIST_IMG_URL
-                cap = _["play_9"]
+                
+                return await mystic.delete()
             else:
                 try:
                     details, track_id = await YouTube.track(url)
@@ -557,16 +543,8 @@ async def play_playlists_command(client, CallbackQuery, _):
     ffplay = True if fplay == "f" else None
     spotify = True
     if ptype == "yt":
-        spotify = False
-        try:
-            result = await YouTube.playlist(
-                videoid,
-                config.PLAYLIST_FETCH_LIMIT,
-                CallbackQuery.from_user.id,
-                True,
-            )
-        except:
-            return await mystic.edit_text(_["play_3"])
+        
+        return await mystic.delete()
     if ptype == "spplay":
         try:
             result, spotify_id = await Spotify.playlist(videoid)
@@ -671,4 +649,3 @@ async def slider_queries(client, CallbackQuery, _):
         return await CallbackQuery.edit_message_media(
             media=med, reply_markup=InlineKeyboardMarkup(buttons)
         )
-
