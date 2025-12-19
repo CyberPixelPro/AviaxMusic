@@ -39,8 +39,12 @@ update() {
 }
 
 packages(){
-	if ! command -v pip &>/dev/null; then
-		pprint "Couldn't found pip, installing now..."
+	pprint "Installing build dependencies (python3-dev, python3-venv, python3-full)...\n"
+	sudo apt install -y python3-dev build-essential python3-venv python3-full &>/dev/null &&
+	pprint "Build Dependencies Installed.\n\n" "cgreen"
+
+	if ! command -v pip3 &>/dev/null; then
+		pprint "Couldn't found pip3, installing now..."
 		sudo apt install python3-pip -y 2>pypilog.txt 1>/dev/null &&
 		pprint "SUCCESS.\n\n" "cgreen" || (pprint "FAIL.\n\n" "cred"; exit 1)
 	fi
@@ -51,40 +55,35 @@ packages(){
 			pprint "SUCCESS.\n\n" "cgreen"
 		else
 			pprint "FAIL.\n\n" "cred"
-			pprint "You need to install ffmpeg manually in order to deploy AnonXMusic, exiting...\n" "cblue"
+			pprint "You need to install ffmpeg manually in order to deploy AviaxMusic, exiting...\n" "cblue"
 			exit 1
 		fi
 	fi
 
-	# Check ffmpeg version and warn user if necessary.
 	fv=$(grep -Po 'version (3.*?) ' <<< $(ffmpeg -version)) &&
 	pprint "Playing live streams not going to work since you have ffmpeg $fv, live streams are supported by version 4+.\n" "cblue"
 }
 
-
-node(){
-	command -v npm &>/dev/null && return
-	pprint "Installing Nodejs and Npm..  "
-	curl -fssL https://deb.nodesource.com/setup_19.x | sudo -E bash - &>nodelog.txt &&
-	sudo apt install -y nodejs &>>nodelog.txt &&
-	sudo npm i -g npm &>>nodelog.txt &&
-	pprint "SUCCESS!\n" "cgreen" || (pprint "FAIL.\n" "cred"; exit 1)
-}
-
-
 installation(){
-	pprint "\n\nUpgrading pip and installing dependency packages..."
-	pip3 install -U pip &>>pypilog.txt &&
-	pip3 install -U -r requirements.txt &>>pypilog.txt &&
+	pprint "\n\nCreating and Activating Virtual Environment (venv)..."
+	if [ ! -d "venv" ]; then
+		python3 -m venv venv
+	fi
+	source venv/bin/activate
+
+	pprint "\n\nUpgrading pip and installing dependency packages inside venv..."
+	pip install -U pip &>>pypilog.txt &&
+	pip install -U -r requirements.txt &>>pypilog.txt &&
 	pprint "DONE.\n" "cgreen" && return
 	pprint "FAIL.\n" "cred"
+	pprint "\nLast 20 lines of pypilog.txt:\n" "cyellow"
+	tail -n 20 pypilog.txt
 	exit 1
 }
 
 clear
 pprint "Welcome to AviaxMusic Setup Installer\n\n"
 pprint "If you see any error during Installation Process, Please refer to these files for logs: "
-pprint "\nFor node js errors , Checkout nodelog.txt"
 pprint "\nFor pypi packages errors , Checkout pypilog.txt"
 sleep 1
 pprint "\n\nScript needs sudo privileges in order to update & install packages.\n"
@@ -92,7 +91,6 @@ sudo test
 
 update
 packages
-node
 installation
 pprint "\n\n\n\n\nAviaxMusic Installation Completed !" "cgreen"
 sleep 1
@@ -102,10 +100,11 @@ pprint "\nEnter Your Values Below\n\n\n"
 pprint "API ID: "; color_reset; read api_id
 pprint "\nAPI HASH: "; color_reset; read api_hash
 pprint "\nBOT TOKEN: "; color_reset; read bot_token
-pprint "\nOWNER ID:"; color_reset; read ownid
+pprint "\nOWNER ID: "; color_reset; read ownid
 pprint "\nMONGO DB URI: "; color_reset; read mongo_db
 pprint "\nLOG GROUP ID: "; color_reset; read logger
 pprint "\nSTRING SESSION: "; color_reset; read string_session
+pprint "\nAPI KEY (from console.nexgenbots.xyz): "; color_reset; read api_key
 
 pprint "\n\nProcessing your vars, wait a while !" "cgreen"
 
@@ -113,14 +112,16 @@ if [ -f .env ]; then
 	rm .env
 fi
 
-echo """API_ID = $api_id
-API_HASH = $api_hash
-BOT_TOKEN = $bot_token
-MONGO_DB_URI = $mongo_db
-LOG_GROUP_ID = $logger
-STRING_SESSION = $string_session
-OWNER_ID = $ownid""" > .env
+echo """API_ID=$api_id
+API_HASH=$api_hash
+BOT_TOKEN=$bot_token
+MONGO_DB_URI=$mongo_db
+LOG_GROUP_ID=$logger
+STRING_SESSION=$string_session
+OWNER_ID=$ownid
+API_KEY=$api_key""" > .env
 clear
 
 pprint "\n\n\nThanks for using AviaxMusic installer, your vars have been saved successfully ! \nIf you wanna add more variables add them in your env by : vi .env"
-pprint "\n\nNow you can start the bot by : bash start\n\n"
+pprint "\n\nImportant: Since we used venv, start the bot using the generated start script or activate venv first.\n"
+pprint "Now you can start the bot by : bash start\n\n"

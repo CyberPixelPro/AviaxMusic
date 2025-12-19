@@ -38,7 +38,7 @@ Use API for reliability; switch to **custom cookies** if you prefer not to rely 
 
 Manage keys from our official dashboard (no Telegram DMs needed):
 
-[![API Dashboard](https://img.shields.io/badge/Visit-Dashboard-black?style=for-the-badge&logo=vercel)](https://panel.thequickearn.xyz)  
+[![API Dashboard](https://img.shields.io/badge/Visit-Dashboard-black?style=for-the-badge&logo=vercel)](https://console.nexgenbots.xyz)  
 [![API Community](https://img.shields.io/badge/Join-API%20Community-green?style=for-the-badge&logo=telegram)](https://t.me/+DXGe6UE90y01NDVl)  
 [![Contact Rahul](https://img.shields.io/badge/DM-@RahulTC-blueviolet?style=for-the-badge&logo=telegram)](https://t.me/ItzRahul)  
 
@@ -46,7 +46,7 @@ Manage keys from our official dashboard (no Telegram DMs needed):
 
 #### 🛠️ Steps to Get Started
 
-1. **Sign up** at [panel.thequickearn.xyz](https://panel.thequickearn.xyz) and create an account.  
+1. **Sign up** at [console.nexgenbots.xyz](https://console.nexgenbots.xyz) and create an account.  
 2. **Generate Key**: After logging in, click **“Generate Key”** on the dashboard to activate the **Free Plan**.  
 3. **Upgrade anytime** via the dashboard for higher limits.  
 
@@ -56,13 +56,13 @@ Manage keys from our official dashboard (no Telegram DMs needed):
 
 | Plan          | Daily API Requests | Daily Video Requests | Price   |
 |---------------|--------------------|----------------------|---------|
-| **Free**      | 200                | 4                    | ₹0      |
-| **Starter**   | 5,000              | 100                  | ₹97     |
-| **Standard**  | 10,000             | 200                  | ₹209    |
-| **Pro**       | 25,000             | 500                  | ₹419    |
-| **Business**  | 50,000             | 1,000                | ₹839    |
-| **Enterprise**| 100,000            | 2,000                | ₹1259   |
-| **Ultra**     | 150,000            | 3,000                | ₹1819   |
+| **Free**      | 5,000              | 250                  | ₹0      |
+| **Starter**   | 10,000             | 500                  | ₹01     |
+| **Standard**  | 15,000             | 750                  | ₹02     |
+| **Pro**       | 25,000             | 1,000                | ₹03     |
+| **Business**  | 50,000             | 2,000                | ₹04     |
+| **Enterprise**| 100,000            | 4,000                | ₹05     |
+| **Ultra**     | 150,000            | 5,000                | ₹06     |
 
 ---
 
@@ -115,35 +115,31 @@ API_KEY=your-api-key-here
    ```bash
    sudo pip3 install -U pip
    ```
-4. **Installing Node**
-   ```bash
-   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash && source ~/.bashrc && nvm install v18
-   ```
-5. **Clone the Repository**
+4. **Clone the Repository**
    ```bash
    git clone https://github.com/CyberPixelPro/AviaxMusic && cd AviaxMusic
    ```
-6. **Install Requirements**
+5. **Install Requirements**
    ```bash
    pip3 install -U -r requirements.txt
    ```
-7. **Create .env  with sample.env**
+6. **Create .env  with sample.env**
    ```bash
    cp sample.env .env
    ```
    - Edit .env with your vars
-8. **Editing Vars:**
+7. **Editing Vars:**
    ```bash
    vi .env
    ```
    - Edit .env with your values.
    - Press `I` button on keyboard to start editing.
    - Press `Ctrl + C`  once you are done with editing vars and type `:wq` to save .env or `:qa` to exit editing.
-9. **Installing tmux**
+8. **Installing tmux**
     ```bash
     sudo apt install tmux -y && tmux
     ```
-10. **Run the Bot**
+9. **Run the Bot**
     ```bash
     bash start
     ```
@@ -172,10 +168,10 @@ For a full list of commands, use `/help` in [telegram](https://t.me/AviaxBeatzBo
 Stay updated with the latest features and improvements to Aviax Music Bot:
 
 <p align="center">
-  <a href="https://telegram.me/NexGenSpam">
+  <a href="https://telegram.me/NexGenBotsIndia">
     <img src="https://img.shields.io/badge/Join-Support%20Group-blue?style=for-the-badge&logo=telegram">
   </a>
-  <a href="https://telegram.me/NexGenSpam">
+  <a href="https://telegram.me/NexGenBots">
     <img src="https://img.shields.io/badge/Join-Update%20Channel-blue?style=for-the-badge&logo=telegram">
   </a>
 </p>
@@ -189,7 +185,7 @@ We welcome contributions to the Aviax Music Bot project. If you'd like to contri
 1. Fork the repository.
 2. Create a new branch with a meaningful name.
 3. Make your changes and commit them with a descriptive commit message.
-4. Open a pull request against our `main` branch.
+4. Open a pull request against our `master` branch.
 5. Our team will review your changes and provide feedback.
 
 For more details, reach out us on telegram.
@@ -205,5 +201,10 @@ This project is licensed under the MIT License. For more details, see the [LICEN
 ### 🙏 Acknowledgements
 
 Thanks to all the contributors, supporters, and users of the Aviax Music Bot. Your feedback and support keep us going!
-- [Yukki Music](https://github.com/TeamYukki/YukkiMusicBot) and [AnonXMusic](https://github.com/AnonymousX1025/AnonXMusic) For their Source Codes.
-- **Special Thanks** to [SPiDER 🇮🇳](https://github.com/Surendra9123) for invaluable assistance in resolving the IP ban issue.
+- Yukki Music & AnonX Music – Base inspiration
+- All contributors & community members
+  
+---
+
+⭐ If you like this project, don’t forget to star the repo!
+

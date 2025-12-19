@@ -106,6 +106,16 @@
 
       },
 
+      "API_KEY": {
+
+        "description": "Your API key from console.nexgenbots.xyz",
+
+        "value": "",
+
+        "required": true
+
+      },
+
       "LOG_GROUP_ID": {
 
         "description": "Your Log Group ID, add your bot and promote as an admin with full rights!. Do not ever try to put channel ID here.",
