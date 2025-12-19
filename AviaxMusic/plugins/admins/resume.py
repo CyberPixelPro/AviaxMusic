@@ -15,7 +15,11 @@ async def resume_com(cli, message: Message, _, chat_id):
     if await is_music_playing(chat_id):
         return await message.reply_text(_["admin_3"])
     await music_on(chat_id)
-    await Aviax.resume_stream(chat_id)
+    try:
+        await Aviax.resume_stream(chat_id)
+    except Exception:
+        pass
     await message.reply_text(
-        _["admin_4"].format(message.from_user.mention), reply_markup=close_markup(_)
+        _["admin_4"].format(message.from_user.mention),
+        reply_markup=close_markup(_)
     )

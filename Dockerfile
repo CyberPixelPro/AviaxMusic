@@ -1,10 +1,14 @@
-FROM ubuntu:22.04
+FROM python:3.13-slim
 
-RUN apt-get update && apt-get install -y python3 python3-pip nodejs npm ffmpeg
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git ffmpeg curl && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
 
 COPY . /app/
-WORKDIR /app/
 
-RUN pip3 install --no-cache-dir -U -r requirements.txt
+RUN pip install --no-cache-dir -U pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-CMD bash start
+CMD ["bash", "start"]

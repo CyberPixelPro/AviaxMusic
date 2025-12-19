@@ -10,9 +10,9 @@ httpx
 motor
 numpy
 opencv-python
-pillow==9.5.0
+pillow
 psutil
-py-tgcalls==0.9.7
+py-tgcalls==2.2.8
 pytgcrypto
 kurigram
 python-dotenv
