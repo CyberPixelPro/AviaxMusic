@@ -25,6 +25,9 @@ IS_BROADCASTING = False
 async def braodcast_message(client, message, _):
     global IS_BROADCASTING
 
+    if IS_BROADCASTING:
+        return await message.reply_text("A broadcast is already in progress. Please wait until it finishes.")
+
     if "-wfchat" in message.text or "-wfuser" in message.text:
         if not message.reply_to_message or not (message.reply_to_message.photo or message.reply_to_message.text):
             return await message.reply_text("Please reply to a text or image message for broadcasting.")
@@ -56,7 +59,7 @@ async def braodcast_message(client, message, _):
                     sent_chats += 1
                     await asyncio.sleep(0.2)
                 except FloodWait as fw:
-                    await asyncio.sleep(fw.x)
+                    await asyncio.sleep(fw.value)
                 except:
                     continue
             await message.reply_text(f"Broadcast to chats completed! Sent to {sent_chats} chats.")
@@ -74,7 +77,7 @@ async def braodcast_message(client, message, _):
                     sent_users += 1
                     await asyncio.sleep(0.2)
                 except FloodWait as fw:
-                    await asyncio.sleep(fw.x)
+                    await asyncio.sleep(fw.value)
                 except:
                     continue
             await message.reply_text(f"Broadcast to users completed! Sent to {sent_users} users.")
