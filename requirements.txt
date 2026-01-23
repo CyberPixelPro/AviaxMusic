@@ -12,9 +12,9 @@ numpy
 opencv-python
 pillow
 psutil
-py-tgcalls==2.2.8
+py-tgcalls
 pytgcrypto
-kurigram
+kurigram==2.1.35
 python-dotenv
 pyyaml
 requests
@@ -26,4 +26,5 @@ yt-dlp
 youtube-search
 youtube-search-python
 py-yt-search
+
 
