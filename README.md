@@ -39,7 +39,7 @@ Use API for reliability; switch to **custom cookies** if you prefer not to rely 
 Manage keys from our official dashboard (no Telegram DMs needed):
 
 [![API Dashboard](https://img.shields.io/badge/Visit-Dashboard-black?style=for-the-badge&logo=vercel)](https://console.nexgenbots.xyz)  
-[![API Community](https://img.shields.io/badge/Join-API%20Community-green?style=for-the-badge&logo=telegram)](https://t.me/+DXGe6UE90y01NDVl)  
+[![API Community](https://img.shields.io/badge/Join-API%20Community-green?style=for-the-badge&logo=telegram)](https://t.me/+oH1cVV8YSsdhMWU5)  
 [![Contact Rahul](https://img.shields.io/badge/DM-@RahulTC-blueviolet?style=for-the-badge&logo=telegram)](https://t.me/ItzRahul)  
 
 ---
@@ -56,13 +56,14 @@ Manage keys from our official dashboard (no Telegram DMs needed):
 
 | Plan          | Daily API Requests | Daily Video Requests | Price   |
 |---------------|--------------------|----------------------|---------|
-| **Free**      | 5,000              | 250                  | ₹0      |
-| **Starter**   | 10,000             | 500                  | ₹01     |
-| **Standard**  | 15,000             | 750                  | ₹02     |
-| **Pro**       | 25,000             | 1,000                | ₹03     |
-| **Business**  | 50,000             | 2,000                | ₹04     |
-| **Enterprise**| 100,000            | 4,000                | ₹05     |
-| **Ultra**     | 150,000            | 5,000                | ₹06     |
+| **Free**      | 500                | 25                   | ₹0      |
+| **Basic**     | 3,000              | 150                  | ₹150    |
+| **Starter**   | 5,000              | 250                  | ₹250    |
+| **Standard**  | 15,000             | 750                  | ₹450    |
+| **Pro**       | 25,000             | 1,250                | ₹900    |
+| **Business**  | 50,000             | 2,500                | ₹1700   |
+| **Enterprise**| 100,000            | 5,000                | ₹3200   |
+| **Ultra**     | 150,000            | 7,500                | ₹4500   |
 
 ---
 
@@ -71,7 +72,7 @@ Manage keys from our official dashboard (no Telegram DMs needed):
 - 🔄 **Daily Reset**: All limits reset at midnight (IST).  
 - 🎧🎬 **Audio + Video**: Fully supported via API (vPlay).  
 - 🍪 **Fallback**: Add local **custom cookies** if you prefer not to use the API (works for both audio & video).  
-- 💬 **Support**: Join the [API Community Group](https://t.me/+DXGe6UE90y01NDVl).  
+- 💬 **Support**: Join the [API Community Group](https://t.me/+oH1cVV8YSsdhMWU5).  
 
 ---
 
@@ -102,6 +103,12 @@ API_KEY=your-api-key-here
 
 ### 🔧 Quick Setup
 
+<h3>✔️ Prerequisites</h3>
+
+- <a href="https://www.python.org">Python 3.10+</a> installed  
+- <a href="https://deno.com/">deno</a> & <a href="https://ffmpeg.org//">ffmpeg</a> installed on your system  
+- Required variables mentioned in <a href="https://github.com/CyberPixelPro/AviaxMusic/blob/master/sample.env">sample.env</a>
+
 1. **Upgrade & Update:**
    ```bash
    sudo apt-get update && sudo apt-get upgrade -y
@@ -111,6 +118,12 @@ API_KEY=your-api-key-here
    ```bash
    sudo apt-get install python3-pip ffmpeg -y
    ```
+
+3. **Install Deno:**
+   ```bash
+   apt-get install unzip && curl -fsSL https://deno.land/install.sh | sh
+   ```
+
 3. **Setting up PIP**
    ```bash
    sudo pip3 install -U pip
@@ -201,7 +214,7 @@ This project is licensed under the MIT License. For more details, see the [LICEN
 ### 🙏 Acknowledgements
 
 Thanks to all the contributors, supporters, and users of the Aviax Music Bot. Your feedback and support keep us going!
-- Yukki Music & AnonX Music – Base inspiration
+- AnonX Music – Base inspiration
 - All contributors & community members
   
 ---
